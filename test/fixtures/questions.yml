@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  test_number: 1
+  section: MyString
+  question_number: 1
+  question_text: MyText
+  num_ans_choices: 1
+  correct_ans: 1
+
+two:
+  test_number: 1
+  section: MyString
+  question_number: 1
+  question_text: MyText
+  num_ans_choices: 1
+  correct_ans: 1

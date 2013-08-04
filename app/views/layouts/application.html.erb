@@ -8,7 +8,24 @@
 </head>
 <body>
 
-<%= yield %>
+
+<div id="container-fluid">
+	<div class="masthead">
+		<ul class="nav nav-pills pull-right">
+			<li <% if @active == "summary" %> class="active" <% end %> > <a href="">Summary</a> </li>
+			<li <% if @active == "answer" %> class="active" <% end %> > <a href="/questions/answer">Answer Question</a> </li>
+			<li  <% if @active == "view" %> class="active" <% end %> > <a href="#">View Question</a> </li>
+			<li <% if @active == "login" %> class="active" <% end %> > <a href="/sessions/new">Log In</a> </li>
+		</ul>
+	</div>	
+
+	<%= yield %>
+
+
+
+
+</div> <!--end of container -->
+
 
 </body>
 </html>

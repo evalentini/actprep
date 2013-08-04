@@ -1,0 +1,52 @@
+<h1> Answer Question </h1>
+
+<div class="row-fluid">
+	<div class="span1"></div>
+	<div class="span5">
+		<form method="post" <% if @has_question == true %> action="/answers/record" <% else %> action="" <%end%> >
+			<!--add authenticity token for CSRF protection-->
+			<%= token_tag(nil) %>
+
+			select test:
+			<select id="test-number" name="test_number">
+			<% @tests.each do |test| %>
+				<option value="<%=test.test_number%>"><%=test.test_number%></option>
+			<%end%> 
+			</select>
+
+		</br>
+		    select section:
+			<select id="section" name="section">
+			<% @sections.each do |section| %>
+				<option value="<%=section.section%>"><%=section.section%></option>
+			<%end%> 
+			</select>
+		</br>
+			Enter Question #:
+			<input type="text" name="question_number"> </input>
+		</br>
+			<button>Submit</button>	
+
+			
+	</div>
+
+	<div class="span5">
+		<% if @has_question == true %>
+			<%= @question.question_text%>
+		<div class="radio">
+			<% @counter=1%>
+			<% @ans_choices.each do |choice| %>
+		</br>
+			<label> <input type="radio" name="optionsRadios" id="optionsRadios1" value="<%= @counter %>" checked> <%= choice %> 
+				<% @counter+=1 %>
+			</label>
+			<% end %>
+		<% end %>
+		</div> <!--end of radio div -->
+	</div>
+
+	</form>
+	<div class="span1"></div>
+
+</div>
+

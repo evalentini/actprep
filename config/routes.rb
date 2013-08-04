@@ -1,5 +1,9 @@
 Actprep::Application.routes.draw do
 
+  get "answers/record"
+
+  match 'questions/answer' => 'questions#answer'
+  match 'answers/record'  =>  'answers#record'
   root :to => 'pages#home'
 
   match 'sessions/new' => 'sessions#new', :as => 'login'
