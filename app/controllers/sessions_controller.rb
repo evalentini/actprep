@@ -20,5 +20,4 @@ skip_before_filter :confirm_login
   
 
 
-
 end

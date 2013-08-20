@@ -1,7 +1,23 @@
 <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="span12">
-			<h1>WORKK</h1>
+
+				<table class="table table-hover">
+					<thead>
+					  <tr>
+						<th>Test #</th>
+						<th>Section</th>
+						<th>Queston #</th>
+						<th>Correct</th>
+						<th>Time</th>
+					  </tr>
+					</thead>
+					 <tbody>
+					 <%= render @questions %>
+					 </tbody>
+				</table>
+
 		</div>
 	</div>
 </div>
+

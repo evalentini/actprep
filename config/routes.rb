@@ -1,7 +1,7 @@
 Actprep::Application.routes.draw do
 
   get "answers/record"
-
+  resources :questions
   match 'questions/answer' => 'questions#answer'
   match 'answers/record'  =>  'answers#record'
   root :to => 'pages#home'
