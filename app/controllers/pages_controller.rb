@@ -3,7 +3,7 @@ class PagesController < ApplicationController
   	@active = "summary"
   	user = User.find_by_id(session[:user_id])
 
-  	@questions = user.questions
+  	@answers = user.answers
 
 
   end
