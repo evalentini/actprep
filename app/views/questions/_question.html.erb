@@ -1,8 +1,14 @@
 
+
 <tr>
 	<td><%= link_to question.test_number,question %></td>
+	<td><%= link_to question.section, question %></td>
+	<td><%= link_to question.question_number, question%></td>
+	<td> yes/no</td>
+	<td> <%= link_to time_ago_in_words(question.updated_at), question %></td> 
 	<td><%= link_to question.section,"www.google.com" %></td>
 	<td><%= link_to question.question_number,"www.google.com"%></td>
 	<td> yes/no</td>
 	<td> <%= link_to time_ago_in_words(question.updated_at),"www.google.com" %></td> 
+
 </tr>

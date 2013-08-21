@@ -1,12 +1,20 @@
 Actprep::Application.routes.draw do
 
+  post 'answers/submit'
+  match '/show'=> 'questions#show'
+  match 'questions/answer' => 'questions#answer'
+  resources :answers
+  resources :questions
+  get "answers/record"
+
+
   get "answers/record"
   resources :questions
   match 'questions/answer' => 'questions#answer'
   match 'answers/record'  =>  'answers#record'
   root :to => 'pages#home'
 
-  match 'sessions/new' => 'sessions#new', :as => 'login'
+  match 'sessions/new' => 'sessions#new', :as => 'login' 
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

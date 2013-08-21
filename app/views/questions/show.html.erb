@@ -1,9 +1,50 @@
-<h1> Question </h1>
 
-<div class="row-fluid">
-	<div class="span1"></div>
-		<div class="span5">
-			<%= @question.question_text %>
-		</div>
-	</div>
+
+<div style="display:block;">
+<h1>Question #: <%= @question.question_number %> </h1>
+
+<ul class="qnav_description">
+<li>Test #: <%= @question.test_number %> |</li>
+<li>Section: <%= @question.section %> </li>
+
+</ul>
+
+
+<%= form_tag url_for(:controller => 'answers', :action => 'submit'), :method => 'post' do %>
+Question: <%= @question.question_text %> </br>
+
+<div class="radio_button">
+<p><%= radio_button_tag :ans , 1 %></p>
+<p><%= label_tag(:age_child, "a.) #{@question.ans_choice_1}") %></p>
 </div>
+
+<div class="radio_button">
+<p><%= radio_button_tag :ans, 2 %></p>
+<p><%= label_tag(:age_child, "a.) #{@question.ans_choice_2}") %></p>
+</div>
+
+<div class="radio_button">
+<p><%= radio_button_tag :ans, 3 %></p>
+<p><%= label_tag(:age_child, "a.) #{@question.ans_choice_3}") %></p>
+</div>
+
+<div class="radio_button">
+<p><%= radio_button_tag :ans, 4 %></p>
+<p><%= label_tag(:age_child, "a.) #{@question.ans_choice_4}") %></p>
+</div>
+
+<div class="radio_button">
+<p><%= radio_button_tag :ans, 5 %></p>
+<p><%= label_tag(:age_child, "a.) #{@question.ans_choice_5}") %></p>
+</div>
+
+<%= hidden_field_tag(:q_id, @question.id) %>
+
+
+	<%= submit_tag 'Submit' %>
+<% end %> 
+
+
+
+
+
