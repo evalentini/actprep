@@ -21,4 +21,8 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
   end
 
+  def page_image
+    @filename = "science page 3.jpg"
+  end
+
 end

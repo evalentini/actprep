@@ -1,5 +1,6 @@
 class Answer < ActiveRecord::Base
   attr_accessible :question_id, :selected_ans, :user_id
+  validates_presence_of :question_id
 
   belongs_to :question 
   belongs_to :user

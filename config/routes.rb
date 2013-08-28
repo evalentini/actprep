@@ -1,5 +1,7 @@
 Actprep::Application.routes.draw do
 
+  match "/answers/save" => "answers#save"
+  match "/questions/image" => "questions#page_image"
   post 'answers/submit'
   match '/show'=> 'questions#show'
   match 'questions/answer' => 'questions#answer'
@@ -8,8 +10,8 @@ Actprep::Application.routes.draw do
   get "answers/record"
 
 
+
   get "answers/record"
-  resources :questions
   match 'questions/answer' => 'questions#answer'
   match 'answers/record'  =>  'answers#record'
   root :to => 'pages#home'

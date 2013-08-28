@@ -1,17 +1,26 @@
 class AnswersController < ApplicationController
+  def save
+    user = User.find(session[:user_id])
+    Answer.create(question_id: params[:question_id], user_id: user.id, selected_ans: params[:ans_choice])
+    redirect_to action: "home", controller: "pages"
+  end
+  
   def record
 
-    question = Question.where(test_number: params[:test_number], 
+    @question = Question.where(test_number: params[:test_number], 
             section: params[:section],
             question_number: params[:question_number]).first
 
-    user = User.find(session[:user_id])
+    @filename = "#{@question.section}_pg#{@question.page}.jpg"
+
+
+    @user = User.find(session[:user_id])
     
 
-    ans_choice = params[:ans_choice_radio]
+    # @ans_choice = params[:ans_choice_radio]
     
  
-   Answer.create(question_id: question.id, user_id: user.id, selected_ans: ans_choice)
+   # Answer.create(question_id: question.id, user_id: user.id, selected_ans: ans_choice)
   
   end
 

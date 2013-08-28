@@ -1,3 +1,14 @@
-<h1>Answers#record</h1>
-<p>Find me in app/views/answers/record.html.erb</p>
-<!--test comment -->
+<form method="POST" action="/answers/save">
+	<input type="hidden" value="<%= @question.id %>" name="question_id">
+	<!--add authenticity token for CSRF protection-->
+			<%= token_tag(nil) %>
+<select name="ans_choice"> 
+	<% (1..5).each do |num| %>
+	<% @choice = @question.send("ans_choice_#{num}") %>
+	<option value="<%= @choice %>"><%= @choice %></option>
+	<% end %>
+</select>
+
+<button>Submit Answer</button>
+<%= image_tag @filename, size: "950x110" %>
+</form>
