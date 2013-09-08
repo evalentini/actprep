@@ -1,5 +1,8 @@
 Actprep::Application.routes.draw do
 
+
+  match 'questions/modify' => 'questions#modify'
+
   match "/answers/save" => "answers#save"
   match "/questions/image" => "questions#page_image"
   post 'answers/submit'
@@ -18,7 +21,6 @@ Actprep::Application.routes.draw do
 
   match 'sessions/new' => 'sessions#new', :as => 'login' 
   match 'sessions/destroy' => 'sessions#destroy', :as => 'logout'
-  match 'questions/modify' => 'questions#modify'
   match 'users/modify' => 'users#modify'
   match 'users/save' => 'users#save'
   match '/users/delete' => 'users#delete'

@@ -26,6 +26,7 @@ class QuestionsController < ApplicationController
   end
   
   def modify
+    @questions = Question.all
   end 
 
 end
