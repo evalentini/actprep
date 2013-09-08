@@ -12,10 +12,14 @@ class ApplicationController < ActionController::Base
 
 	  
 	  def confirm_login
-	    unless session[:password].present?
+	    unless session[:password].present? and session[:user_id].present?
 	 	  redirect_to login_path
 		else
-		  redirect_to login_path unless User.find(session[:user_id]).check_pwd(session[:password]) == true
+      if User.find(session[:user_id]).check_pwd(session[:password]) == true 
+        @user_email = User.find(session[:user_id]).email
+      else 
+        redirect_to login_path
+      end 
 		end
 	end
 

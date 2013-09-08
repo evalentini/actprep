@@ -17,6 +17,7 @@ Actprep::Application.routes.draw do
   root :to => 'pages#home'
 
   match 'sessions/new' => 'sessions#new', :as => 'login' 
+  match 'sessions/destroy' => 'sessions#destroy', :as => 'logout'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

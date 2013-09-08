@@ -15,7 +15,13 @@
 			<li <% if @active == "summary" %> class="active" <% end %> > <a href="/">Summary</a> </li>
 			<li <% if @active == "answer" %> class="active" <% end %> > <a href="/questions/answer">Answer Question</a> </li>
 			<li  <% if @active == "view" %> class="active" <% end %> > <a href="#">View Question</a> </li>
-			<li <% if @active == "login" %> class="active" <% end %> > <a href="/sessions/new">Log In</a> </li>
+			<% if session[:user_id] %>
+				<li>
+					<a href="/sessions/destroy">Log Out: <%= @user_email %></a> 
+				</li>
+			<% else %>
+				<li <% if @active == "login" %> class="active" <% end %> > <a href="/sessions/new">Login</a> </li>
+			<% end %>
 		</ul>
 	</div>	
 	

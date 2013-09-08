@@ -16,6 +16,11 @@ skip_before_filter :confirm_login
   		end	
   	end
   end
+  
+  def destroy
+    session[:user_id] = nil
+    redirect_to root_url, :notice => "Logged out"
+  end 
 
   
 
