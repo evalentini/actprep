@@ -1,12 +1,15 @@
 class PagesController < ApplicationController
+  
   def home
   	@active = "summary"
   	user = User.find_by_id(session[:user_id])
-
-  	@answers = user.answers
-
-
+    @answers = user.answers
   end
+  
+  def admin
+    @active="admin"
+  end 
+  
 end
 
 

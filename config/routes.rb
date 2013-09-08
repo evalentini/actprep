@@ -18,6 +18,10 @@ Actprep::Application.routes.draw do
 
   match 'sessions/new' => 'sessions#new', :as => 'login' 
   match 'sessions/destroy' => 'sessions#destroy', :as => 'logout'
+  match 'questions/modify' => 'questions#modify'
+  match 'users/modify' => 'users#modify'
+  match 'users/save' => 'users#save'
+  match '/users/delete' => 'users#delete'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

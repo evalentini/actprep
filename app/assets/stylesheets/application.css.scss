@@ -13,3 +13,14 @@
  */
 
 @import 'bootstrap';
+
+.row-fluid.toppadding {
+	margin-left: -20px;
+	*zoom: 1;
+
+	margin-top: 10px;
+}
+
+.hidden {
+	display: none;
+}

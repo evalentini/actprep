@@ -1,0 +1,60 @@
+<div class="row-fluid toppadding">
+	<div class="span1"></div>
+	<div class="span10">
+		<div class="row-fluid hidden" id="alert-row">
+			<div class="alert alert-dismissable">
+			  <button type="button" id="dismiss-alert" class="close">&times;</button>
+			  <span id="alert-text">TEXT</span>
+			</div>
+		</div>
+		<div class="row-fluid">
+			<div class="span12">
+				<table class="table table-bordered" id="user-modify-table">
+					<tr>
+						<td>Email Address</td>
+						<td>Username</td>
+						<td>Role</td>
+						<td>Temporary Password</td>
+						<td></td>
+					</tr>
+					<% @users.each do |user| %>
+						<tr userid=<%= user.id %>>
+							<td><%= user.email %></td>
+							<td><%= user.username %></td>
+							<td><%= user.role %></td>
+							<td></td>
+							<td>
+								<button class="btn btn-mini btn-primary editUser">Edit</button>
+								<button class="btn btn-mini btn-danger deleteUser">Delete</button>
+							</td>
+						</tr>
+					<% end %>
+					<!--extra row for creating a new user -->
+					<tr id="new-user-row" class="hidden">
+						<td><input id="new-user-email" type="text"></td>
+						<td><input id="new-user-username" type="text"></td>
+						<td>
+							<select id="new-user-role">
+								<option selected value="student">student</option>
+								<option value="admin">admin</option>
+							</select>
+						</td>
+						<td>
+							<input type="text" disabled="disabled" id="new-user-temppass" value=<%= @new_user_pwd %>>
+						</td>
+						<td>
+							<button id="save-new-user" class="btn btn-mini btn-primary">Save</button>
+							<button id="cancel-new-user" class="btn btn-mini btn-danger">Cancel</button>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div class="row-fluid">
+			<div class="span12">
+				<button class="btn btn-primary" id="add-user-button">Add User</button>
+			</div>
+		</div>
+	</div>
+	<div class="span1"></div>
+</div>

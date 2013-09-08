@@ -24,5 +24,8 @@ class QuestionsController < ApplicationController
   def page_image
     @filename = "science page 3.jpg"
   end
+  
+  def modify
+  end 
 
 end

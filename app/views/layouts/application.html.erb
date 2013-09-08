@@ -12,9 +12,17 @@
 <div class="container-fluid">
 	<div class="masthead">
 		<ul class="nav nav-pills pull-right">
+			<% if @is_admin==true %>
+		        <li class="dropdown">
+		          <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Admin Tools <b class="caret"></b></a>
+		          <ul class="dropdown-menu">
+		            <li><a href="/users/modify">Change Users</a></li>
+		            <li><a href="/questions/modify">Change Questions</a></li>
+		          </ul>
+			<% end %>
+
 			<li <% if @active == "summary" %> class="active" <% end %> > <a href="/">Summary</a> </li>
 			<li <% if @active == "answer" %> class="active" <% end %> > <a href="/questions/answer">Answer Question</a> </li>
-			<li  <% if @active == "view" %> class="active" <% end %> > <a href="#">View Question</a> </li>
 			<% if session[:user_id] %>
 				<li>
 					<a href="/sessions/destroy">Log Out: <%= @user_email %></a> 
