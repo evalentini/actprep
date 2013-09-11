@@ -10,7 +10,7 @@
 		</div>
 		<div class="row-fluid">
 			<div class="span12">
-				<table class="table table-bordered">
+				<table id="questionlist" class="table table-bordered">
 					<tr><td>Test #</td><td>Section</td><td>Question #</td></tr>
 					<% @questions.each do |question| %>
 					<tr>
@@ -32,11 +32,102 @@
 		<div class="row-fluid">
 		</div>
 				
-		<div class="row-fluid">
-			<div class="span12">
-				<button class="btn btn-primary">Add Question</button>
+		
+		
+		<div class="row-fluid" style="margin-top:25px">
+			<div class="span2">
+				<strong>Select Test</strong>
+			</div>
+			<div class="span4">
+				<select id="testnumber"><% (1..@maxtest+1).each do |test|%>
+					<option value=<%=test%>>Test <%=test%></option>
+					<%end%></select>
+			</div>
+			
+		</div>
+		
+		<div class="row-fluid" style="margin-top:25px">
+			<div class="span2">
+				<strong>Select Section #</strong>
+			</div>
+			<div class="span4">
+			  <select id="section">
+				<option value="math">Math</option>
+				<option value="science">Science</option>
+				<option value="reading">Reading</option>
+				<option value="verbal">Verbal</option>
+			  </select>
 			</div>
 		</div>
+		
+		<div class="row-fluid" style="margin-top:25px">
+			<div class="span2">
+				<strong>Select Question #</strong>
+			</div>
+			<div class="span4">
+				<select id="questionnumber"><% (1..@maxquestion+1).each do |question|%>
+					<option value="<%=question%>">Question #<%=question%></option>
+					<%end%>
+				</select>
+			</div>
+			
+		</div>
+		
+		<div class="row-fluid" style="margin-top:25px">
+			<div class="span2">
+				<strong>Select Page #</strong>
+			</div>
+			<div class="span4">
+			  <select id="pagenumber">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+			  </select>
+			</div>
+			
+		</div>
+		<% (1..4).each do |choice|%>
+		<div class="row-fluid" style="margin-top:25px">
+			<div class="span2">
+				<strong>Select Choice <%= choice %></strong>
+			</div>
+			<div class="span4">
+			  <select id="choice<%= choice %>">
+				  <% ('A'..'Z').each do |letter|%>
+				  
+				  <option value="<%=letter%>"><%=letter%></option>
+				  <%end%>
+			  </select>
+			</div>
+		<%end%>	
+		</div>
+		
+		<div class="row-fluid" style="margin-top:25px">
+			<div class="span2">
+				<strong>Correct Answer</strong>
+			</div>
+			<div class="span4">
+			  <select id="correctanswer">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+			  </select>
+			</div>
+			
+		</div>
+		
+		
+		
+		<div class="row-fluid">
+			<div class="span12">
+				<button id="addquestion" class="btn btn-primary">Add Question</button>
+			</div>
+		</div>
+		
+		
 		
 
 	</div>

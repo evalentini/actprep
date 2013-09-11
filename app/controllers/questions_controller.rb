@@ -27,6 +27,23 @@ class QuestionsController < ApplicationController
   
   def modify
     @questions = Question.all
+    @maxtest = Question.maximum("test_number")
+    @maxquestion = 0 || Question.where(test_number: 1, section: 'math').maximum("question_number")
   end 
+  
+  def add
+    Question.create(correct_ans: params[:correct_answer], num_ans_choices: 4, question_number: params[:question_number] ,section: params[:section], 
+    test_number: params[:test], ans_choice_1: params[:choice1], ans_choice_2: params[:choice2], ans_choice_3: params[:choice3],
+    ans_choice_4: params[:choice4])
+    
+    respond_to do |format|
+      format.json {render :json => Question.all}
+    end
+    
+  end
+  
 
 end
+
+
+
