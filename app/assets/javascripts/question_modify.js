@@ -19,7 +19,9 @@ $("button#addquestion").click(function(){
 	}).done(function(data){
 		$("table#questionlist").html("");
 		$("table#questionlist").append("<tr><td>1</td><td>2</td></tr>");
-		data.each 
+		for(var i=0; i<data.length-1; i++){
+			alert(data[i].section);
+		}
     });
 });
 });	
