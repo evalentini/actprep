@@ -3,9 +3,9 @@
 	<!--add authenticity token for CSRF protection-->
 			<%= token_tag(nil) %>
 <select name="ans_choice"> 
-	<% (1..5).each do |num| %>
-	<% @choice = @question.send("ans_choice_#{num}") %>
-	<option value="<%= @choice %>"><%= @choice %></option>
+	<option value=1><%= @question.ans_choice_1 %></option>
+	<% (2..4).each do |num| %>
+		<option value="<%= num %>"><%= @ans_choices[num] %></option>
 	<% end %>
 </select>
 

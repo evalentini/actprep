@@ -9,7 +9,15 @@ class AnswersController < ApplicationController
 
     @question = Question.where(test_number: params[:test_number], 
             section: params[:section],
-            question_number: params[:question_number]).first
+            question_number: params[:question]).first
+            
+    @ans_choices = {}
+    
+    @ans_choices[1]=@question.ans_choice_1
+    @ans_choices[2]=@question.ans_choice_1.succ
+    @ans_choices[3]=@question.ans_choice_1.succ.succ
+    @ans_choices[4]=@question.ans_choice_1.succ.succ.succ
+    
 
     @filename = "#{@question.section}_pg#{@question.page}.jpg"
 

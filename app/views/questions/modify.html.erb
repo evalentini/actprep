@@ -55,7 +55,7 @@
 				<option value="math">Math</option>
 				<option value="science">Science</option>
 				<option value="reading">Reading</option>
-				<option value="verbal">Verbal</option>
+				<option value="english">English</option>
 			  </select>
 			</div>
 		</div>
@@ -65,10 +65,7 @@
 				<strong>Select Question #</strong>
 			</div>
 			<div class="span4">
-				<select id="questionnumber"><% (1..@maxquestion+1).each do |question|%>
-					<option value="<%=question%>">Question #<%=question%></option>
-					<%end%>
-				</select>
+				<input id="questionnumber" value="<%= @maxquestion['math']+1 %>" disabled="disabled">
 			</div>
 			
 		</div>
@@ -88,20 +85,20 @@
 			</div>
 			
 		</div>
-		<% (1..4).each do |choice|%>
 		<div class="row-fluid" style="margin-top:25px">
 			<div class="span2">
-				<strong>Select Choice <%= choice %></strong>
+				<strong>Select Answer Choice 1</strong>
 			</div>
 			<div class="span4">
-			  <select id="choice<%= choice %>">
-				  <% ('A'..'Z').each do |letter|%>
-				  
+			  <select id="choice1">
+				  <% ('A'..'W').each do |letter|%>
 				  <option value="<%=letter%>"><%=letter%></option>
 				  <%end%>
 			  </select>
 			</div>
-		<%end%>	
+			<div class="span2" id="choice-2-span">Choice 2=>B</div>
+			<div class="span1" id="choice-3-span">3=>C</div>
+			<div class="span1" id="choice-4-span">4=>D</div>
 		</div>
 		
 		<div class="row-fluid" style="margin-top:25px">
@@ -110,14 +107,23 @@
 			</div>
 			<div class="span4">
 			  <select id="correctanswer">
-				<option value="1">1</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-				<option value="4">4</option>
+				<option value="1">A</option>
+				<option value="2">B</option>
+				<option value="3">C</option>
+				<option value="4">D</option>
 			  </select>
 			</div>
 			
 		</div>
+		
+		<!--hidden inputs for max question for each section-->
+		
+		<% @maxquestion.each do |k, v| %>
+			<input type="hidden" id="maxquestion-hidden-input-<%= k %>" value="<%= v %>">
+		<% end %>
+		
+		
+		<!--end hidden inputs-->
 		
 		
 		

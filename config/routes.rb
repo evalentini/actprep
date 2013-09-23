@@ -1,5 +1,6 @@
 Actprep::Application.routes.draw do
 
+  match 'questions/list' => 'questions#list'
   match 'questions/add' => 'questions#add'
   match 'questions/modify' => 'questions#modify'
 

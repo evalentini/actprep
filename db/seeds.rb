@@ -27,20 +27,6 @@ end
 Question.create(
 correct_ans: 1, 
 num_ans_choices: 5, 
-question_number: 8, 
-section: "science", 
-test_number: 1, 
-ans_choice_1: "F",
-ans_choice_2: "G",
-ans_choice_3: "H",
-ans_choice_4: "J",
-page: 4
-)
-
-
-Question.create(
-correct_ans: 1, 
-num_ans_choices: 5, 
 question_number: 1, 
 section: "science", 
 test_number: 1, 
