@@ -31,9 +31,5 @@ question_number: 1,
 section: "science", 
 test_number: 1, 
 ans_choice_1: "A",
-ans_choice_2: "B",
-ans_choice_3: "C",
-ans_choice_4: "D",
-ans_choice_5: "E",
 page: 2
 )
