@@ -13,7 +13,9 @@
 					  </tr>
 					</thead>
 					 <tbody>
-					 <%= render @answers %>
+						 <% if @answers.count > 0 %>
+					 		<%= render @answers %>
+						<% end %>
 					 </tbody>
 				</table>
 

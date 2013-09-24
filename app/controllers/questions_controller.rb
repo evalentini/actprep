@@ -51,6 +51,10 @@ class QuestionsController < ApplicationController
     end 
   end 
   
+  def viewimage
+    @filename = "#{params[:section]}_pg#{params[:page]}.jpg"
+  end
+  
   
 
 end

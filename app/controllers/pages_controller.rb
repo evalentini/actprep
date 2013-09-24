@@ -4,6 +4,7 @@ class PagesController < ApplicationController
   	@active = "summary"
   	user = User.find_by_id(session[:user_id])
     @answers = user.answers
+    logger.info "--#{@answers.count}---"
   end
   
   def admin

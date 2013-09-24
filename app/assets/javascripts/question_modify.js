@@ -45,5 +45,12 @@ $('select#choice1').change(function(){
 		}
 });
 
+//code to open a new browser window with question page when user clicks view page 
+
+$('button#view-page-button').click(function(){
+	window.open("viewimage/"+$('select#section').val()+"/"+$('select#pagenumber').val(), 
+				"_blank", "menubar=yes, fullscreen=yes, scrollbars=1,resizable=1,height=1500,width=1100");
+});
+
 });	
 
