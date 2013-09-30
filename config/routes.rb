@@ -1,5 +1,6 @@
 Actprep::Application.routes.draw do
 
+  match 'questions/maxpage' => 'questions#maxpage'
   
   match 'questions/viewimage/:section/:page' => 'questions#viewimage'
   match 'questions/list' => 'questions#list'

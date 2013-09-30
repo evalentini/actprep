@@ -1,14 +1,30 @@
-<form method="POST" action="/answers/save">
-	<input type="hidden" value="<%= @question.id %>" name="question_id">
-	<!--add authenticity token for CSRF protection-->
-			<%= token_tag(nil) %>
-<select name="ans_choice"> 
-	<option value=1><%= @question.ans_choice_1 %></option>
-	<% (2..4).each do |num| %>
-		<option value="<%= num %>"><%= @ans_choices[num] %></option>
-	<% end %>
-</select>
 
-<button>Submit Answer</button>
-<%= image_tag @filename, size: "950x110" %>
+
+<form method="POST" action="/answers/save">
+<div class="row-fluid" style="margin-top:50px;">
+	<div class="span4"></div>
+	<div class="span2">
+			<input type="hidden" value="<%= @question.id %>" name="question_id">
+			<!--add authenticity token for CSRF protection-->
+			<%= token_tag(nil) %>
+			<select name="ans_choice"> 
+			<option value=1><%= @question.ans_choice_1 %></option>
+			<% (2..4).each do |num| %>
+				<option value="<%= num %>"><%= @ans_choices[num] %></option>
+			<% end %>
+		</select>
+	</div>
+	<div class="span1"><button class="btn btn-primary">Submit</button></div>	
+	<div class="span1 output" id="timer">0:00</div>
+	<div class="span4">
+		 <input type="hidden" id="minutes" value=0><input type="hidden" id="seconds" value=0>
+	</div>
+</div>
+
+<div class="row-fluid">
+	<div class="span2"></div>
+	<div class="span8"></div>
+		<%= image_tag @filename, size: "950x110", style: "display: block; margin-left: auto; margin-right: auto;"%>
+	</div>
+	<div class="span2"></div>
 </form>

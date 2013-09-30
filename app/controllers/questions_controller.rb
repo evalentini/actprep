@@ -1,4 +1,18 @@
 class QuestionsController < ApplicationController
+  
+
+  def maxpage
+    
+    maxpage_item={}
+    maxpage_item["current"]=Question.maxpage(params['test'],params['section'])
+    
+    
+    respond_to do |format|
+      format.json { render :json => maxpage_item}
+    end
+    
+  end
+  
   def answer
     @has_question = false
     @tests = Question.select("test_number").group(:test_number)
@@ -26,9 +40,14 @@ class QuestionsController < ApplicationController
   end
   
   def modify
+
+    sections = ['math', 'english', 'science', 'reading']
+    default_section = 'math'
+    @default_section_maxpage=Question.maxpage(1, default_section).to_i
     @questions = Question.all
     @maxtest = Question.maximum("test_number") || 0
-    sections = ['math', 'english', 'science', 'reading']
+    
+    @maxpage
     @maxquestion = {}
     sections.each do |section|
       @maxquestion[section] = Question.where(test_number: 1, section: section).maximum("question_number") || 0

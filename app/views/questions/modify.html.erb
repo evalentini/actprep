@@ -76,11 +76,9 @@
 			</div>
 			<div class="span4">
 			  <select id="pagenumber">
-				<option value="1">1</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-				<option value="4">4</option>
-				<option value="5">5</option>
+				  <% (1..@default_section_maxpage.to_i).each do |page| %>
+				  	<option value=<%=page %>><%= page %></option>
+				  <% end %>
 			  </select>
 			</div>
 			

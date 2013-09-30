@@ -22,12 +22,33 @@ $("button#addquestion").click(function(){
 	
 });
 	
+//save test
+	
 //code to change max/min question when section changes
 $('select#section').change(function(){
 	var sectionName = $(this).val();
 	//alert($('input#maxquestion-hidden-input-'+sectionName).val());
 	//delete all of the options for question #
 	$('input#questionnumber').val(parseInt($('input#maxquestion-hidden-input-'+sectionName).val())+1);
+	$('select#pagenumber').html('');
+	//run ajax to get answer choice for other section
+	$.ajax({
+		type:"GET",
+		url:"/questions/maxpage.json",
+		dataType:"JSON",
+		data:
+		{
+			test: $('select#testnumber').val(),
+			section: $('select#section').val()
+		}
+	}).done(function(data){
+		var maxpage=parseInt(data.current);
+		for (i=1; i<=maxpage; i++){
+			$('select#pagenumber').append("<option value="+i+">"+i+"</option>");
+		}
+    });
+	
+	
 });
 
 //code to change answer choice letters when first choice changes 
