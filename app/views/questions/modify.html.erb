@@ -11,12 +11,35 @@
 		<div class="row-fluid">
 			<div class="span12">
 				<table id="questionlist" class="table table-bordered">
-					<tr><td>Test #</td><td>Section</td><td>Question #</td></tr>
+					<tr style="font-weight: bold;">
+						<td>Test </td>
+						<td>Section</td>
+						<td>Question</td>
+						<td>Page</td>
+						<td></td>
+					</tr>
 					<% @questions.each do |question| %>
 					<tr>
 						<td><%= question.test_number %></td>
-						<td><%= question.section %></td>
+						<td><%= question.section.titlecase %></td>
 						<td><%= question.question_number%></td>
+						<td>
+							<a 
+								href="#" 
+								linksection="<%= question.section %>"
+								linkpage="<%= question.page %>"
+								class="mod-view-page-link" 
+								q_id="<%= question.id %>"
+							>
+								<%= question.page %>
+							</a>
+						</td>
+						<td>
+							<button class="btn btn-primary btn-mini">Edit</button>
+							<% if question.question_number==@maxquestion[question.section] %>
+								<button class="btn btn-danger btn-mini">Delete</button>
+							<% end %>
+						</td>
 					</tr>
 					<% end %>
 				</table>
@@ -76,7 +99,7 @@
 			</div>
 			<div class="span4">
 			  <select id="pagenumber">
-				  <% (1..@default_section_maxpage	.to_i).each do |page| %>
+				  <% (1..@default_section_maxpage.to_i).each do |page| %>
 				  	<option value=<%=page %>><%= page %></option>
 				  <% end %>
 			  </select>
@@ -85,8 +108,27 @@
 			<div class="span4">
 				<button class="btn btn-success" id="view-page-button">View Page</button>
 			</div>
-			
 		</div>
+		
+		<div class="row-fluid hidden" 
+			style="margin-top: 25px; border-top: 1px dashed black; padding-top: 15px;" 
+			id="modify-page-image-row"
+		>
+			<div class="span12">
+				<div class="row-fluid">
+					<div class="span5"></div>
+					<div class="span2">
+						<button class="btn btn-success" id="modify-image-prev-page">Prev</button>
+						<button class="btn btn-success" id="modify-image-next-page" style="float: right;">Next</button>
+					</div>
+					<div class="span5"></div>
+				</div>
+				<div class="row-fluid">
+					<div class="span12"><%= image_tag @default_section_pageimage, size: "950x110", id: "q-mod-img" %></div>
+				</div>
+			</div>
+		</div>
+		
 		<div class="row-fluid" style="margin-top:25px">
 			<div class="span2">
 				<strong>Select Answer Choice 1</strong>
@@ -124,7 +166,8 @@
 			<input type="hidden" id="maxquestion-hidden-input-<%= k %>" value="<%= v %>">
 		<% end %>
 		
-		
+		<!--hidden input for maximum page-->
+		<input type="hidden" id="modify-maxpage" value=<%= @default_section_maxpage %>>
 		<!--end hidden inputs-->
 		
 		

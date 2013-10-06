@@ -19,10 +19,10 @@
 					</tr>
 					<% @users.each do |user| %>
 						<tr userid=<%= user.id %>>
-							<td><%= user.email %></td>
-							<td><%= user.username %></td>
-							<td><%= user.role %></td>
-							<td></td>
+							<td class="user-mod-email"><%= user.email %></td>
+							<td class="user-mod-username"><%= user.username %></td>
+							<td class="user-mod-role"><%= user.role %></td>
+							<td class="user-mod-temppass"></td>
 							<td>
 								<button class="btn btn-mini btn-primary editUser">Edit</button>
 								<button class="btn btn-mini btn-danger deleteUser">Delete</button>

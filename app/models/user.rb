@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   	end
 
   end
-  
+    
   def answerSummary
     #find unique questions answered by user
     questions = Answer.select("question_id as q_id").where(user_id: self.id).group("question_id")
@@ -52,6 +52,18 @@ class User < ActiveRecord::Base
     
     (100*(num_answered/total_num)).round
   
+  end
+  
+  def editWithPwd(argHash)
+    u_id=self.id
+    salt=self.salt
+    e_pwd=Digest::SHA2.hexdigest(salt+argHash['pwd'])
+    User.update(u_id, 
+                :email=>argHash['email'], 
+                :username=>argHash['username'], 
+                :role=>argHash['role'],
+                :encrypted_password=>e_pwd)
+    true
   end
   
   

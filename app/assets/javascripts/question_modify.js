@@ -1,3 +1,4 @@
+
 $("document").ready(function(){
 $("button#addquestion").click(function(){
 	$.ajax({
@@ -43,6 +44,7 @@ $('select#section').change(function(){
 		}
 	}).done(function(data){
 		var maxpage=parseInt(data.current);
+		$('input#modify-maxpage').val(data.current);
 		for (i=1; i<=maxpage; i++){
 			$('select#pagenumber').append("<option value="+i+">"+i+"</option>");
 		}
@@ -61,7 +63,6 @@ $('select#choice1').change(function(){
 	//reset list of options for correct answer
 	$('select#correctanswer').html('');
 	for(i=1; i<5; i++) {
-		//alert("<option value="+i+">"+alphabet.substr(alphabet.indexOf($(this).val())+(i-1),1)+"</option>")
 		$('select#correctanswer').append("<option value="+i+">"+alphabet.substr(alphabet.indexOf($(this).val())+(i-1),1)+"</option>");
 		}
 });
@@ -69,8 +70,47 @@ $('select#choice1').change(function(){
 //code to open a new browser window with question page when user clicks view page 
 
 $('button#view-page-button').click(function(){
-	window.open("viewimage/"+$('select#section').val()+"/"+$('select#pagenumber').val(), 
+	var isVisible = true;
+	if ($('div#modify-page-image-row').hasClass("hidden")) {
+		isVisible=false;
+	}
+	if (isVisible==false) {
+		$(this).text("Hide Page");	
+		$('div#modify-page-image-row').removeClass("hidden");		
+	}
+	else {
+		$(this).text("View Page");
+		$('div#modify-page-image-row').addClass("hidden");
+	}
+				
+});
+
+$('button#modify-image-prev-page, button#modify-image-next-page').click(function(){
+	var src = $('img#q-mod-img').attr("src");
+	var section = (/[a-z]+/.exec(/[a-z]+_/.exec(src)));
+	var page = parseInt((/[0-9]+/.exec(/pg[0-9]+/.exec(src))));
+	if ($(this).attr("id")=="modify-image-prev-page") {
+		if (page>1) {
+			page=page-1;
+		}
+	}
+	else {
+		maxpage=$('input#modify-maxpage').val();
+		if (page<maxpage) {
+			page=page+1;			
+		}
+	}
+	//set the selected page option to the current page
+	$('select#pagenumber').val(page);
+	
+	$('img#q-mod-img').attr("src", "/assets/"+section+"_pg"+page+".jpg");
+	$('img#q-mod-img').attr("alt", section+"page "+page);
+});
+
+$('a.mod-view-page-link').click(function(){
+	window.open("viewimage/"+$(this).attr("linksection")+"/"+$(this).attr("linkpage"), 
 				"_blank", "menubar=yes, fullscreen=yes, scrollbars=1,resizable=1,height=1500,width=1100");
+	
 });
 
 });	

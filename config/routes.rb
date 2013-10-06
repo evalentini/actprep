@@ -1,5 +1,8 @@
 Actprep::Application.routes.draw do
 
+
+  match 'users/temppass' => 'users#temppass'
+  match 'users/edituser' => 'users#editUser'
   match 'questions/maxpage' => 'questions#maxpage'
   
   match 'questions/viewimage/:section/:page' => 'questions#viewimage'

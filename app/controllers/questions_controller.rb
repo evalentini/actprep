@@ -46,8 +46,9 @@ class QuestionsController < ApplicationController
 
     sections = ['math', 'english', 'science', 'reading']
     default_section = 'math'
+    @default_section_pageimage = "#{default_section}_pg1.jpg"
     @default_section_maxpage=Question.maxpage(1, default_section).to_i
-    @questions = Question.all
+    @questions = Question.order("test_number, section, question_number")
     @maxtest = Question.maximum("test_number") || 0
     
     @maxpage
