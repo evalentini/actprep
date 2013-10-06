@@ -18,6 +18,9 @@ class QuestionsController < ApplicationController
     @tests = Question.select("test_number").group(:test_number)
     @sections = Question.select("section").group(:section)
     
+    @default_q = Question.first
+    @num_questions = Question.where(test_number: @default_q.test_number, section: @default_q.section).count("id")
+    
     if params[:section]
       #all this shit
       @question = Question.where(test_number: params[:test_number], 
@@ -72,6 +75,13 @@ class QuestionsController < ApplicationController
   
   def viewimage
     @filename = "#{params[:section]}_pg#{params[:page]}.jpg"
+    section=params[:section]
+    page = params[:page].to_i
+    prev_page = page-1
+    next_page = page+1
+    @prev_link = "/questions/viewimage/#{section}/#{prev_page}"
+    @next_link = "/questions/viewimage/#{section}/#{next_page}"
+    
   end
   
   

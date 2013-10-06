@@ -7,9 +7,8 @@ class AnswersController < ApplicationController
   
   def record
 
-    @question = Question.where(test_number: params[:test_number], 
-            section: params[:section],
-            question_number: params[:question]).first
+  
+    @question = Question.find(params[:id])
             
     @ans_choices = {}
     

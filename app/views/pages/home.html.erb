@@ -1,5 +1,10 @@
 <div class="container-fluid">
-	<div class="row-fluid">
+	
+	<div class="row-fluid toprow">
+		<div class="span12"><h1>You've answered: <%= @pctAnswered %>% of this test</h1></div>
+	</div>
+	
+	<div class="row-fluid toprow">
 		<div class="span12">
 
 				<table class="table table-hover">
@@ -9,12 +14,20 @@
 						<th>Section</th>
 						<th>Queston #</th>
 						<th>Correct</th>
-						<th>Time</th>
+						<th></th>
 					  </tr>
 					</thead>
 					 <tbody>
-						 <% if @answers.count > 0 %>
-					 		<%= render @answers %>
+						 <% if @summary.present? %>
+						 <% @summary.each do |q| %>
+						 	<tr>
+						 		<td><%= q[:test] %></td>
+								<td><%= q[:section] %></td>
+								<td><%= q[:question] %></td>
+								<td><%= q[:correct] %></td>
+								<td><a href="/answers/record/<%= q[:question_id] %>">try again</a></td>
+						 	</tr>
+						 <% end %>
 						<% end %>
 					 </tbody>
 				</table>

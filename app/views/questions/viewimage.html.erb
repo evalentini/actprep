@@ -1,1 +1,17 @@
-<%= image_tag @filename, size: "950x110" %>
+<div class="row-fluid toprow">
+	<div class="span2"></div>
+	<div class="span3"></div>
+	<div class="span1"><a href="<%= @prev_link %>"class="btn btn-success">Prev</a></div>
+	<div class="span1">
+		<a href="<%= @next_link %>"class="btn btn-success" style="float: right;">Next</a>
+	</div>
+	<div class="span3"></div>
+	<div class="span2"></div>
+</div>
+<div class="row-fluid">
+	<div class="span2"></div>
+	<div class="span8">
+		<%= image_tag @filename, size: "950x110" %>
+	</div>
+	<div class="span2"></div>
+</div>

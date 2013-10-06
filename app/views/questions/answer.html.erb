@@ -3,7 +3,7 @@
 	<div class="span1"></div>
 	<div class="span5">
 		<div class="row-fluid" style="margin-bottom:25px;"><div class="span12"><h1> Answer Question </h1></div></div>
-		<form method="post" action="/answers/record" >
+		<form method="post" action="/answers/record/<%= @default_q.id %>" >
 		
 			<!--add authenticity token for CSRF protection-->
 			<%= token_tag(nil) %>
@@ -11,9 +11,15 @@
 			<div class="row-fluid">
 				<div class="span3"><strong>Select Test</strong></div>
 				<div class="span9">
-					<select id="test-number" name="test_number">
+					<select id="question-answer-test-number" name="test_number">
 						<% @tests.each do |test| %>
-							<option value="<%=test.test_number%>"><%=test.test_number%></option>
+							<option value="<%=test.test_number%>"
+								<% if @default_q.test_number == test.test_number %>
+									selected="selected"
+								<% end %>
+							>
+								<%=test.test_number%>
+							</option>
 						<% end %> 
 					</select>
 				</div>
@@ -22,9 +28,15 @@
 		    <div class="row-fluid">
 				<div class="span3"><strong>Select Section:</strong></div>
 				<div class="span9">
-					<select id="section" name="section">
+					<select id="question-answer-section" name="section">
 						<% @sections.each do |section| %>
-							<option value="<%=section.section%>"><%=section.section%></option>
+							<option value="<%=section.section%>" 
+								<% if @default_q.section == section.section %>
+									selected="selected"
+								<% end %>
+							>
+								<%=section.section%>
+							</option>
 							<%end%> 
 					</select>
 				</div>
@@ -33,8 +45,10 @@
 		    <div class="row-fluid">
 				<div class="span3"><strong>Select Question:</strong></div>
 				<div class="span9">
-					<select id="question" name="question">
-						<option value=1>1</option>
+					<select id="question-answer-question" name="question">
+						<% (1..@num_questions).each do |q| %>
+							<option value="<%= q %>"><%= q %></option>
+						<% end %>
 					</select>
 				</div>
 			</div>

@@ -3,8 +3,13 @@ class PagesController < ApplicationController
   def home
   	@active = "summary"
   	user = User.find_by_id(session[:user_id])
-    @answers = user.answers
-    logger.info "--#{@answers.count}---"
+    
+    if user.answers.count>0 
+      @summary = user.answerSummary
+      @pctAnswered = user.pctAnswered
+    end 
+    #@answers = user.answers
+    #@questions = user.answers.select("question_id").group("question_id")
   end
   
   def admin

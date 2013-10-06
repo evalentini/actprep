@@ -21,4 +21,21 @@ $('document').ready(function(){
 		$('input#minutes').val(minutes);
 		$('input#seconds').val(seconds);
 	},1000);
+	
+	$('button#prev-page, button#next-page').click(function(){
+		
+		var src = $('img#q-img').attr("src");
+		var section = (/[a-z]+/.exec(/[a-z]+_/.exec(src)));
+		var page = parseInt((/[0-9]+/.exec(/pg[0-9]+/.exec(src))));
+		if ($(this).attr("id")=="prev-page") {
+			page=page-1;
+		}
+		else {
+			page=page+1;
+		}
+		
+		$('img#q-img').attr("src", "/assets/"+section+"_pg"+page+".jpg");
+		$('img#q-img').attr("alt", section+"page "+page);
+		
+	});
 });

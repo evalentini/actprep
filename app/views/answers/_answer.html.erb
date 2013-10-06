@@ -1,14 +1,16 @@
 
 
 <tr>
-	<td><%= link_to answer.question.test_number,answer.question %></td>
-	<td><%= link_to answer.question.section, answer.question %></td>
-	<td><%= link_to answer.question.question_number, answer.question%></td>
-	<td> yes/no</td>
-	<td> <%= link_to time_ago_in_words(answer.question.updated_at), answer.question %></td> 
-	<td><%= link_to answer.question.section,"www.google.com" %></td>
-	<td><%= link_to answer.question.question_number,"www.google.com"%></td>
-	<td> yes/no</td>
-	<td> <%= link_to time_ago_in_words(answer.question.updated_at),"www.google.com" %></td> 
+	<td><%= answer.question.test_number %></td>
+	<td><%= answer.question.section.titlecase %></td>
+	<td><%= answer.question.question_number %></td>
+	<td>
+		<% if answer.correct() %>
+			Yes
+		<% else %>
+			No
+		<% end %>
+	</td>
+	<td><%= link_to "Try Again","www.google.com"%></td>
 
 </tr>
