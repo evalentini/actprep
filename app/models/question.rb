@@ -12,6 +12,7 @@ class Question < ActiveRecord::Base
   validates_presence_of :correct_ans
   validates_presence_of :ans_choice_1
   validates_presence_of :num_ans_choices
+  validates_uniqueness_of :question_number, scope: [:section, :test_number]
   
   def rightChoice
     (self.ans_choice_1..'Z').to_a[0, self.num_ans_choices][self.correct_ans-1]

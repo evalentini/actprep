@@ -49,6 +49,17 @@ unless User.find_by_email("evalentini@welshcarson.com")
   )
 end
 
+unless Question.where(test_number:1, section: "english", question_number:1).count>0
+  Question.create(
+    test_number: 1,
+    section: "english",
+    question_number: 1,
+    ans_choice_1: "A",
+    num_ans_choices: 4,
+    correct_ans: 3, 
+    page: 1
+    )
+end
 
 
 #Question.create(
