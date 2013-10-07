@@ -12,6 +12,9 @@ Actprep::Application.routes.draw do
   match 'questions/add' => 'questions#add'
   match 'questions/modify' => 'questions#modify'
 
+  match 'questions/findbyattributes' => 'questions#findbyattributes'
+
+
   match "/answers/save" => "answers#save"
   match "/questions/image" => "questions#page_image"
   post 'answers/submit'

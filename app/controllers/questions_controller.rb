@@ -115,8 +115,10 @@ class QuestionsController < ApplicationController
   
   
   def list 
+    result = Question.where(test_number: params[:test], section: params[:section])
+                     .order("test_number, section, question_number")
     respond_to do |format|
-      format.json {render :json => Question.where(test_number: params[:test], section: params[:section])}
+      format.json {render :json => result}
     end 
   end 
   
@@ -129,6 +131,13 @@ class QuestionsController < ApplicationController
     @prev_link = "/questions/viewimage/#{section}/#{prev_page}"
     @next_link = "/questions/viewimage/#{section}/#{next_page}"
     
+  end
+  
+  def findbyattributes
+    result=Question.where(test_number: params[:test], section: params[:section], question_number: params[:question]).first
+    respond_to do |format|
+      format.json {render :json => result}
+    end
   end
   
   

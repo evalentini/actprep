@@ -3,7 +3,7 @@
 	<div class="span1"></div>
 	<div class="span5">
 		<div class="row-fluid" style="margin-bottom:25px;"><div class="span12"><h1> Answer Question </h1></div></div>
-		<form method="post" action="/answers/record" >
+		<form id="answer-q-form" method="post" action="/answers/record/<%= @default_q.id %>" >
 		
 			<!--add authenticity token for CSRF protection-->
 			<%= token_tag(nil) %>
