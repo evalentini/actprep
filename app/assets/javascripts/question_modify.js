@@ -142,8 +142,8 @@ $('select#choice1').change(function(){
 //	//reset list of options for correct answer
 
 	$('select#correctanswer').html('');
-	for(i=0; i<optionList.length; i++) {
-		$('select#correctanswer').append("<option value="+i+">"+optionList[i]+"</option>");
+	for(i=1; i<=optionList.length; i++) {
+		$('select#correctanswer').append("<option value="+i+">"+optionList[i-1]+"</option>");
 	}
 });
 
