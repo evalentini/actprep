@@ -1,6 +1,8 @@
 Actprep::Application.routes.draw do
 
 
+  match 'questions/delete' => 'questions#delete'
+  match 'questions/edit' => 'questions#edit'
   match 'users/temppass' => 'users#temppass'
   match 'users/edituser' => 'users#editUser'
   match 'questions/maxpage' => 'questions#maxpage'

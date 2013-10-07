@@ -1,6 +1,14 @@
 class QuestionsController < ApplicationController
   
 
+
+  def delete
+    Question.find(params[:id]).destroy
+    respond_to do |format|
+      format.json {render :json => Question.first}
+    end 
+  end
+
   def maxpage
     
     maxpage_item={}
@@ -44,14 +52,35 @@ class QuestionsController < ApplicationController
   
   def modify
 
-    sections = ['math', 'english', 'science', 'reading']
-    default_section = 'math'
+    
+    @alphabetArray = ('A'..'Z').to_a
+    @alphabetOrderHash = {}
+    counter=0
+    ('A'..'Z').each do |letter|
+      @alphabetOrderHash[letter]=counter
+      counter+=1
+    end
+
+    @answerChoiceOptions=[]
+    ('A'..'W').each do |fl|
+      flPosition=@alphabetOrderHash[fl]
+      @answerChoiceOptions << @alphabetArray[flPosition,4].join(" ")
+    end
+    ('A'..'V').each do |fl|
+      flPosition=@alphabetOrderHash[fl]
+      @answerChoiceOptions << @alphabetArray[flPosition,5].join(" ")
+    end
+
+    sections = ['english', 'math', 'reading', 'science']
+    default_section = 'english'
     @default_section_pageimage = "#{default_section}_pg1.jpg"
     @default_section_maxpage=Question.maxpage(1, default_section).to_i
+    @maxpage_hash = {}
+    sections.each {|sec| @maxpage_hash[sec]=Question.maxpage(1,sec).to_i }
+    @maxpage_hash['science']=Question.maxpage(1, "science").to_i
     @questions = Question.order("test_number, section, question_number")
     @maxtest = Question.maximum("test_number") || 0
     
-    @maxpage
     @maxquestion = {}
     sections.each do |section|
       @maxquestion[section] = Question.where(test_number: 1, section: section).maximum("question_number") || 0
@@ -59,14 +88,31 @@ class QuestionsController < ApplicationController
   end 
   
   def add
-    Question.create(correct_ans: params[:correct_answer], num_ans_choices: 4, question_number: params[:question_number] ,section: params[:section], 
-    test_number: params[:test], ans_choice_1: params[:choice1], page: params[:page])
+    Question.create(correct_ans: params[:correct_answer], 
+                    num_ans_choices: params[:num_choice], 
+                    question_number: params[:question_number], 
+                    section: params[:section], 
+                    test_number: params[:test], 
+                    ans_choice_1: params[:choice1], 
+                    page: params[:page])
     
     respond_to do |format|
       format.json {render :json => Question.all}
     end
-    
+   
   end
+  
+  def edit 
+    Question.update(params[:id].to_i, 
+                    :page => params[:page].to_i, 
+                    :ans_choice_1 => params[:choice1], 
+                    :correct_ans => params[:correct_answer],
+                    :num_ans_choices => params[:num_choice])
+    respond_to do |format|
+      format.json {render :json => Question.find(params[:id].to_i)}
+    end
+  end
+  
   
   def list 
     respond_to do |format|
