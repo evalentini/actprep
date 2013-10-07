@@ -59,6 +59,22 @@ unless Question.where(test_number:1, section: "english", question_number:1).coun
     correct_ans: 3, 
     page: 1
     )
+    
+    q_id=Question.where(test_number:1, section: "english", question_number:1).first.id
+    
+  else 
+    
+    q_id=Question.first.id
+    
+end
+
+
+unless Answer.count>0
+  Answer.create(
+    question_id: q_id, 
+    selected_ans: 1, 
+    user_id: User.first.id  
+  )
 end
 
 
