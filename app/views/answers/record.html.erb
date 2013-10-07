@@ -8,9 +8,8 @@
 			<!--add authenticity token for CSRF protection-->
 			<%= token_tag(nil) %>
 			<select name="ans_choice"> 
-			<option value=1><%= @question.ans_choice_1 %></option>
-			<% (2..4).each do |num| %>
-				<option value="<%= num %>"><%= @ans_choices[num] %></option>
+			<% @question.correctAnswerOptions.each do |letter| %>
+				<option value="<%= @question.ansChoiceNumber(letter) %>"><%= letter %></option>
 			<% end %>
 		</select>
 	</div>

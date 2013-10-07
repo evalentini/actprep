@@ -25,6 +25,14 @@ class Question < ActiveRecord::Base
     (self.ans_choice_1..'Z').to_a[0, self.num_ans_choices]
   end
   
+  def ansChoiceLetter(num)
+    (self.ans_choice_1..'Z').to_a[0, self.num_ans_choices][num.to_i-1]
+  end
+  
+  def ansChoiceNumber(letter)
+    self.choiceList.rindex(letter)/2+1
+  end
+  
   def maxpage
     testnumber=self.test_number
     section=self.section
