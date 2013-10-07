@@ -11,6 +11,10 @@ end
 
 module Actprep
   class Application < Rails::Application
+    
+    #create a global variable for alphabet less the letter "I" which the ACT never uses as an answer choice
+    
+    
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
