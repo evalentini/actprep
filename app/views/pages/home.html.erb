@@ -20,37 +20,42 @@
 					 <tbody>
 						 <% if @summary.present? %>
 						 <tr>
-							 <td colspan=5 style="background-color: green;"></td>
+							 <td colspan=5 style="background-color: green; font-size: 120%; font-weight: bold">
+								 Answered Correctly 
+							 </td>
 						 </tr>
 						 <% @summary[:correct].each do |q|%>
 						 	<tr>
 						 		<td ><%= q[:test] %></td>
-								<td><%= q[:section] %></td>
+								<td><%= q[:section].titlecase %></td>
 								<td><%= q[:question] %></td>
 								<td><%= q[:correct].titlecase %></td>
 								<td><a href="/answers/record/<%= q[:question_id] %>">Try Again</a></td>
 						 	</tr>
 						 <% end %>
-						 <tr>
-							 <td colspan=5 style="background-color: red;"></td>
-						 </tr>
+						 <td colspan=5 style="background-color: red; font-size: 120%; font-weight: bold">
+							 Answered <span style="text-decoration: underline;">In</span>correctly
+						 </td>
 						 <% @summary[:incorrect].each do |q|%>
 						 	<tr>
 						 		<td ><%= q[:test] %></td>
-								<td><%= q[:section] %></td>
+								<td><%= q[:section].titlecase %></td>
 								<td><%= q[:question] %></td>
 								<td><%= q[:correct].titlecase %></td>
 								<td><a href="/answers/record/<%= q[:question_id] %>">Try Again</a></td>
 						 	</tr>
 						 <% end %>
+						 
 						 <tr>
-							 <td colspan=5 style="background-color: yellow;"></td>
-						 </tr>
+						 	<td colspan=5 style="background-color: yellow; font-size: 120%; font-weight: bold">
+								 Not Answered
+						 	</td>
+						</tr>
 						 
 						 <% @summary[:not_attempted].each do |q|%>
 						 	<tr>
 						 		<td ><%= q[:test] %></td>
-								<td><%= q[:section] %></td>
+								<td><%= q[:section].titlecase %></td>
 								<td><%= q[:question] %></td>
 								<td><%= q[:correct].titlecase %></td>
 								<td><a href="/answers/record/<%= q[:question_id] %>">Try</a></td>

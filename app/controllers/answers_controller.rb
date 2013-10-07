@@ -1,4 +1,8 @@
 class AnswersController < ApplicationController
+  
+  def dashboard
+  end
+  
   def save
     user = User.find(session[:user_id])
     Answer.create(question_id: params[:question_id], user_id: user.id, selected_ans: params[:ans_choice])

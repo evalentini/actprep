@@ -1,6 +1,7 @@
 Actprep::Application.routes.draw do
 
-
+  match '/answers/dashboard' => 'answers#dashboard'
+  
   match 'questions/delete' => 'questions#delete'
   match 'questions/edit' => 'questions#edit'
   match 'users/temppass' => 'users#temppass'
