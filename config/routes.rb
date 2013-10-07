@@ -19,7 +19,7 @@ Actprep::Application.routes.draw do
   match 'questions/answer' => 'questions#answer'
   resources :answers
   resources :questions
-  get "answers/record"
+  match "answers/record" => 'answers#record'
 
 
 

@@ -21,5 +21,5 @@ function pullQuestions() {
 $("document").ready(function(){
 	$('select#question-answer-section, select#question-answer-test-number').change(function(){
 		pullQuestions();
-	})
+	});
 });

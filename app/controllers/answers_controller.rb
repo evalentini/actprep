@@ -7,8 +7,14 @@ class AnswersController < ApplicationController
   
   def record
 
-  
-    @question = Question.find(params[:id])
+    if params[:id].present?
+      @question = Question.find(params[:id]) 
+    else 
+    @question = Question.where(test_number: params[:test_number], 
+                               section: params[:section], 
+                               question_number: params[:question]
+                              ).first
+    end
             
     @ans_choices = {}
     
