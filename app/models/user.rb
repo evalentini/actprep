@@ -22,24 +22,83 @@ class User < ActiveRecord::Base
     
   def answerSummary
     #find unique questions answered by user
+  
     questions = Answer.select("question_id as q_id").where(user_id: self.id).group("question_id")
     #find latest answer for each question 
     result = []
-    questions.each do |q|
-    
-      mrdate = Answer.where(question_id: q.q_id, user_id: self.id).maximum("created_at")
-      most_recent_ans = Answer.where(question_id: q.q_id, user_id: self.id, created_at: mrdate).first.selected_ans      
-      is_correct = "no"
-      is_correct = "yes" if most_recent_ans == Question.find(q.q_id).correct_ans
+    Question.all.each do |q|
       
-      result << {:question_id => q.q_id,
-                 :test => Question.find(q.q_id).test_number, 
-                 :section => Question.find(q.q_id).section, 
-                 :question => Question.find(q.q_id).question_number, 
-                 :correct => is_correct}
+      #check if user answered question 
+      answered=false
+      answered=true if Answer.where(user_id: self.id, question_id: q.id).count>0
+      
+      question_id=q.id.to_i
+      test=Question.find(q.id).test_number.to_i
+      section=Question.find(q.id).section
+      question=Question.find(q.id).question_number
+      is_correct=" "
+      attempted="no"
+      
+      
+      if (answered==true) 
+        mrdate = Answer.where(question_id: q.id, user_id: self.id).maximum("created_at")
+        most_recent_ans = Answer.where(question_id: q.id, user_id: self.id, created_at: mrdate).first.selected_ans
+        is_correct = "no"
+        is_correct = "yes" if most_recent_ans == Question.find(q.id).correct_ans
+        attempted="yes"
+      end
+      
+      
+       result << {:question_id => question_id,
+                  :test => test, 
+                  :section => section, 
+                  :question => question, 
+                  :correct => is_correct,
+                  :attempted => attempted}
+      
+#    questions.each do |q|
+    
+#      mrdate = Answer.where(question_id: q.q_id, user_id: self.id).maximum("created_at")
+#      most_recent_ans = Answer.where(question_id: q.q_id, user_id: self.id, created_at: mrdate).first.selected_ans      
+#      is_correct = "no"
+#      is_correct = "yes" if most_recent_ans == Question.find(q.q_id).correct_ans
+      
+#      result << {:question_id => q.q_id,
+#                 :test => Question.find(q.q_id).test_number, 
+#                 :section => Question.find(q.q_id).section, 
+#                 :question => Question.find(q.q_id).question_number, 
+#                 :correct => is_correct}
     end
     
-    result
+    
+    # sorted_result = result.sort { |a,b| a[:question] == b[:question]? ( a[:section] ==
+    # b[:section]? a[:test] <=> b[:test] : a[:section] <=> b[:section] ) : b[:question] <=> a[:question] }
+
+    correct_questions = []
+    result.each {|r| correct_questions << r if r[:correct]=="yes" && r[:attempted]=="yes"}
+    correct_questions = User.sortArray(correct_questions)
+
+    incorrect_questions = []
+    result.each {|r| incorrect_questions << r if r[:correct]=="no" && r[:attempted]=="yes"}
+    incorrect_questions = User.sortArray(incorrect_questions)
+    
+    not_attempted = []
+    result.each {|r| not_attempted << r if r[:attempted]=="no"}
+    not_attempted = User.sortArray(not_attempted)
+    
+    final_result = {}
+    final_result[:correct]=correct_questions
+    final_result[:incorrect]=incorrect_questions
+    final_result[:not_attempted]=not_attempted
+    
+    
+    
+ #   sorted_result = result.sort { |a,b| a[:test] == b[:test]? ( a[:section] ==
+ #   b[:section]? a[:question] <=> b[:question] : a[:section] <=> b[:section] ) : b[:test] <=> a[:test] }
+    
+    
+    
+    final_result
       
   end
   
@@ -80,6 +139,12 @@ class User < ActiveRecord::Base
   def self.rand_string(i)
     o = [('a'..'z'), ('A'..'Z')].map { |i| i.to_a }.flatten
     (0...i).map{ o[rand(o.length)] }.join
+  end
+  
+  def self.sortArray(result, test=:test, section=:section, question=:question) 
+    result.sort { |a,b| a[test] == b[test]? ( a[section] ==
+    b[section]? a[question] <=> b[question] : a[section] <=> b[section] ) : b[test] <=> a[test] }
+    
   end
 
  
