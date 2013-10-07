@@ -161,11 +161,19 @@ $("select[fieldtype='answerchoices']").change(function(){
 //code to open a new browser window with question page when user clicks view page 
 
 $('button#view-page-button').click(function(){
+	
 	var isVisible = true;
 	if ($('div#modify-page-image-row').hasClass("hidden")) {
 		isVisible=false;
 	}
 	if (isVisible==false) {
+		
+		var section = $('select#section').val();
+		var page = $('select#pagenumber').val();
+		
+		$('img#q-mod-img').attr("src", "/assets/"+section+"_pg"+page+".jpg");
+		$('img#q-mod-img').attr("alt", section+"page "+page);
+		
 		$(this).text("Hide Page");	
 		$('div#modify-page-image-row').removeClass("hidden");		
 	}
@@ -178,7 +186,7 @@ $('button#view-page-button').click(function(){
 
 $('button#modify-image-prev-page, button#modify-image-next-page').click(function(){
 	var src = $('img#q-mod-img').attr("src");
-	var section = (/[a-z]+/.exec(/[a-z]+_/.exec(src)));
+	var section = $('select#section').val();
 	var page = parseInt((/[0-9]+/.exec(/pg[0-9]+/.exec(src))));
 	if ($(this).attr("id")=="modify-image-prev-page") {
 		if (page>1) {
@@ -186,7 +194,7 @@ $('button#modify-image-prev-page, button#modify-image-next-page').click(function
 		}
 	}
 	else {
-		maxpage=$('input#modify-maxpage').val();
+		maxpage=$("input#maxpage-"+section).val();
 		if (page<maxpage) {
 			page=page+1;			
 		}
