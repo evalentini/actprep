@@ -1,10 +1,33 @@
 <div class="container-fluid">
 	
-	<div class="row-fluid toprow">
-		<div class="span12"><h1>You've answered <%= @pctAnswered %>% of all online questions</h1></div>
+	<div class="row-fluid">
+		<div class="span12" style="font-weight: bold; font-size: 180%; margin-top: 25px;">
+			Your current level is <span style="color: blue;"><%= @currentLevel %></span>.  
+			Answer more questions correctly to get to a higher level! 
+		</div>
+	</div>
+	
+	<div class="row-fluid" style="margin-top: 25px;">
+		<div class="span12" style="font-weight: bold; font-size: 130%; ">
+			You've answered <%= pluralize(@numCorrect, "question") %> correctly 
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span12" style="font-weight: bold; font-size: 130%; ">
+			You've answered <%= pluralize(@numIncorrect, "question") %> 
+			<span style="text-decoration: underline">in</span>correctly 
+		</div>
 	</div>
 	
 	<div class="row-fluid">
+		<div class="span12" style="font-weight: bold; font-size: 130%; ">
+			You have not answered <%= pluralize(@notAttempted, "question") %>
+		</div>
+	</div>
+	
+
+	
+	<div class="row-fluid" style="margin-top: 25px;">
 		<div class="span12">
 
 				<table class="table table-bordered">
