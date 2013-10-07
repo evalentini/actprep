@@ -23,13 +23,40 @@ unless User.find_by_email("asharman@griffithtutoring.org")
   )
 end 
 
+#locked ADMIN user with my email 
 
-Question.create(
-correct_ans: 1, 
-num_ans_choices: 5, 
-question_number: 1, 
-section: "science", 
-test_number: 1, 
-ans_choice_1: "A",
-page: 2
-)
+unless User.find_by_email("evan.valentini@gmail.com")
+  User.create(
+    email: "evan.valentini@gmail.com",
+    encrypted_password: "7ffb3c76e1ba0f5822e931c812653d311587e824a61921f91fa6b470f03cf7f0",
+    salt:  "x79Z",
+    role: "admin",
+    username: "evan.valentini",
+    locked: true 
+  )
+end
+
+#locked STUDENT user with my email 
+
+unless User.find_by_email("evalentini@welshcarson.com")
+  User.create(
+    email: "evalentini@welshcarson.com",
+    encrypted_password: "7ffb3c76e1ba0f5822e931c812653d311587e824a61921f91fa6b470f03cf7f0",
+    salt:  "x79Z",
+    role: "student",
+    username: "evalentini", 
+    locked: true   
+  )
+end
+
+
+
+#Question.create(
+#correct_ans: 1, 
+#num_ans_choices: 5, 
+#question_number: 1, 
+#section: "science", 
+#test_number: 1, 
+#ans_choice_1: "A",
+#page: 2
+#)

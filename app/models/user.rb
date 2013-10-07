@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   
-  attr_accessible :email, :encrypted_password, :role, :salt, :username 
+  attr_accessible :email, :encrypted_password, :role, :salt, :username, :locked
   has_many :answers, dependent: :destroy
   
   validates_uniqueness_of :email

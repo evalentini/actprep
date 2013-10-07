@@ -1,8 +1,13 @@
 class UsersController < ApplicationController
   
   def editUser
+    
+
+    
     argHash={'email'=>params[:email], 'username'=>params['username'], 'role'=>params['role'], 'pwd'=>params['pwd']}
-    User.find(params['id'].to_i).editWithPwd(argHash)
+
+    #if user is not editable we want to skip any edits
+    User.find(params['id'].to_i).editWithPwd(argHash) unless User.find(params['id'].to_i).locked==true
     respond_to do |format|
       format.json {render :json => User.find(params['id'])}
     end 
