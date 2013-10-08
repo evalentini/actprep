@@ -15,19 +15,43 @@ class Question < ActiveRecord::Base
   validates_uniqueness_of :question_number, scope: [:section, :test_number]
   
   def rightChoice
-    (self.ans_choice_1..'Z').to_a[0, self.num_ans_choices][self.correct_ans-1]
+
+    alphaArray = Actprep::Application.alphabetArray
+    alphaHash = Actprep::Application.alphabetHash
+    
+    alphaArray[alphaHash[self.ans_choice_1], self.num_ans_choices][self.correct_ans-1]
+    
+    #(self.ans_choice_1..'Z').to_a[0, self.num_ans_choices][self.correct_ans-1]
   end
   
   def choiceList
-    ((self.ans_choice_1..'Z').to_a[0, self.num_ans_choices]).join(" ")
+
+    alphaArray = Actprep::Application.alphabetArray
+    alphaHash = Actprep::Application.alphabetHash
+
+    alphaArray[alphaHash[self.ans_choice_1], self.num_ans_choices].join(" ")  
+    #((self.ans_choice_1..'Z').to_a[0, self.num_ans_choices]).join(" ")
   end
   
   def correctAnswerOptions
-    (self.ans_choice_1..'Z').to_a[0, self.num_ans_choices]
+
+    alphaArray = Actprep::Application.alphabetArray
+    alphaHash = Actprep::Application.alphabetHash
+
+    alphaArray[alphaHash[self.ans_choice_1], self.num_ans_choices]  
+    
+    #(self.ans_choice_1..'Z').to_a[0, self.num_ans_choices]
   end
   
   def ansChoiceLetter(num)
-    (self.ans_choice_1..'Z').to_a[0, self.num_ans_choices][num.to_i-1]
+
+    alphaArray = Actprep::Application.alphabetArray
+    alphaHash = Actprep::Application.alphabetHash
+
+    alphaArray[alphaHash[self.ans_choice_1], self.num_ans_choices][num.to_i-1]  
+
+
+#    (self.ans_choice_1..'Z').to_a[0, self.num_ans_choices][num.to_i-1]
   end
   
   def ansChoiceNumber(letter)

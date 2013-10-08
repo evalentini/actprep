@@ -13,6 +13,13 @@ module Actprep
   class Application < Rails::Application
     
     #create a global variable for alphabet less the letter "I" which the ACT never uses as an answer choice
+    def self.alphabetArray
+      ["A","B","C","D","E","F","G","H","J","K","L","M","N","O"]
+    end
+    
+    def self.alphabetHash
+      {"A"=>0,"B"=>1,"C"=>2,"D"=>3,"E"=>4,"F"=>5,"G"=>6,"H"=>7,"J"=>8,"K"=>9,"L"=>10,"M"=>11,"N"=>12,"O"=>13}
+    end
     
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

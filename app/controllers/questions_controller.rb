@@ -53,8 +53,8 @@ class QuestionsController < ApplicationController
   def modify
 
     
-    @alphabetArray = ('A'..'Z').to_a
-    @alphabetOrderHash = {}
+    @alphabetArray = Actprep::Application.alphabetArray
+    @alphabetOrderHash = Actprep::Application.alphabetHash
     counter=0
     ('A'..'Z').each do |letter|
       @alphabetOrderHash[letter]=counter
@@ -62,11 +62,11 @@ class QuestionsController < ApplicationController
     end
 
     @answerChoiceOptions=[]
-    ('A'..'W').each do |fl|
+    @alphabetArray[0, @alphabetArray.length-4].each do |fl|
       flPosition=@alphabetOrderHash[fl]
       @answerChoiceOptions << @alphabetArray[flPosition,4].join(" ")
     end
-    ('A'..'V').each do |fl|
+    @alphabetArray[0, @alphabetArray.length-5].each do |fl|
       flPosition=@alphabetOrderHash[fl]
       @answerChoiceOptions << @alphabetArray[flPosition,5].join(" ")
     end
