@@ -37,6 +37,7 @@
 						<th>Section</th>
 						<th>Queston</th>
 						<th>Correct</th>
+						<th>Explanation</th>
 						<th></th>
 					  </tr>
 					</thead>
@@ -53,6 +54,7 @@
 								<td><%= q[:section].titlecase %></td>
 								<td><%= q[:question] %></td>
 								<td><%= q[:correct].titlecase %></td>
+								<td><%= q[:explanation] %></td>
 								<td><a href="/answers/record/<%= q[:question_id] %>">Try Again</a></td>
 						 	</tr>
 						 <% end %>
@@ -65,6 +67,8 @@
 								<td><%= q[:section].titlecase %></td>
 								<td><%= q[:question] %></td>
 								<td><%= q[:correct].titlecase %></td>
+								<td><%= q[:explanation] %></td>
+
 								<td><a href="/answers/record/<%= q[:question_id] %>">Try Again</a></td>
 						 	</tr>
 						 <% end %>
@@ -81,6 +85,8 @@
 								<td><%= q[:section].titlecase %></td>
 								<td><%= q[:question] %></td>
 								<td><%= q[:correct].titlecase %></td>
+								<td><%= q[:explanation] %></td>
+								
 								<td><a href="/answers/record/<%= q[:question_id] %>">Try</a></td>
 						 	</tr>
 						 <% end %>

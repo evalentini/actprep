@@ -3,7 +3,7 @@ class Question < ActiveRecord::Base
   
   
   attr_accessible :correct_ans, :num_ans_choices, :question_number, :section, :test_number,
-  :ans_choice_1, :user_id, :page
+  :ans_choice_1, :user_id, :page, :explanation
   
   belongs_to :user
   
