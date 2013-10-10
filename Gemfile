@@ -25,6 +25,12 @@ gem 'jquery-rails', '~> 2.0'
 gem 'raphael-rails'
 gem 'morris-rails'
 
+group :development do
+	gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'meta_request'
+end
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

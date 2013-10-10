@@ -41,8 +41,7 @@
 
 <%= yield %>
 
+<%= debug(params) if Rails.env.development? %>
 
-
-</div> <!--end of container -->
 </body>
 </html>
