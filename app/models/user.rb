@@ -41,8 +41,10 @@ class User < ActiveRecord::Base
       
       
       if (answered==true) 
-        mrdate = Answer.where(question_id: q.id, user_id: self.id).maximum("created_at")
-        most_recent_ans = Answer.where(question_id: q.id, user_id: self.id, created_at: mrdate).first.selected_ans
+        #mrdate = Answer.where(question_id: q.id, user_id: self.id).maximum("created_at")
+        mr_id=Answer.where(question_id: q.id, user_id:self.id).order("created_at desc").limit(1).first.id
+        most_recent_ans=Answer.find(mr_id)
+        #most_recent_ans = Answer.where(question_id: q.id, user_id: self.id, created_at: mrdate).first.selected_ans
         is_correct = "no"
         is_correct = "yes" if most_recent_ans == Question.find(q.id).correct_ans
         attempted="yes"
