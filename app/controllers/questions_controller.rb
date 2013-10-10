@@ -94,7 +94,8 @@ class QuestionsController < ApplicationController
                     section: params[:section], 
                     test_number: params[:test], 
                     ans_choice_1: params[:choice1], 
-                    page: params[:page])
+                    page: params[:page],
+                    explanation: params[:explanation])
     
     respond_to do |format|
       format.json {render :json => Question.all}
