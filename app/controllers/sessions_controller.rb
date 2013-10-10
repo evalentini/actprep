@@ -13,7 +13,10 @@ skip_before_filter :confirm_login
   		session[:password] = params[:password]
   		if @user_record.check_pwd(params[:password])
   			redirect_to root_path
-  		end	
+  		else
+        flash.now[:failure] = "Wrong Username or Password"  
+        render 'new'
+      end
     else
       if @user = params[:username]
       flash.now[:failure] = "Wrong Username or Password"  
