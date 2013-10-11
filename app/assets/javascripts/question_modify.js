@@ -261,5 +261,10 @@ $('a.mod-view-page-link').click(function(){
 	
 });
 
+$('a.view-explanation-link').click(function(){
+	window.open("explanation/"+$(this).attr("questionid"), "_blank", "menubar=yes, fullscreen=yes, scrollbars=1,resizable=1,height=1500,width=1100");
+	
+});
+
 });	
 

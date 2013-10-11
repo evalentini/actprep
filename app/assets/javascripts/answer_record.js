@@ -31,8 +31,12 @@ $('document').ready(function(){
 			page=page-1;
 		}
 		else {
+<<<<<<< HEAD
 			maxpage=$("input#maxpage-"+section).val();
 			if (page<maxpage) {
+=======
+			if (page<$("input#maxpage").val()){
+>>>>>>> ed93ad33cbccc14696fd7f0b6999c0dcc34d59c2
 				page=page+1;
 			}
 		}

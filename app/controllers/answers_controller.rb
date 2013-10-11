@@ -24,8 +24,7 @@ class AnswersController < ApplicationController
 
 
     @user = User.find(session[:user_id])
-    
-
+  
     # @ans_choice = params[:ans_choice_radio]
     
  

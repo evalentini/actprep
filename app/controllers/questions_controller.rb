@@ -94,7 +94,8 @@ class QuestionsController < ApplicationController
                     section: params[:section], 
                     test_number: params[:test], 
                     ans_choice_1: params[:choice1], 
-                    page: params[:page])
+                    page: params[:page],
+                    explanation: params[:explanation])
     
     respond_to do |format|
       format.json {render :json => Question.all}
@@ -140,7 +141,19 @@ class QuestionsController < ApplicationController
     end
   end
   
-  
+  def explanation
+    @simple_explanation = Question.find(params[:id]).explanation || "No explanation available."
+  end
+
+  def edit_explanation
+    @question = Question.find(params[:id])
+  end
+  def post_edit_explanation
+    @question = Question.update(params[:id].to_i, 
+                    :explanation => params[:explanation])
+    redirect_to action: "modify"
+  end
+
 
 end
 
