@@ -108,6 +108,14 @@
 							
 						</td>
 						<td>
+							<span class="viewmode-<%= question.id %>">
+							<%= link_to "Explanation", explanation_path(question.id), class: "view-explanation-link", questionid: question.id %>
+							</span>
+							<span class="editmode-<%= question.id %> hidden">
+							<%= link_to "Edit explanation", explanation_edit_path(question.id), class: "view-explanation-link", questionid: question.id %>
+							</span>
+						</td>
+						<td>
 							<button class="btn btn-primary btn-mini editQuestion">Edit</button>
 							<% if question.question_number==@maxquestion[question.section] %>
 								<button class="btn btn-danger btn-mini deleteQuestion">Delete</button>

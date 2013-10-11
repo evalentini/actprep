@@ -145,6 +145,15 @@ class QuestionsController < ApplicationController
     @simple_explanation = Question.find(params[:id]).explanation || "No explanation available."
   end
 
+  def edit_explanation
+    @question = Question.find(params[:id])
+  end
+  def post_edit_explanation
+    @question = Question.update(params[:id].to_i, 
+                    :explanation => params[:explanation])
+    redirect_to action: "modify"
+  end
+
 
 end
 

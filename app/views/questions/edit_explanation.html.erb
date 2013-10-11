@@ -1,0 +1,5 @@
+<%= form_tag post_edit_explanation_path, method: :get do -%>
+<input name="explanation" value="<%= @question.explanation %>">
+<input name="id" type="hidden" value="<%= @question.id %>">
+<%= submit_tag 'Edit' %>
+<% end -%>
