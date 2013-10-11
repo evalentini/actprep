@@ -1,4 +1,5 @@
 Actprep::Application.routes.draw do
+  match 'questions/explanation/:id' => 'questions#explanation'
 
   match '/answers/dashboard' => 'answers#dashboard'
   

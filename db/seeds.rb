@@ -58,7 +58,7 @@ unless Question.where(test_number:1, section: "english", question_number:1).coun
     num_ans_choices: 4,
     correct_ans: 3, 
     page: 1,
-    explanation: "foobar"
+    explanation: "Hey question 1. Your answer should've been blah because blah "
     )
     
     q_id=Question.where(test_number:1, section: "english", question_number:1).first.id
@@ -76,6 +76,19 @@ unless Answer.count>0
     selected_ans: 1, 
     user_id: User.first.id  
   )
+end
+
+unless Question.where(test_number:1, section: "english", question_number:2).count>0
+  Question.create(
+    test_number: 1,
+    section: "english",
+    question_number: 2,
+    ans_choice_1: "A",
+    num_ans_choices: 4,
+    correct_ans: 3, 
+    page: 1,
+    explanation: "Your answer should've been blah because blah "
+    )
 end
 
 

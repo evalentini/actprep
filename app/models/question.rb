@@ -6,6 +6,7 @@ class Question < ActiveRecord::Base
   :ans_choice_1, :user_id, :page, :explanation
   
   belongs_to :user
+  has_many :answers
   
   validates_presence_of :question_number
   validates_presence_of :page

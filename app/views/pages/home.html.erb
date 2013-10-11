@@ -35,7 +35,7 @@
 					  <tr>
 						<th>Test</th>
 						<th>Section</th>
-						<th>Queston</th>
+						<th>Question</th>
 						<th>Correct</th>
 						<th>Explanation</th>
 						<th></th>
@@ -44,7 +44,7 @@
 					 <tbody>
 						 <% if @summary.present? %>
 						 <tr>
-							 <td colspan=5 style="background-color: green; font-size: 120%; font-weight: bold">
+							 <td colspan=6 style="background-color: green; font-size: 120%; font-weight: bold">
 								 Answered Correctly 
 							 </td>
 						 </tr>
@@ -54,11 +54,13 @@
 								<td><%= q[:section].titlecase %></td>
 								<td><%= q[:question] %></td>
 								<td><%= q[:correct].titlecase %></td>
-								<td><%= q[:explanation] %></td>
+								
+								<td><a href="#myModal-<%= q[:question_id] %>" role="button" class="" data-toggle="modal">explanation</a></td>
+<%= render partial: "questions/modal", locals: {question_id: q[:question_id]} %>
 								<td><a href="/answers/record/<%= q[:question_id] %>">Try Again</a></td>
 						 	</tr>
 						 <% end %>
-						 <td colspan=5 style="background-color: red; font-size: 120%; font-weight: bold">
+						 <td colspan=6 style="background-color: red; font-size: 120%; font-weight: bold">
 							 Answered <span style="text-decoration: underline;">In</span>correctly
 						 </td>
 						 <% @summary[:incorrect].each do |q|%>
@@ -67,14 +69,15 @@
 								<td><%= q[:section].titlecase %></td>
 								<td><%= q[:question] %></td>
 								<td><%= q[:correct].titlecase %></td>
-								<td><%= q[:explanation] %></td>
-
+								
+								<td><a href="#myModal-<%= q[:question_id] %>" role="button" class="" data-toggle="modal">explanation</a></td>
+<%= render partial: "questions/modal", locals: {question_id: q[:question_id]} %>
 								<td><a href="/answers/record/<%= q[:question_id] %>">Try Again</a></td>
 						 	</tr>
 						 <% end %>
 						 
 						 <tr>
-						 	<td colspan=5 style="background-color: yellow; font-size: 120%; font-weight: bold">
+						 	<td colspan=6 style="background-color: yellow; font-size: 120%; font-weight: bold">
 								 Not Answered
 						 	</td>
 						</tr>
@@ -84,9 +87,10 @@
 						 		<td ><%= q[:test] %></td>
 								<td><%= q[:section].titlecase %></td>
 								<td><%= q[:question] %></td>
-								<td><%= q[:correct].titlecase %></td>
-								<td><%= q[:explanation] %></td>
+								<td><%=  %></td>
 								
+								<td><a href="#myModal-<%= q[:question_id] %>" role="button" class="" data-toggle="modal">explanation</a></td>
+								<%= render partial: "questions/modal", locals: {question_id: q[:question_id]} %>
 								<td><a href="/answers/record/<%= q[:question_id] %>">Try</a></td>
 						 	</tr>
 						 <% end %>
@@ -99,4 +103,3 @@
 		</div>
 	</div>
 </div>
-

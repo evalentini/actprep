@@ -24,14 +24,7 @@ class AnswersController < ApplicationController
 
 
     @user = User.find(session[:user_id])
-    
-    @cutoffs = {}
-    @cutoffs[:english]={}
-    @cutoffs[:english][:yellow]=50 
-    @cutoffs[:english][:red]=120
-    @cutoffs[:math]={}
-    @cutoffs[:math][:yellow]=40
-
+  
     # @ans_choice = params[:ans_choice_radio]
     
  

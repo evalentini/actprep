@@ -141,7 +141,10 @@ class QuestionsController < ApplicationController
     end
   end
   
-  
+  def explanation
+    @simple_explanation = Question.find(params[:id]).explanation || "No explanation available."
+  end
+
 
 end
 
