@@ -31,7 +31,10 @@ $('document').ready(function(){
 			page=page-1;
 		}
 		else {
-			page=page+1;
+			maxpage=$("input#maxpage-"+section).val();
+			if (page<maxpage) {
+				page=page+1;
+			}
 		}
 		
 		$('img#q-img').attr("src", "/assets/"+section+"_pg"+page+".jpg");

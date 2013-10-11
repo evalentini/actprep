@@ -40,5 +40,19 @@
 	<div class="span8"></div>
 		<%= image_tag @filename, size: "950x110", style: "display: block; margin-left: auto; margin-right: auto;", id: "q-img"%>
 	</div>
+	<!--hidden inputs for max question for each section-->
+		
+		<% @maxquestion.each do |k, v| %>
+			<input type="hidden" id="maxquestion-hidden-input-<%= k %>" value="<%= v %>">
+		<% end %>
+		
+		<!--hidden input for maximum page-->
+		<input type="hidden" id="modify-maxpage" value=<%= @default_section_maxpage %>>
+		<!--end hidden inputs-->	
+		
+		<!--hidden input for maximum page for each section-->	
+		<% @maxpage_hash.each do |k,v| %>
+			<input type="hidden" id="maxpage-<%= k %>" value="<%= v%>">
+		<% end %>
 	<div class="span2"></div>
 </form>
