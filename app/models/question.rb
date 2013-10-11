@@ -15,6 +15,9 @@ class Question < ActiveRecord::Base
   validates_presence_of :num_ans_choices
   validates_uniqueness_of :question_number, scope: [:section, :test_number]
   
+  def maxpage
+    Question.maxpage(self.test_number, self.section)
+  end
   def rightChoice
 
     alphaArray = Actprep::Application.alphabetArray

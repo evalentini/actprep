@@ -55,7 +55,7 @@
 								<td><%= q[:question] %></td>
 								<td><%= q[:correct].titlecase %></td>
 								
-								<td><a href="#myModal-<%= q[:question_id] %>" role="button" class="" data-toggle="modal">explanation</a></td>
+								<td><a href="#myModal-<%= q[:question_id] %>" role="button" class="" data-toggle="modal">View</a></td>
 <%= render partial: "questions/modal", locals: {question_id: q[:question_id]} %>
 								<td><a href="/answers/record/<%= q[:question_id] %>">Try Again</a></td>
 						 	</tr>
@@ -70,7 +70,7 @@
 								<td><%= q[:question] %></td>
 								<td><%= q[:correct].titlecase %></td>
 								
-								<td><a href="#myModal-<%= q[:question_id] %>" role="button" class="" data-toggle="modal">explanation</a></td>
+								<td><a href="#myModal-<%= q[:question_id] %>" role="button" class="" data-toggle="modal">View</a></td>
 <%= render partial: "questions/modal", locals: {question_id: q[:question_id]} %>
 								<td><a href="/answers/record/<%= q[:question_id] %>">Try Again</a></td>
 						 	</tr>
@@ -89,7 +89,7 @@
 								<td><%= q[:question] %></td>
 								<td><%=  %></td>
 								
-								<td><a href="#myModal-<%= q[:question_id] %>" role="button" class="" data-toggle="modal">explanation</a></td>
+								<td><a href="#myModal-<%= q[:question_id] %>" role="button" class="" data-toggle="modal">View</a></td>
 								<%= render partial: "questions/modal", locals: {question_id: q[:question_id]} %>
 								<td><a href="/answers/record/<%= q[:question_id] %>">Try</a></td>
 						 	</tr>

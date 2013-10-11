@@ -31,7 +31,9 @@ $('document').ready(function(){
 			page=page-1;
 		}
 		else {
-			page=page+1;
+			if (page<$("input#maxpage").val()){
+				page=page+1;
+			}
 		}
 		
 		$('img#q-img').attr("src", "/assets/"+section+"_pg"+page+".jpg");
