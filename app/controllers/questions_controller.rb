@@ -143,6 +143,7 @@ class QuestionsController < ApplicationController
   
   def explanation
     @simple_explanation = Question.find(params[:id]).explanation || "No explanation available."
+    @question = Question.find(params[:id])
   end
 
   def edit_explanation
