@@ -1,1 +1,22 @@
-<%= @simple_explanation %>
+<div class="row-fluid toprow">
+	<div class="span1"></div>
+	<div class="span10">
+		<div class="row-fluid">
+			<div class="span12">
+			</div>
+		</div>
+		<div class="row-fluid">
+			<div class="span12">
+				<% @simple_explanation.gsub("\r", "").split("\n").each do |line| %>
+					<%= line %><br/>
+				<% end %>
+			</div>
+		</div>
+		<div class="row-fluid">
+			<div class="span12">
+				<a href="/questions/explanation/edit/<%=@question.id%>">Edit</a>
+			</div>
+		</div>	
+	</div>
+	<div class="span1"></div>
+</div>

@@ -57,11 +57,11 @@ $('document').ready(function(){
 		email.html("<input type='text' id='user-mod-email' name='user-mod-email' value='"+email.text()+"'>");
 		
 		username=row.children('td.user-mod-username')
-		username.html("<input type='text' id='user-mod-username' name='user-mod-username' value='"+username.text()+"'>");
+		username.html("<input type='text' class='shortbox' id='user-mod-username' name='user-mod-username' value='"+username.text()+"'>");
 		
 		role=row.children('td.user-mod-role');
 		var current_role=role.text();
-		var role_html="<select id='user-mod-role' name='user-mod-role'>";
+		var role_html="<select id='user-mod-role' class='shortbox' name='user-mod-role'>";
 			
 			//set the student option
 			role_html=role_html+" <option value='student'";
@@ -93,7 +93,7 @@ $('document').ready(function(){
 				user_id:row_id
 			}
 		}).done(function(data){
-			temppass.html("<input id='user-mod-pwd' type='text' disabled='disabled' value='"+data.pwd+"'>");
+			temppass.html("<input id='user-mod-pwd' class='shortbox' type='text' value='"+data.pwd+"'>");
 	    });
 		
 		//change edit user button to save
