@@ -12,7 +12,9 @@ var buttonOptions={'buttonList':
 					
 				   };
 
-new nicEditor(buttonOptions).panelInstance('edit-exp-area');
+if ($('textarea#edit-exp-area').length) {
+	new nicEditor(buttonOptions).panelInstance('edit-exp-area');
+}
 //nicEditors.findEditor('edit-exp-area');
 
 $("button#save-new-question-button").click(function(){
