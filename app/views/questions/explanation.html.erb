@@ -7,9 +7,7 @@
 		</div>
 		<div class="row-fluid">
 			<div class="span12">
-				<% @simple_explanation.gsub("\r", "").split("\n").each do |line| %>
-					<%= line %><br/>
-				<% end %>
+				<%= @simple_explanation.html_safe %>
 			</div>
 		</div>
 		<div class="row-fluid">
