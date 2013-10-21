@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  
+  skip_before_filter :authorization, except: [:modify, :edit_explanation]
 
 
   def delete

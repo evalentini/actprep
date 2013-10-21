@@ -1,5 +1,22 @@
 
 $("document").ready(function(){
+	
+//convert textarea to nicedit instance
+
+var buttonOptions={'buttonList':
+								[
+									'bold', 'italic', 'underline',
+									'left','center','right', 'subscript', 'superscript',
+									'strikethrough', 'indent', 'outdent', 'fontSize'
+								]
+					
+				   };
+
+if ($('textarea#edit-exp-area').length) {
+	new nicEditor(buttonOptions).panelInstance('edit-exp-area');
+}
+//nicEditors.findEditor('edit-exp-area');
+
 $("button#save-new-question-button").click(function(){
 	
 	$.ajax({

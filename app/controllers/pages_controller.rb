@@ -1,5 +1,7 @@
 class PagesController < ApplicationController
-  
+  skip_before_filter :authorization
+
+
   def home
   	@active = "summary"
   	user = User.find_by_id(session[:user_id])

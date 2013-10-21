@@ -2,9 +2,11 @@
 	<div class="span1"></div>
 	<div class="span10">
 		<%= form_tag post_edit_explanation_path, method: :get do -%>
-		<textarea style="width: 400px; height: 150px;" name="explanation"><%= @question.explanation %></textarea>
+		<textarea id="edit-exp-area" style="width: 800px; height: 150px;" name="explanation">
+			<%= @question.explanation %>
+		</textarea>
 		<input name="id" type="hidden" value="<%= @question.id %>"><br>
-		<%= submit_tag 'Edit', class: "btn btn-primary" %>
+		<%= submit_tag 'Save', class: "btn btn-primary" %>
 		<% end -%>
 	</div>
 	<div class="span1"></div>

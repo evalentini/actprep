@@ -1,5 +1,7 @@
 class AnswersController < ApplicationController
-  
+  skip_before_filter :authorization, except: [:dashboard]
+
+
   def dashboard
   end
   

@@ -1,15 +1,13 @@
 
 <!-- Modal -->
-<div id="myModal-<%= question_id %>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="myModal-<%= question_id %>" style="width: 800px;" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h3 id="myModalLabel"><%= "#{Question.find(question_id).section.capitalize} Question #{Question.find(question_id).question_number} " %></h3>
   </div>
   <div class="modal-body">
 	<% @explanation_text = Question.find(question_id).explanation || "Explanation not available." %>
-    <% @explanation_text.gsub("\r", "").split("\n").each do |line| %>
-		<%= line %><br>
-	<% end %>
+    <%= @explanation_text.html_safe %>
   </div>
   <div class="modal-footer">
     <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Close</button>

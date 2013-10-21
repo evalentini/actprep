@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter :confirm_login
+  before_filter :authorization
 
 
 	private
@@ -23,6 +24,12 @@ class ApplicationController < ActionController::Base
       end 
 		end
 	end
+
+  
+   protected
+   def authorization
+     redirect_to(root_url) unless current_user.role == 'admin'
+   end
 
 end
 
