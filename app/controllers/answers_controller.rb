@@ -16,12 +16,27 @@ class AnswersController < ApplicationController
     if params[:id].present?
       @question = Question.find(params[:id]) 
     else 
-    @question = Question.where(test_number: params[:test_number], 
-                               section: params[:section], 
-                               question_number: params[:question]
-                              ).first
+      @question = Question.where(test_number: params[:test_number], 
+                                 section: params[:section], 
+                                 question_number: params[:question]
+                                ).first
     end
-            
+    
+    # TODO DRY this:
+    sections = ['english', 'math', 'reading', 'science']
+    default_section = 'english'
+    @default_section_pageimage = "#{default_section}_pg1.jpg"
+    @default_section_maxpage=Question.maxpage(1, default_section).to_i
+    @maxpage_hash = {}
+    sections.each {|sec| @maxpage_hash[sec]=Question.maxpage(1,sec).to_i }
+    @maxpage_hash['science']=Question.maxpage(1, "science").to_i
+    @questions = Question.order("test_number, section, question_number")
+    @maxtest = Question.maximum("test_number") || 0
+    
+    @maxquestion = {}
+    sections.each do |section|
+      @maxquestion[section] = Question.where(test_number: 1, section: section).maximum("question_number") || 0
+    end       
     @filename = "#{@question.section}_pg#{@question.page}.jpg"
 
 
