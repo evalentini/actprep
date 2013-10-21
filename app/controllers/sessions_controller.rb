@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   
 skip_before_filter :confirm_login
-
+skip_before_filter :authorization
 
 
   def new

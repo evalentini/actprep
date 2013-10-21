@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
+    skip_before_filter :authorization, except: [:modify]
   
-  def editUser
-    
 
+
+  def editUser
     
     argHash={'email'=>params[:email], 'username'=>params['username'], 'role'=>params['role'], 'pwd'=>params['pwd']}
 
