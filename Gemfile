@@ -45,3 +45,5 @@ end
 
 # To use debugger
 # gem 'debugger'
+
+gem "google_visualr", "~> 2.1.0"

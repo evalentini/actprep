@@ -20,10 +20,22 @@ class PagesController < ApplicationController
       
       logger.info "-----RATIO #{@numCorrect/@totalNum}-----"
       
-      
-      
-      
-      
+ 
+      data_table = GoogleVisualr::DataTable.new
+      data_table.new_column('string', 'Question')
+      data_table.new_column('number', 'Result')
+      data_table.add_rows(3)
+      data_table.set_cell(0, 0, 'Number Correct'     )
+      data_table.set_cell(0, 1, @numCorrect )
+      data_table.set_cell(1, 0, 'Number Incorrect'      )
+      data_table.set_cell(1, 1, @numIncorrect  )
+      data_table.set_cell(2, 0, 'Not Answered'  )
+      data_table.set_cell(2, 1, @notAttempted )
+
+     
+      opts   = { :width => 800, :height => 600, :title => 'Results', :is3D => true, slices: [{color: 'green'},{color: 'red'},{color: 'yellow', textStyle: {color: 'black'}}]}
+      @chart = GoogleVisualr::Interactive::PieChart.new(data_table, opts)
+
     end 
     #@answers = user.answers
     #@questions = user.answers.select("question_id").group("question_id")
