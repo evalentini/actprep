@@ -1,8 +1,16 @@
 $('document').ready(function(){
-	
+
 	//alert every 3 seconds
 	//setInterval(function(){alert("Hello")},3000);
+	
 	setInterval(function(){
+		if (odd==true) {
+			odd=false;
+		}
+		else {
+			odd=true;
+		}
+		if (odd==false) {
 		var minutes = parseInt($('input#minutes').val());
 		var seconds = parseInt($('input#seconds').val());
 		var textSeconds = "";
@@ -20,6 +28,7 @@ $('document').ready(function(){
 		$('div#timer').text(minutes+":"+textSeconds);
 		$('input#minutes').val(minutes);
 		$('input#seconds').val(seconds);
+		}
 	},1000);
 	
 	$('button#prev-page, button#next-page').click(function(){
