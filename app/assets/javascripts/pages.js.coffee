@@ -5,7 +5,6 @@
 jQuery -> 
 	jQuery(document).ready ->
 		jQuery("#toggle-breakdown-button").click ->
-			alert("running")
 			if jQuery('#answer-breakdown-header-row').hasClass("hidden")
 				jQuery('#answer-breakdown-header-row').removeClass("hidden")
 				jQuery('#answer-breakdown-content-row').removeClass("hidden")
