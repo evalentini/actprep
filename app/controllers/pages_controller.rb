@@ -16,24 +16,21 @@ class PagesController < ApplicationController
       @currentLevel="NEWBIE"
       @currentLevel="INTERMEDIATE" if @numCorrect.to_f/@totalNum.to_f > 0.5
       @currentLevel="PRO" if @numCorrect.to_f/@totalNum.to_f > 0.8
-      @currentLevel="TOTAL MASTER" if @numCorrect.to_f/@totalNum.to_f >= 1.0
-      
-      logger.info "-----RATIO #{@numCorrect/@totalNum}-----"
-      
+      @currentLevel="TOTAL MASTER" if @numCorrect.to_f/@totalNum.to_f >= 1.0      
  
       data_table = GoogleVisualr::DataTable.new
       data_table.new_column('string', 'Question')
       data_table.new_column('number', 'Result')
       data_table.add_rows(3)
-      data_table.set_cell(0, 0, 'Number Correct'     )
+      data_table.set_cell(0, 0, 'Correct'     )
       data_table.set_cell(0, 1, @numCorrect )
-      data_table.set_cell(1, 0, 'Number Incorrect'      )
+      data_table.set_cell(1, 0, 'Incorrect'      )
       data_table.set_cell(1, 1, @numIncorrect  )
       data_table.set_cell(2, 0, 'Not Answered'  )
       data_table.set_cell(2, 1, @notAttempted )
 
      
-      opts   = { :width => 800, :height => 600, :title => 'Results', :is3D => true, slices: [{color: 'green'},{color: 'red'},{color: 'yellow', textStyle: {color: 'black'}}]}
+      opts   = { :width => 800, :height => 600, :title => '', :is3D => true, slices: [{color: 'green'},{color: 'red'},{color: 'yellow', textStyle: {color: 'black'}}]}
       @chart = GoogleVisualr::Interactive::PieChart.new(data_table, opts)
 
     end 

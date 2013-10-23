@@ -20,11 +20,37 @@
 	</div>
 	
 	<div class="row-fluid">
-		<div class="span12" style="font-weight: bold; font-size: 130%; ">
+		<div class="span12" style="font-weight: bold; font-size: 130%; margin-bottom: 25px;">
 			You have not answered <%= pluralize(@notAttempted, "question") %>
 		</div>
 	</div>
 	
+	<div class="row-fluid">
+		<div class="span12">
+			<button id="toggle-breakdown-button" class="btn btn-primary">Show Answer Summary</button>
+		</div>
+	</div>
+	
+	
+	<div class="row-fluid hidden hidden" id="answer-breakdown-header-row" style="border-bottom: 1px dashed; margin-top: 25px;">
+		<div class="span12" style="font-size: 200%; font-weight:bold;">
+			Answer Summary
+		</div>
+	</div>
+	
+	<div class="row-fluid hidden" id="answer-breakdown-content-row">
+		<div class="span12">
+			<div id='chart'>
+				<%= render_chart(@chart, 'chart') %>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row-fluid" style="border-bottom: 1px dashed; margin-top: 25px;">
+		<div class="span12" style="font-size: 200%; font-weight:bold;">
+			Answer Detail
+		</div>
+	</div>
 
 	
 	<div class="row-fluid" style="margin-top: 25px;">
@@ -99,9 +125,6 @@
 						<% end %>
 					 </tbody>
 				</table>
-
-				<div id='chart'></div>
-<%= render_chart(@chart, 'chart') %>
 
 		</div>
 	</div>
