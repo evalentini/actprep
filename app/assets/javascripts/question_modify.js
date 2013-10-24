@@ -47,9 +47,6 @@ $('button#reveal-new-question-button').click(function(){
 
 	$(this).remove();
 	
-	
-	//hide all other rows 
-	
 });
 
 $('button#cancel-new-question').click(function(){
@@ -57,7 +54,7 @@ $('button#cancel-new-question').click(function(){
 });
 
 $('button.editQuestion').click(function(){
-	/*var row=$(this).parent().parent();
+	var row=$(this).parent().parent();
 	var row_id=row.attr('questionid');
 	$("span.editmode-"+row_id).removeClass("hidden");
 	$("span.viewmode-"+row_id).addClass("hidden");
@@ -68,7 +65,7 @@ $('button.editQuestion').click(function(){
 	$('button#reveal-new-question-button').remove();
 	
 	//hide all other rows 
-	//$("tbody tr[questionid!='"+row_id+"']").addClass("hidden");*/
+	$("tbody tr[questionid!='"+row_id+"']").addClass("hidden");
 	
 });	
 
