@@ -14,11 +14,32 @@
 
 @import 'bootstrap';
 
+.fraction, .top, .bottom {
+    padding: 0 5px;    
+}
+
+.fraction {
+    display: inline-block;
+    text-align: center;    
+}
+
+.bottom{
+    border-top: 1px solid #000;
+    display: block;
+}
+
 .row-fluid.toppadding {
 	margin-left: -20px;
 	*zoom: 1;
 
 	margin-top: 10px;
+}
+
+.row-fluid.headerrow {
+	margin-top: 25px;
+	margin-bottom: 25px;
+	font-size: 200%;
+	border-bottom: 1px dashed;
 }
 
 .hidden {

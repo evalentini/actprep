@@ -255,7 +255,7 @@ var nicEditorConfig = bkClass.extend({
 		'italic' : {name : __('Click to Italic'), command : 'Italic', tags : ['EM','I'], css : {'font-style' : 'italic'}, key : 'i'},
 		'underline' : {name : __('Click to Underline'), command : 'Underline', tags : ['U'], css : {'text-decoration' : 'underline'}, key : 'u'},
 		'left' : {name : __('Left Align'), command : 'justifyleft', noActive : true},
-		'center' : {name : __('Center Align'), command : 'justifycenter', noActive : true},
+		'center' 	: {name : __('Center Align'), command : 'justifycenter', noActive : true},
 		'right' : {name : __('Right Align'), command : 'justifyright', noActive : true},
 		'justify' : {name : __('Justify Align'), command : 'justifyfull', noActive : true},
 		'ol' : {name : __('Insert Ordered List'), command : 'insertorderedlist', tags : ['OL']},
@@ -738,6 +738,8 @@ var nicEditorButton = bkClass.extend({
 		else if(this.isActive) { this.setBg('active'); }
 		else { this.setBg(); }
 	},
+	
+	//change the background color depending on whether user has clicked inside text box
 	
 	setBg : function(state) {
 		switch(state) {

@@ -13,27 +13,29 @@
 <div class="container-fluid">
 	<div class="masthead">
 		<%= image_tag "griffithfinal.jpg", alt: "Griffith Tutoring" %>
-		<ul class="nav nav-pills pull-right">
-			<% if @is_admin==true %>
-		        <li class="dropdown">
-		          <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Admin Tools <b class="caret"></b></a>
-		          <ul class="dropdown-menu">
-		            <li><a href="/users/modify">Edit Users</a></li>
-		            <li><a href="/questions/modify">Edit Questions</a></li>
-					<li><a href="/answers/dashboard">Usage Report</a></li>
-		          </ul>
-			<% end %>
+		<% unless defined? @hidenavbar %>
+			<ul class="nav nav-pills pull-right">
+				<% if @is_admin==true %>
+			        <li class="dropdown">
+			          <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Admin Tools <b class="caret"></b></a>
+			          <ul class="dropdown-menu">
+			            <li><a href="/users/modify">Edit Users</a></li>
+			            <li><a href="/questions/modify">Edit Questions</a></li>
+						<li><a href="/answers/dashboard">Usage Report</a></li>
+			          </ul>
+				<% end %>
 
-			<li <% if @active == "summary" %> class="active" <% end %> > <a href="/">Summary</a> </li>
-			<li <% if @active == "answer" %> class="active" <% end %> > <a href="/questions/answer">Answer Question</a> </li>
-			<% if session[:user_id] %>
-				<li>
-					<a href="/sessions/destroy">Log Out: <%= @user_email %></a> 
-				</li>
-			<% else %>
-				<li <% if @active == "login" %> class="active" <% end %> > <a href="/sessions/new">Login</a> </li>
-			<% end %>
-		</ul>
+				<li <% if @active == "summary" %> class="active" <% end %> > <a href="/">Summary</a> </li>
+				<li <% if @active == "answer" %> class="active" <% end %> > <a href="/questions/answer">Answer Question</a> </li>
+				<% if session[:user_id] %>
+					<li>
+						<a href="/sessions/destroy">Log Out: <%= @user_email %></a> 
+					</li>
+				<% else %>
+					<li <% if @active == "login" %> class="active" <% end %> > <a href="/sessions/new">Login</a> </li>
+				<% end %>
+			</ul>
+		<% end %>
 	</div>	
 	
 		    <% flash.each do |key, value| %>

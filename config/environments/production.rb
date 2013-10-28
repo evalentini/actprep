@@ -19,6 +19,16 @@ Actprep::Application.configure do
 
   # Generate digests for assets URLs
   config.assets.digest = true
+  
+  #configure paperclip to work with AWS S3
+  config.paperclip_defaults = {
+    :storage => :s3,
+    :s3_credentials => {
+      :bucket => 'actprep',
+      :access_key_id => 'AKIAJGSUWKREAKDAE7EA',
+      :secret_access_key => 'wIpGR7LMOoaDY+RbSyxssV10JdvkEF5hxiIMi5Rv'
+    }
+  }
 
   # Defaults to nil and saved in location specified by config.assets.prefix
   # config.assets.manifest = YOUR_PATH

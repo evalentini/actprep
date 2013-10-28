@@ -147,11 +147,17 @@ class QuestionsController < ApplicationController
   end
 
   def edit_explanation
+    @hidenavbar = true
     @question = Question.find(params[:id])
   end
   def post_edit_explanation
-    @question = Question.update(params[:id].to_i, 
+    if params["upload_filename"]!=""
+        #upload file
+        #connect to server
+    else
+      @question = Question.update(params[:id].to_i, 
                     :explanation => params[:explanation])
+    end
     redirect_to action: "modify"
   end
 
