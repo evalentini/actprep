@@ -5,9 +5,13 @@
 			<div class="span12">
 			</div>
 		</div>
-		<div class="row-fluid">
+		<div class="row-fluid" style="margin-bottom: 15px; ">
 			<div class="span12">
-				<%= @simple_explanation.html_safe %>
+				<% unless @question.explanation_image_file_name.nil? %>
+					<%= image_tag @question.explanation_image.url %>
+				<% else %>
+					<%= @simple_explanation.html_safe %>
+				<% end %>
 			</div>
 		</div>
 		<div class="row-fluid">

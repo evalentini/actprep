@@ -3,10 +3,12 @@ class Question < ActiveRecord::Base
   
   
   attr_accessible :correct_ans, :num_ans_choices, :question_number, :section, :test_number,
-  :ans_choice_1, :user_id, :page, :explanation
+  :ans_choice_1, :user_id, :page, :explanation, :explanation_image, :explanation_image_file_name
   
   belongs_to :user
   has_many :answers
+  
+  has_attached_file :explanation_image
   
   validates_presence_of :question_number
   validates_presence_of :page
@@ -76,9 +78,7 @@ class Question < ActiveRecord::Base
     maxpage_list[1]["science"]=14
     maxpage_list[1]["english"]=12
     maxpage_list[1]["reading"]=8
-    
-    logger.info "---model test is #{testnumber} and section is #{section}--"
-    
+        
     return maxpage_list[testnumber.to_i][section]
     
   end

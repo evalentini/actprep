@@ -1,6 +1,13 @@
 class QuestionsController < ApplicationController
-  skip_before_filter :authorization, except: [:modify, :edit_explanation]
+  skip_before_filter :authorization, except: [:modify, :edit_explanation, :deleteimage]
 
+  def deleteimage
+    @question=Question.find(params[:id])
+    @question.explanation_image.destroy
+    @question.explanation_image.clear
+    Question.update(params[:id], :explanation_image_file_name => nil)
+    redirect_to action: "edit_explanation"
+  end
 
   def delete
     Question.find(params[:id]).destroy
@@ -142,6 +149,7 @@ class QuestionsController < ApplicationController
   end
   
   def explanation
+    @hidenavbar = true
     @simple_explanation = Question.find(params[:id]).explanation || "No explanation available."
     @question = Question.find(params[:id])
   end
@@ -151,14 +159,19 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
   end
   def post_edit_explanation
-    if params["upload_filename"]!=""
-        #upload file
-        #connect to server
+    unless params["question"].present?
+      params["question"]={}
+      params["question"]["explanation_image"]=""
+    end
+    params["question"]["explanation_image"] ||= ""
+    if params["question"]["explanation_image"]!=""
+      #give me an error
+      @question = Question.update(params[:id].to_i, :explanation_image => params["question"]["explanation_image"])
     else
       @question = Question.update(params[:id].to_i, 
                     :explanation => params[:explanation])
     end
-    redirect_to action: "modify"
+    redirect_to action: "explanation"
   end
 
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131010220655) do
+ActiveRecord::Schema.define(:version => 20131028075345) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -28,8 +28,8 @@ ActiveRecord::Schema.define(:version => 20131010220655) do
     t.text     "question_text"
     t.integer  "num_ans_choices"
     t.integer  "correct_ans"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.text     "ans_choice_1"
     t.text     "ans_choice_2"
     t.text     "ans_choice_3"
@@ -37,6 +37,10 @@ ActiveRecord::Schema.define(:version => 20131010220655) do
     t.text     "ans_choice_5"
     t.integer  "page"
     t.text     "explanation"
+    t.string   "explanation_image_file_name"
+    t.string   "explanation_image_content_type"
+    t.integer  "explanation_image_file_size"
+    t.datetime "explanation_image_updated_at"
   end
 
   create_table "users", :force => true do |t|
