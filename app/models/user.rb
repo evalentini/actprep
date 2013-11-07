@@ -19,6 +19,23 @@ class User < ActiveRecord::Base
   	end
 
   end
+  
+  #----dashboard report calculations--------
+  
+  def self.totalStudents(timePeriod="0.days.ago")
+    User.where(role: "student").where("created_at <= ?", eval(timePeriod) ).count
+  end
+  
+  def self.questionsAnswered(timePeriod="0.days.ago")
+    uniqAnswers=Answer.select("count(*)").where("created_at <?", eval(timePeriod)).group("user_id, question_id")
+    count=0
+    uniqAnswers.each {|ans| count+=1}
+    (count.to_f/User.totalStudents(timePeriod).to_f).round(1)
+  end
+  
+  def self.minSpent(timePeriod="0.days.ago")
+    ((Answer.where("created_at <= ?", eval(timePeriod)).sum(:timetaken).to_f/60)/User.totalStudents(timePeriod).to_f).round(1)
+  end
     
   def answerSummary
     #find unique questions answered by user

@@ -17,8 +17,8 @@ class AnswersController < ApplicationController
 
   data_table = GoogleVisualr::DataTable.new
   data_table.new_column('string', 'Section')
-  data_table.new_column('number', 'Number of questions')
-  data_table.new_column('number', 'Number of questions with explanations')
+  data_table.new_column('number', 'Questions')
+  data_table.new_column('number', 'Questions with Explanations')
   data_table.add_rows(5)
   data_table.set_cell(0, 0, 'All')
   data_table.set_cell(0, 1, @questions)
@@ -37,7 +37,7 @@ class AnswersController < ApplicationController
   data_table.set_cell(4, 2, @math_questions_with_explanations)
 
  
-  opts   = { :width => 800, :height => 500, :title => 'Number of Questions per section', vAxis: {title: 'Section', titleTextStyle: {color: 'red'}} }
+  opts   = { :width => 800, :height => 500, :title => '', vAxis: {title: 'Section', titleTextStyle: {color: 'red'}} }
   @chart = GoogleVisualr::Interactive::BarChart.new(data_table, opts)
 
   end

@@ -12,9 +12,54 @@
 					</li>
 				</ul>
 			</div>
-							<div id='chart'></div>
-<%= render_chart(@chart, 'chart') %>
-
 		</div>
 	</div>
+	
+	<div class="row-fluid" style="border-bottom: 1px dashed; margin-top: 25px;">
+		<div class="span12" style="font-size: 200%; font-weight: bold;">
+			Student Usage Report
+		</div>
+	</div>
+	
+	<div class="row-fluid" style="margin-top: 25px;">
+		<div class="span12">
+			<table class="table table-bordered">
+				<tr><td></td><td>Today</td><td>Last Week</td><td>Last Month</td></tr>
+				<tr>
+					<td>Total Students On Portal</td>
+					<td><%= User.totalStudents =%></td>
+					<td><%= User.totalStudents("1.week.ago") =%></td>
+					<td><%= User.totalStudents("1.month.ago") =%></td>
+				</tr>
+				<tr>
+					<td>Questions Answered Per Student</td>
+					<td><%= User.questionsAnswered %></td>
+					<td><%= User.questionsAnswered("1.week.ago") %></td>
+					<td><%= User.questionsAnswered("1.month.ago") %></td>
+				</tr>
+				<tr>
+					<td>Minutes Spent On Portal Per Student</td>
+					<td><%= User.minSpent %></td>
+					<td><%= User.minSpent("1.week.ago") %></td>
+					<td><%= User.minSpent("1.month.ago") %></td></tr>
+				
+			</table>
+		</div>
+	
+	
+	
+	
+	<div class="row-fluid" style="border-bottom: 1px dashed; margin-top: 25px;">
+		<div class="span12" style="font-size: 200%; font-weight: bold;">
+			# of Questions Available Online
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span12">
+			<div id='chart'>
+				<%= render_chart(@chart, 'chart') %>				
+			</div>
+		</div>
+	</div>
+	
 </div>
