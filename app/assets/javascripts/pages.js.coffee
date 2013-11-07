@@ -13,4 +13,10 @@ jQuery ->
 				jQuery('#answer-breakdown-header-row').addClass("hidden")
 				jQuery('#answer-breakdown-content-row').addClass("hidden")
 				jQuery(this).text("Show Answer Summary")
+		jQuery("select#summary-view-section-filter").change -> 
+			visibleSection = jQuery(this).val()
+			jQuery("td.sectioncolumn").parent().removeClass("hidden")
+			unless visibleSection=="all"
+				jQuery("td.sectioncolumn").parent().addClass("hidden")
+				jQuery("td[section='#{visibleSection}']").parent().removeClass("hidden")
 				
