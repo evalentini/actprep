@@ -52,7 +52,7 @@ class User < ActiveRecord::Base
         is_correct = "yes" if most_recent_ans.correct
         attempted="yes"
         unless most_recent_ans.timetaken.nil?
-          most_recent_ans.timeTakenString
+          timetaken=most_recent_ans.timeTakenString
           #timetaken=(most_recent_ans.timetaken.to_f/60).floor.to_s
           #timetaken=timetaken+":"+(most_recent_ans.timetaken-(60*(most_recent_ans.timetaken.to_f/60).floor)).to_s
         end
