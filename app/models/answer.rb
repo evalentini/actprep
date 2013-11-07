@@ -18,9 +18,9 @@ class Answer < ActiveRecord::Base
   def timeTakenString
     result="--"
     unless self.timetaken.nil?
-      result = (self.timetaken.to_f/60).floor.to_s
+      result=(self.timetaken-(60*(self.timetaken.to_f/60).floor)).to_s 
       result = "0"+result if result.length==1
-      result=result+":"+(self.timetaken-(60*(self.timetaken.to_f/60).floor)).to_s 
+      result = (self.timetaken.to_f/60).floor.to_s+":"+result
     end
     result
   end
