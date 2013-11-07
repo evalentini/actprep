@@ -7,12 +7,21 @@ class Answer < ActiveRecord::Base
   belongs_to :user
   
   
-  def correct()
+  def correct
     if self.selected_ans==self.question.correct_ans 
       true 
     else 
       false
     end 
+  end
+  
+  def timeTakenString
+    result="--"
+    unless self.timetaken.nil?
+      result=(self.timetaken.to_f/60).floor.to_s
+      result=result+":"+(self.timetaken-(60*(self.timetaken.to_f/60).floor)).to_s 
+    end
+    result
   end
   
   def self.answeredQuestions(user_id) 

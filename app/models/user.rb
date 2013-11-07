@@ -49,11 +49,12 @@ class User < ActiveRecord::Base
                 
         #most_recent_ans = Answer.where(question_id: q.id, user_id: self.id, created_at: mrdate).first.selected_ans
         is_correct = "no"
-        is_correct = "yes" if most_recent_ans.selected_ans == Question.find(q.id).correct_ans
+        is_correct = "yes" if most_recent_ans.correct
         attempted="yes"
         unless most_recent_ans.timetaken.nil?
-          timetaken=(most_recent_ans.timetaken.to_f/60).floor.to_s
-          timetaken=timetaken+":"+(most_recent_ans.timetaken-(60*(most_recent_ans.timetaken.to_f/60).floor)).to_s
+          most_recent_ans.timeTakenString
+          #timetaken=(most_recent_ans.timetaken.to_f/60).floor.to_s
+          #timetaken=timetaken+":"+(most_recent_ans.timetaken-(60*(most_recent_ans.timetaken.to_f/60).floor)).to_s
         end
         
         

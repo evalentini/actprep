@@ -1,16 +1,39 @@
 
 
-<h1> Answer for Question # <%= @question.test_number %>|Test# <%= @question.test_number %> </h1>
+<div class="row-fluid" style="margin-top:50px;">
+	<% if @answer.correct%>
+	<div class="span12" style="background-color: green; font-size: 120%; font-weight: bold">
+		You are correct.
+	</div>
+	<% else %>
+	<div class="span12" style="background-color: red; font-size: 120%; font-weight: bold">
+		You are <span style="text-decoration: underline;">in</span>correct.
+	</div>
+	<% end %>	
+</div>
 
-<p>Answer you selected: <%=@answer.selected_ans%> </p>
+<div class="row-fluid" style="margin-top:25px; border-bottom: 1px dashed; font-size: 200%;">
+	<div class="span12">Answer Explanation</div>
+</div>
 
-<ul>
-<p>Test #: <%= @question.test_number %> | Section: <%= @question.section %></p>
-</uL>
-<ul>
-<li>1.) <%= @question.ans_choice_1 %></li>
-<li>2.) <%= @question.ans_choice_2 %></li>
-<li>3.) <%= @question.ans_choice_3 %></li>
-<li>4.) <%= @question.ans_choice_4 %></li>
-<li>5.) <%= @question.ans_choice_5 %></li>
-</uL>
+<div class="row-fluid">
+	<div class="span12">
+		<% unless @answer.question.explanation_image_file_name.nil? %>
+			<%= image_tag @answer.question.explanation_image.url %>
+		<% else %>
+			<% @explanation_text = @answer.question.explanation || "Explanation not available." %>
+		    <%= @explanation_text.html_safe %>
+		<% end %>
+	</div>
+</div>
+
+<div class="row-fluid">
+	<div class="span12">
+		<table class="table table-bordered">
+			<tr>
+				<td><a href="/answers/record/<%= @answer.question.id %>">Retry</a></td>
+				<td><a href="/">Answer Summary</a></td>
+			</tr>
+		</table>
+	</div>
+</div>
