@@ -4,15 +4,16 @@ class AnswersController < ApplicationController
 
   def dashboard
   @questions = Question.count
-  @questions_with_explanations = Question.count(:explanation)
+  baseWhereCriteria = "(explanation is not null or explanation_image_file_name is not null)"
+  @questions_with_explanations = Question.where(baseWhereCriteria).count
   @english_questions = Question.where(section: "english").count
-  @english_questions_with_explanations = Question.where(section: "english").count(:explanation)
+  @english_questions_with_explanations = Question.where("section = 'english' and #{baseWhereCriteria}").count
   @reading_questions = Question.where(section: "reading").count
-  @reading_questions_with_explanations = Question.where(section: "reading").count(:explanation)
+  @reading_questions_with_explanations = Question.where("section = 'reading' and #{baseWhereCriteria}").count
   @science_questions = Question.where(section: "science").count
-  @science_questions_with_explanations = Question.where(section: "science").count(:explanation)
+  @science_questions_with_explanations = Question.where("section = 'science' and #{baseWhereCriteria}").count
   @math_questions = Question.where(section: "math").count
-  @math_questions_with_explanations = Question.where(section: "math").count(:explanation)
+  @math_questions_with_explanations =Question.where("section = 'math' and #{baseWhereCriteria}").count
 
   data_table = GoogleVisualr::DataTable.new
   data_table.new_column('string', 'Section')
