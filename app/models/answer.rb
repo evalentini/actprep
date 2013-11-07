@@ -1,5 +1,5 @@
 class Answer < ActiveRecord::Base
-  attr_accessible :question_id, :selected_ans, :user_id
+  attr_accessible :question_id, :selected_ans, :user_id, :timetaken 
   validates_presence_of :question_id
   validates_presence_of :selected_ans
 

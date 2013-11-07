@@ -38,6 +38,7 @@ class User < ActiveRecord::Base
       question=Question.find(q.id).question_number
       is_correct=" "
       attempted="no"
+      timetaken="--"
       
       
       if (answered==true) 
@@ -50,6 +51,10 @@ class User < ActiveRecord::Base
         is_correct = "no"
         is_correct = "yes" if most_recent_ans.selected_ans == Question.find(q.id).correct_ans
         attempted="yes"
+        unless most_recent_ans.timetaken.nil?
+          timetaken=(most_recent_ans.timetaken.to_f/60).floor.to_s
+          timetaken=timetaken+":"+(most_recent_ans.timetaken-(60*(most_recent_ans.timetaken.to_f/60).floor)).to_s
+        end
         
         
       end
@@ -60,7 +65,8 @@ class User < ActiveRecord::Base
                   :section => section, 
                   :question => question, 
                   :correct => is_correct,
-                  :attempted => attempted}
+                  :attempted => attempted,
+                  :timetaken => timetaken}
       
 #    questions.each do |q|
     

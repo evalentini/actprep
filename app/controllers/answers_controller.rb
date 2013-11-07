@@ -43,7 +43,8 @@ class AnswersController < ApplicationController
   
   def save
     user = User.find(session[:user_id])
-    Answer.create(question_id: params[:question_id], user_id: user.id, selected_ans: params[:ans_choice])
+    time = params[:minutes].to_i*60+params[:seconds].to_i
+    Answer.create(question_id: params[:question_id], user_id: user.id, selected_ans: params[:ans_choice], timetaken:time)
     redirect_to action: "home", controller: "pages"
   end
   
