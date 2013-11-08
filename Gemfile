@@ -50,3 +50,4 @@ gem "aws-sdk"
 # gem 'debugger'
 
 gem "google_visualr", "~> 2.1.0"
+gem 'devise'
