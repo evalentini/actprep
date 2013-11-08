@@ -3,6 +3,13 @@ class AnswersController < ApplicationController
 
 
   def dashboard
+    # preliminary .csv export code
+    @answers = Answer.all
+    respond_to do |format|
+      format.csv { render text: @answers.to_csv }
+    end
+
+  
   @questions = Question.count
   baseWhereCriteria = "(explanation is not null or explanation_image_file_name is not null)"
   @questions_with_explanations = Question.where(baseWhereCriteria).count
