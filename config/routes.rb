@@ -1,5 +1,7 @@
 Actprep::Application.routes.draw do
 
+  devise_for :users
+
   match 'questions/deleteimage/:id' => 'questions#deleteimage'
   match 'questions/explanation/:id' => 'questions#explanation', as: :explanation
   match 'questions/explanation/edit/:id' => 'questions#edit_explanation', as: :explanation_edit
