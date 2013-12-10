@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131107003941) do
+ActiveRecord::Schema.define(:version => 20131210002945) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -53,6 +53,11 @@ ActiveRecord::Schema.define(:version => 20131107003941) do
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
     t.boolean  "locked"
+    t.boolean  "omniauth_user"
+    t.string   "provider"
+    t.integer  "uid"
+    t.string   "oauth_token"
+    t.datetime "oauth_expires_at"
   end
 
 end

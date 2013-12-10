@@ -13,17 +13,26 @@ class ApplicationController < ActionController::Base
 
 	  
 	  def confirm_login
-	    unless session[:password].present? and session[:user_id].present?
-	 	  redirect_to login_path
-		else
-      if User.find(session[:user_id]).check_pwd(session[:password]) == true 
-        @user_email = User.find(session[:user_id]).email
-        User.find(session[:user_id]).role=="admin" ? @is_admin=true : @is_admin=false
-      else 
-        redirect_to login_path
-      end 
-		end
-	end
+	    unless session[:user_id].present?
+	 	    redirect_to login_path
+		  else
+        if User.find(session[:user_id]).omniauth_user==true
+          @user_email = User.find(session[:user_id]).email
+          User.find(session[:user_id]).role=="admin" ? @is_admin=true : @is_admin=false
+        else
+          unless session[:password].present?
+            redirect_to login_path
+          else
+            if User.find(session[:user_id]).check_pwd(session[:password]) == true 
+              @user_email = User.find(session[:user_id]).email
+              User.find(session[:user_id]).role=="admin" ? @is_admin=true : @is_admin=false
+            else 
+              redirect_to login_path
+            end
+          end
+        end 
+		  end
+	  end
 
   
    protected

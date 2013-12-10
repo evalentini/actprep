@@ -1,5 +1,8 @@
 Actprep::Application.routes.draw do
 
+  match 'auth/:provider/callback', to: 'sessions#createFacebook'
+  match 'auth/failure', to: redirect('/')
+
   match 'questions/deleteimage/:id' => 'questions#deleteimage'
   match 'questions/explanation/:id' => 'questions#explanation', as: :explanation
   match 'questions/explanation/edit/:id' => 'questions#edit_explanation', as: :explanation_edit

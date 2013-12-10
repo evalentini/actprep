@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   
-  attr_accessible :email, :encrypted_password, :role, :salt, :username, :locked
+  attr_accessible :email, :encrypted_password, :role, :salt, :username, :locked, :ominauth_user, :uid, 
+                  :provider, :oauth_token, :oauth_expires_at
   has_many :answers, dependent: :destroy
   
   validates_uniqueness_of :email
@@ -9,6 +10,7 @@ class User < ActiveRecord::Base
   validates_presence_of :username
   
   def check_pwd(pwd)
+    logger.info "-----pwd check running--------"
   	hash_pwd = self.salt + pwd
   	hash_pwd = Digest::SHA2.hexdigest(hash_pwd)
   	
@@ -19,8 +21,10 @@ class User < ActiveRecord::Base
   	end
 
   end
+
   
   #----dashboard report calculations--------
+  
   
   def self.totalStudents(timePeriod="0.days.ago")
     User.where(role: "student").where("created_at <= ?", eval(timePeriod) ).count
@@ -142,6 +146,27 @@ class User < ActiveRecord::Base
     (100*(num_answered/total_num)).round
   
   end
+  
+  #------authentication and password management 
+  
+  #--facebook authentication 
+  
+  def self.from_omniauth(auth)
+    where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
+      user.salt="AAAA"
+      user.role="student" if user.role.nil?
+      user.omniauth_user=true
+      user.username=auth.info.email
+      user.email=auth.info.email
+      user.provider = auth.provider
+      user.uid = auth.uid
+      user.oauth_token = auth.credentials.token
+      user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+      user.save!
+    end
+  end
+
+  
   
   def editWithPwd(argHash)
     u_id=self.id

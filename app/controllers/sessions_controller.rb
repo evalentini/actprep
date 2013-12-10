@@ -6,20 +6,20 @@ skip_before_filter :authorization
 
   def new
   	@active = "login"
-  	params[:username].present? ? @user = params[:username] : @user = ''
-  	@user_record = User.find_by_username(@user) if User.find_by_username(@user)
-  	if User.find_by_username(@user)
-  		session[:user_id] = User.find_by_username(@user).id
+  	params[:email].present? ? @email = params[:email] : @email = ''
+  	@email_record = User.find_by_email(@email) if User.find_by_email(@email)
+  	if User.find_by_email(@email)
+  		session[:user_id] = User.find_by_email(@email).id
   		session[:password] = params[:password]
-  		if @user_record.check_pwd(params[:password])
+  		if @email_record.check_pwd(params[:password])
   			redirect_to root_path
   		else
-        flash.now[:failure] = "Wrong Username or Password"  
+        flash.now[:failure] = "Wrong Password"  
         render 'new'
       end
     else
-      if @user = params[:username]
-      flash.now[:failure] = "Wrong Username or Password"  
+      if @email = params[:email]
+      flash.now[:failure] = "Wrong Email"  
       render 'new'
       end
   	end
@@ -29,6 +29,12 @@ skip_before_filter :authorization
     session[:user_id] = nil
     redirect_to root_url, :notice => "Logged out"
   end 
+  
+  def createFacebook
+    user = User.from_omniauth(env["omniauth.auth"])
+    session[:user_id] = user.id
+    redirect_to root_url
+  end
 
   
 
