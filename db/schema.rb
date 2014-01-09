@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(:version => 20131210002945) do
     t.boolean  "locked"
     t.boolean  "omniauth_user"
     t.string   "provider"
-    t.integer  "uid"
+    t.string   "uid"
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
   end
