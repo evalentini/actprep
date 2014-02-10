@@ -18,8 +18,10 @@ class Homework < ActiveRecord::Base
       numansweredq+=1 if question.isAnswered(uid)==true
     end
     
-    ((numansweredq.to_f/numq.to_f)*100).to_i unless numq==0
-    100 if numq==0
+    result = 100
+    result = ((numansweredq.to_f/numq.to_f)*100).to_i if numq>0
+    
+    return result
     
   end
   
