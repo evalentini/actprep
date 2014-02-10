@@ -2,10 +2,8 @@
 
 one:
   name: MyString
-  due: MyString
-  date: MyString
+  due: 2014-02-10
 
 two:
   name: MyString
-  due: MyString
-  date: MyString
+  due: 2014-02-10
