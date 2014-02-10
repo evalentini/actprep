@@ -18,6 +18,17 @@ class Question < ActiveRecord::Base
   validates_presence_of :num_ans_choices
   validates_uniqueness_of :question_number, scope: [:section, :test_number]
   
+  def shortDescription
+    self.test_number.to_s+"MC-"+self.section.titlecase+"-"+self.question_number.to_s
+  end
+  
+  def btnType(uid)
+    btnType="btn-default"
+    btnType="btn-success" if self.isCorrect(uid)==true
+    btnType="btn-danger" if self.isCorrect(uid)==false && self.isAnswered(uid)==true
+    btnType
+  end
+  
   def maxpage
     Question.maxpage(self.test_number, self.section)
   end

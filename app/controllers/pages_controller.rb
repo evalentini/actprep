@@ -5,6 +5,8 @@ class PagesController < ApplicationController
   end
   
   def homework
+    @homeworks=Homework.order("due asc")
+    @user = User.find_by_id(session[:user_id])
   end
 
   def home

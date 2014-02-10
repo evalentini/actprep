@@ -11,4 +11,15 @@ class Homework < ActiveRecord::Base
     Question.update(qid, :homework_id => nil)
   end
   
+  def pctCompleted(uid)
+    numq=self.questions.count
+    numansweredq=0
+    self.questions.each do |question|
+      numansweredq+=1 if question.isAnswered(uid)==true
+    end
+    
+    ((numansweredq.to_f/numq.to_f)*100).to_i
+    
+  end
+  
 end

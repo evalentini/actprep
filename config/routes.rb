@@ -55,7 +55,7 @@ Actprep::Application.routes.draw do
   match '/users/delete' => 'users#delete'
   
   match '/questionlist'=>'homeworks#questionlist'
-  match '/removequestion'=>'homeworks#removequestion'
+  match '/removequestion'=>'homeworks#removequestio'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
