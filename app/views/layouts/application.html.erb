@@ -19,7 +19,7 @@
 			</div>
 		</div>
 		<% unless defined? @hidenavbar %>
-		<div class="row-fluid">
+		<div class="row-fluid" >
 			<div class="col-xs-12" style="text-align: center;">
 				<div class="btn-group">
 				    <div class="btn-group">
@@ -35,7 +35,6 @@
 				    </div>
 					<a href="/questions/answer" class="btn btn-default">Answer Questions</a>
 					<a href="/" class="btn btn-default">Study Summary</a>
-					<a href="#" class="btn btn-default">Leaderboard</a>
 					<% if session[:user_id] %>
 						<a href="/sessions/destroy" class="btn btn-default">Log Out: <%= @user_email %></a> 
 					<% else %>
@@ -53,6 +52,8 @@
 <%= yield %>
 
 <%= debug(params) if Rails.env.development? %>
+
+</div>
 
 </body>
 </html>

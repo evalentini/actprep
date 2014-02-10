@@ -1,0 +1,11 @@
+<div class="row-fluid" id="answer-breakdown-content-row">
+	<div class="col-xs-12">
+		<div id='chart'>
+			<% unless @chart.nil?%>
+				<%= render_chart(@chart, 'chart') %>
+			<% else %>
+			<div class="alert alert-danger">Error displaying chart.</div>
+			<% end %>
+		</div>
+	</div>
+</div>

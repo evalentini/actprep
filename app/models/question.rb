@@ -94,6 +94,15 @@ class Question < ActiveRecord::Base
     
   end
   
+  def self.sectionListWithAll
+    list={}
+    list["All"]="all"
+    list.merge!(Question.sectionList)
+    
+    list
+    
+  end
+  
   def self.questionList(test_number=1, section="english")
     maxq=Question.where(test_number: test_number, section: section).count("id")
     list={}

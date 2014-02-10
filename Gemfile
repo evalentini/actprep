@@ -26,6 +26,7 @@ end
 gem 'jquery-rails', '~> 2.0'
 gem 'raphael-rails'
 gem 'morris-rails'
+gem 'jquery-datatables-rails'
 
 group :development do
 	gem 'better_errors'

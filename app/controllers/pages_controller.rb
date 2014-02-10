@@ -5,7 +5,15 @@ class PagesController < ApplicationController
   end
 
   def home
-  	@active = "summary"
+    user=User.find_by_id(session[:user_id])
+    @questions=Question.order("test_number asc, section, question_number asc")
+  end
+  
+  def admin
+    @active="admin"
+  end 
+  
+  def statistics
   	user = User.find_by_id(session[:user_id])
     
     if user.answers.count>0 
@@ -36,13 +44,8 @@ class PagesController < ApplicationController
       @chart = GoogleVisualr::Interactive::PieChart.new(data_table, opts)
 
     end 
-    #@answers = user.answers
-    #@questions = user.answers.select("question_id").group("question_id")
+    
   end
-  
-  def admin
-    @active="admin"
-  end 
   
 end
 

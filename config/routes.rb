@@ -33,6 +33,7 @@ Actprep::Application.routes.draw do
   resources :answers
   resources :questions
   match "answers/record" => 'answers#record'
+  match "pages/statistics" => 'pages#statistics'
 
 
 

@@ -2,7 +2,8 @@
 # All this logic will automat	ically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-jQuery -> 
+jQuery ->
+	#$('#answer-summary-table').dataTable()
 	jQuery(document).ready ->
 		jQuery("#toggle-breakdown-button").click ->
 			if jQuery('#answer-breakdown-header-row').hasClass("hidden")
