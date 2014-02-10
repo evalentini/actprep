@@ -1,6 +1,5 @@
 Actprep::Application.routes.draw do
 
-  resources :homeworks
 
 
   match '/pages/formattest' => 'pages#formattes'
