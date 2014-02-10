@@ -3,9 +3,10 @@ class Question < ActiveRecord::Base
   
   
   attr_accessible :correct_ans, :num_ans_choices, :question_number, :section, :test_number,
-  :ans_choice_1, :user_id, :page, :explanation, :explanation_image, :explanation_image_file_name
+  :ans_choice_1, :user_id, :page, :explanation, :explanation_image, :explanation_image_file_name, :homework_id
   
   belongs_to :user
+  belongs_to :homework
   has_many :answers
   
   has_attached_file :explanation_image

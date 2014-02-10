@@ -14,6 +14,9 @@
   <tr>
     <td><%= homework.name %></td>
     <td><%= homework.due %></td>
+	<td><a href="<%= url_for :controller=>'homeworks', :action=>'questionlist' ,:id=> homework.id %>">
+		Edit Questions
+	</a></td>
     <td><%= link_to 'Show', homework %></td>
     <td><%= link_to 'Edit', edit_homework_path(homework) %></td>
     <td><%= link_to 'Destroy', homework, method: :delete, data: { confirm: 'Are you sure?' } %></td>

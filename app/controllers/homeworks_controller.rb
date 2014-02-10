@@ -80,4 +80,19 @@ class HomeworksController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def questionlist
+    @homework=Homework.find(params[:id])
+    @questions=@homework.questions.order("test_number, section, question_number ")
+    unless params[:test_number].nil?
+      @homework.addQuestion(params[:test_number], params[:section], params[:question])
+    end
+  end
+  
+  def removequestion
+    @homework=Question.find(params[:id]).homework
+    Homework.removeQuestion(params[:id])
+    redirect_to :action => "questionlist", :id=> @homework.id
+  end
+  
 end
