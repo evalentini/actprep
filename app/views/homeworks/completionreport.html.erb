@@ -1,0 +1,26 @@
+<div class="row">
+	<div class="col-xs-12">
+		<p></p>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12">
+		<table class="table table-bordered">
+			<tr style="font-weight: bold;">
+				<td>Student Email</td>
+				<td>Homework Assignment</td>
+				<td>Homework Due Date</td>
+				<td>% Complete</td>
+			</tr>
+			<% User.where(role: "student").order("email desc").each do |student| %>
+				<% Homework.order("due asc").each do |homework| %>
+					<td><%= student.email %></td>
+					<td><%= homework.name %></td>
+					<td><%= homework.due %></td>
+					<td><%= homework.pctCompleted(student.id) %>%</td>
+				</tr>
+				<% end %>
+			<% end %>
+		</table>
+	</div>
+</div>

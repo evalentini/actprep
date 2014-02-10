@@ -57,6 +57,8 @@ Actprep::Application.routes.draw do
   match '/questionlist'=>'homeworks#questionlist'
   match '/removequestion'=>'homeworks#removequestion'
   
+  match '/completionreport' =>'homeworks#completionreport'
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

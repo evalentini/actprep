@@ -95,4 +95,7 @@ class HomeworksController < ApplicationController
     redirect_to :action => "questionlist", :id=> @homework.id
   end
   
+  def completionreport
+  end
+  
 end
