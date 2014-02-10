@@ -70,6 +70,40 @@ class Question < ActiveRecord::Base
     Question.maxpage(testnumber, section)
   end
   
+  def self.testList
+    list={}
+    Question.select("test_number").group(:test_number).each do |test|
+      list[test.test_number.to_s+"MC"]=test.test_number
+    end
+    
+    list
+    
+  end
+  
+  def self.defQ
+    Question.first
+  end
+  
+  def self.sectionList
+    list={}
+    Question.select("section").group(:section).order(:section).each do |section|
+      list[section.section.titlecase]=section.section
+    end
+    
+    list
+    
+  end
+  
+  def self.questionList(test_number=1, section="english")
+    maxq=Question.where(test_number: test_number, section: section).count("id")
+    list={}
+    (1..maxq).each do |i|
+      list[i]=i
+    end
+    
+    list
+  end
+  
   def self.maxpage(testnumber, section)
     maxpage={}
     maxpage_list={}

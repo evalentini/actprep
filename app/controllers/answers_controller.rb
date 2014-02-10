@@ -52,6 +52,19 @@ class AnswersController < ApplicationController
   
   def show
     @answer=Answer.find(params[:id]) 
+    @question=@answer.question
+    @filename = "#{@question.section}_pg#{@question.page}.jpg"
+    @maxpage_hash = {}
+    
+    default_section = 'english'
+    
+    @default_section_maxpage=Question.maxpage(1, default_section).to_i
+    
+    sections = ['english', 'math', 'reading', 'science']
+    sections.each {|sec| @maxpage_hash[sec]=Question.maxpage(1,sec).to_i }
+
+    
+    
   end
   
   def record

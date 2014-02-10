@@ -25,10 +25,18 @@ class Answer < ActiveRecord::Base
     result
   end
   
+  def timeTakenMinutes
+    self.timeTakenString.split(':')[0]
+  end
+  
+  def timeTakenSeconds
+    self.timeTakenString.split(':')[1]
+  end
+  
   def self.answeredQuestions(user_id) 
     
   end 
-
+  
   #def self.record(question, user, ans_choice)
 	#Answer.create(question_id: question.id, user: user.id, ans_choice: ans_choice)
   #end

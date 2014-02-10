@@ -1,6 +1,8 @@
 class PagesController < ApplicationController
   skip_before_filter :authorization
 
+  def formattest
+  end
 
   def home
   	@active = "summary"

@@ -1,46 +1,67 @@
 
+<%= render 'shared/banner' %>
 
 <form method="POST" action="/answers/save">
-<div class="row-fluid" style="margin-top:50px;">
-	<div class="span4"></div>
-	<div class="span4 output" style="text-align:center; font-weight: bold; font-size: 110%;">
-		Section => <%=@question.section.titlecase %> | Question =>   <%=@question.question_number%>
+	<%= token_tag(nil) %>
+	
+
+	
+	
+
+
+<div class="row-fluid">
+	<div class="col-xs-7">
+		<div class="well">
+			<b>Your Answer &nbsp &nbsp</b>
+				<select name="ans_choice"> 
+					<% @question.correctAnswerOptions.each do |letter| %>
+						<option value="<%= @question.ansChoiceNumber(letter) %>"><%= letter %></option>
+					<% end %>
+				</select> &nbsp &nbsp
+				<button class="btn btn-default">Submit Answer</button> &nbsp &nbsp &nbsp &nbsp
+				<input type="text" id="timerminute"disabled="disabled" style="width: 25px;" value="0" class="greentime"></input> :
+				<input type="text" id="timersecond" disabled="disabled" style="width: 25px;" value="00" class="greentime"></input>&nbsp &nbsp
+		</div>
+			
 	</div>
-	<div class="span4"></div>
-</div>
-<div class="row-fluid" style="margin-top: 5px;">
-	<div class="span4"></div>
-	<div class="span2">
-			<input type="hidden" value="<%= @question.id %>" name="question_id">
-			<!--add authenticity token for CSRF protection-->
-			<%= token_tag(nil) %>
-			<select name="ans_choice"> 
-			<% @question.correctAnswerOptions.each do |letter| %>
-				<option value="<%= @question.ansChoiceNumber(letter) %>"><%= letter %></option>
-			<% end %>
-		</select>
-	</div>
-	<div class="span1"><button class="btn btn-primary">Submit</button></div>	
-	<div class="span1 output" id="timer">0:00</div>
-	<div class="span4">
-		 <input type="hidden" id="minutes" name="minutes" value=0>
-		 <input type="hidden" id="seconds" name="seconds" value=0>
-	</div>
+	<div class="col-xs-5"></div>
 </div>
 
 <div class="row-fluid">
-	<div class="span4"></div>
-	<div class="span1"><button type="button" class="btn btn-success" id="prev-page" button="button">Prev</button></div>
-	<div class="span2"></div>
-	<div class="span1"><button type="button" style="float: right;" class="btn btn-success" id="next-page" action="test">Next</button></div>
-	<div class="span4"></div>
+	<div class="col-xs-12">
+		<div class="panel panel-success">
+			<div class="panel-heading">
+			</div>
+			<div class="panel-body">
+				<div class="row-fluid">
+					<div class="col-xs-12" style="text-align:center; margin-bottom: 25px;">
+						<button type="button" class="btn btn-success" id="prev-page" action="test">
+							<span class="glyphicon glyphicon-arrow-left"></span>
+						</button>
+						&nbsp &nbsp 
+						<button type="button" class="btn btn-success" id="next-page" action="test">
+							<span class="glyphicon glyphicon-arrow-right" id="next-page"></span>
+						</button>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="col-xs-12">
+						<%= image_tag @filename, size: "850x1100", 
+							style: "display: block; border: 3px solid #5cb85c; margin-left: auto; margin-right: auto;", id: "q-img"%>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
-<div class="row-fluid">
-	<div class="span2"></div>
-	<div class="span8"></div>
-		<%= image_tag @filename, size: "950x110", style: "display: block; margin-left: auto; margin-right: auto;", id: "q-img"%>
-	</div>
+	<input type="hidden" id="minutes" name="minutes" value=0>
+	<input type="hidden" id="seconds" name="seconds" value=0>
+
+	<input type="hidden" value="<%= @question.id %>" name="question_id">
+	<!--add authenticity token for CSRF protection-->
+	
+
 	<!--hidden inputs for max question for each section-->
 		
 		<% @maxquestion.each do |k, v| %>
@@ -55,7 +76,13 @@
 		<% @maxpage_hash.each do |k,v| %>
 			<input type="hidden" id="maxpage-<%= k %>" value="<%= v%>">
 		<% end %>
-	<div class="span2"></div>
+		
+		<input type="hidden" value="<%= @question.maxpage %>" id="maxpage">
+
+		<input type="hidden" value="<%= @question.section %>" id="currentquestionsection">
+
 </form>
 
-<input type="hidden" value="<%= @question.maxpage %>" id="maxpage">
+</div>
+
+

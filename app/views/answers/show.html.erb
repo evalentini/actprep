@@ -1,39 +1,103 @@
 
+<%= render 'shared/banner' %>
 
-<div class="row-fluid" style="margin-top:50px;">
-	<% if @answer.correct%>
-	<div class="span12" style="background-color: green; font-size: 120%; font-weight: bold">
-		You are correct.
+<div class="row-fluid">
+	<div class="col-xs-7">
+		<div class="well">
+			<% @question.correctAnswerOptions.each do |letter| %>
+					<% if @question.ansChoiceNumber(letter)==@answer.selected_ans %>
+						<% if @answer.correct %>
+							<span class="greentime"><b><%= letter %></b> (Your Answer)</span>
+						<% else%>
+							<span class="redtime"><b><%= letter %></b> (Your Answer)</span>
+						<% end %>
+					<% else%>
+						<% if @question.ansChoiceNumber(letter)==@question.correct_ans %>
+							<span class="greentime"><b><%= letter %></b> (Correct Answer)</span>
+						<% else %>
+							<b><%= letter %></b>
+						<% end %>
+					<% end %>
+			<% end %>
+			&nbsp &nbsp
+				<a class="btn btn-default" href="/answers/record/<%= @answer.question.id %>">Do Again</a> &nbsp &nbsp &nbsp &nbsp
+				<input 
+					type="text" disabled="disabled" style="width: 25px;" 
+					value="<%= @answer.timeTakenMinutes %>" class="greentime"></input> :
+				<input 
+					type="text" disabled="disabled" style="width: 25px;" 
+					value="<%= @answer.timeTakenSeconds %>" class="greentime"></input>&nbsp &nbsp <b>(Your Time)</b>
+		</div>
+			
 	</div>
-	<% else %>
-	<div class="span12" style="background-color: red; font-size: 120%; font-weight: bold">
-		You are <span style="text-decoration: underline;">in</span>correct.
-	</div>
-	<% end %>	
-</div>
-
-<div class="row-fluid" style="margin-top:25px; border-bottom: 1px dashed; font-size: 200%;">
-	<div class="span12">Answer Explanation</div>
+	<div class="col-xs-5"></div>
 </div>
 
 <div class="row-fluid">
-	<div class="span12">
-		<% unless @answer.question.explanation_image_file_name.nil? %>
-			<%= image_tag @answer.question.explanation_image.url %>
-		<% else %>
-			<% @explanation_text = @answer.question.explanation || "Explanation not available." %>
-		    <%= @explanation_text.html_safe %>
-		<% end %>
+	<div class="col-xs-12">
+		<div class="panel panel-success">
+			<div class="panel-heading">
+				<h4>Answer Explanation</h4>
+			</div>
+			<div class="panel-body">
+				<div class="row-fluid">
+					<div class="col-xs-12">
+						<% unless @answer.question.explanation_image_file_name.nil? %>
+							<%= image_tag @answer.question.explanation_image.url %>
+						<% else %>
+							<% @explanation_text = @answer.question.explanation || "Explanation not available." %>
+						    <%= @explanation_text.html_safe %>
+						<% end %>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 
+
 <div class="row-fluid">
-	<div class="span12">
-		<table class="table table-bordered">
-			<tr>
-				<td><a href="/answers/record/<%= @answer.question.id %>">Retry</a></td>
-				<td><a href="/">Answer Summary</a></td>
-			</tr>
-		</table>
+	<div class="col-xs-12">
+		<div class="panel panel-success">
+			<div class="panel-heading">
+				<h4>Question View</h4>
+			</div>
+			<div class="panel-body">
+				<div class="row-fluid">
+					<div class="col-xs-12" style="text-align:center; margin-bottom: 25px;">
+						<button type="button" class="btn btn-success" id="prev-page" action="test">
+							<span class="glyphicon glyphicon-arrow-left"></span>
+						</button>
+						&nbsp &nbsp 
+						<button type="button" class="btn btn-success" id="next-page" action="test">
+							<span class="glyphicon glyphicon-arrow-right" id="next-page"></span>
+						</button>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="col-xs-12">
+						<%= image_tag @filename, size: "850x1100", 
+							style: "display: block; border: 3px solid #5cb85c; margin-left: auto; margin-right: auto;", id: "q-img"%>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
+</div>
+
+
+	<!--hidden input for maximum page-->
+	<input type="hidden" id="modify-maxpage" value=<%= @default_section_maxpage %>>
+	<!--end hidden inputs-->	
+	
+	<!--hidden input for maximum page for each section-->	
+	<% @maxpage_hash.each do |k,v| %>
+		<input type="hidden" id="maxpage-<%= k %>" value="<%= v%>">
+	<% end %>
+	
+	<input type="hidden" value="<%= @question.maxpage %>" id="maxpage">
+
+	<input type="hidden" value="<%= @question.section %>" id="currentquestionsection">
+
+
 </div>
