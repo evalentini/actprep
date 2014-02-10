@@ -42,7 +42,9 @@
 		        <button type="submit" class="btn btn-success">Go</button>
 		      </form>
 		      <ul class="nav navbar-nav navbar-right">
-		        <li><a href="#" data-toggle="tooltip" data-placement="top" title="Problem List">
+		        <li><a href="<%= url_for :controller=>'pages', :action=>'home'%>"  
+					   data-toggle="tooltip" data-placement="top" title="Problem List">
+					   
 					<span class="glyphicon glyphicon-file"></span>
 				</a></li>
 				 <li><a href="<%= url_for :controller=>'pages', :action=>'statistics'%>" 

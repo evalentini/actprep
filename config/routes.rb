@@ -39,7 +39,9 @@ Actprep::Application.routes.draw do
 
   match 'questions/answer' => 'questions#answer'
   match 'answers/record/:id'  =>  'answers#record'
-  root :to => 'pages#home'
+  match 'pages/homework' => 'pages#homework'
+  match 'pages/home' => 'pages#home'
+  root :to => 'pages#homework'
 
   match 'sessions/new' => 'sessions#new', :as => 'login' 
   match 'sessions/destroy' => 'sessions#destroy', :as => 'logout'

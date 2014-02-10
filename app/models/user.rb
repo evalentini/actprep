@@ -25,6 +25,8 @@ class User < ActiveRecord::Base
   
   #----dashboard report calculations--------
   
+ 
+  
   
   def self.totalStudents(timePeriod="0.days.ago")
     User.where(role: "student").where("created_at <= ?", eval(timePeriod) ).count

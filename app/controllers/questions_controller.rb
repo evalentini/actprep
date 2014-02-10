@@ -131,6 +131,7 @@ class QuestionsController < ApplicationController
   end 
   
   def viewimage
+    @hidenavbar=true
     @filename = "#{params[:section]}_pg#{params[:page]}.jpg"
     section=params[:section]
     page = params[:page].to_i

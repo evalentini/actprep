@@ -54,6 +54,7 @@ $('button#cancel-new-question').click(function(){
 });
 
 $('button.editQuestion').click(function(){
+	
 	var row=$(this).parent().parent();
 	var row_id=row.attr('questionid');
 	$("span.editmode-"+row_id).removeClass("hidden");

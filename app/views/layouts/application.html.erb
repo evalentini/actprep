@@ -22,6 +22,7 @@
 		<div class="row-fluid" >
 			<div class="col-xs-12" style="text-align: center;">
 				<div class="btn-group">
+					<% if @is_admin==true %>
 				    <div class="btn-group">
 				      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
 				        Admin Tools
@@ -33,20 +34,34 @@
   						<li><a href="/answers/dashboard">Usage Report</a></li>
 				      </ul>
 				    </div>
+					<% end %>
 					<a href="/questions/answer" class="btn btn-default">Answer Questions</a>
-					<a href="/" class="btn btn-default">Study Summary</a>
+					<a href="/" class="btn btn-default">Homework</a>
 					<% if session[:user_id] %>
 						<a href="/sessions/destroy" class="btn btn-default">Log Out: <%= @user_email %></a> 
 					<% else %>
-						<a href="/sessions/new" class="btn btn-default">Login</a> </li>
+						<a href="/sessions/new" class="btn btn-default">Login</a> 
 					<% end %>
 				</div>
 			</div>
 		</div>
+		
 		<% end %>
 	
-		    <% flash.each do |key, value| %>
-        <div class="alert alert-<%= key %>"><%= value %></div>
+		<% flash.each do |key, value| %>
+		
+		<div class="row-fluid">
+			<div class="col-xs-12">
+				<p></p>
+			</div>
+		</div>
+		
+		<div class="row-fluid">
+			<div class="col-xs-12">
+				<div class="alert alert-<%= key %>"><%= value %></div>
+			</div>
+		</div>
+        
         <% end %> <!-- Shows if validation is off -->
 
 <%= yield %>

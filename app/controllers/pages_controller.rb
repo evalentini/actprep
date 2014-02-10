@@ -3,9 +3,23 @@ class PagesController < ApplicationController
 
   def formattest
   end
+  
+  def homework
+  end
 
   def home
+    @sectionfilter = (params.nil?  && "all") || params[:sectionfilter]
+    @correctfilter = (params.nil?  && "all") || params[:correctfilter]
+    @speedfilter = (params.nil?  && "all") || params[:speedfilter]
+    
+    @sectionfilter = "all" if @sectionfilter.nil?
+    @correctfilter = "all" if @correctfilter.nil?
+    @speedfilter = "all" if @speedfilter.nil?
+    
+    @filter_hash= {:section => @sectionfilter, :correct=>@correctfilter, :speed=>@speedfilter}
+    
     user=User.find_by_id(session[:user_id])
+    @user = User.find_by_id(session[:user_id])
     @questions=Question.order("test_number asc, section, question_number asc")
   end
   
@@ -15,6 +29,7 @@ class PagesController < ApplicationController
   
   def statistics
   	user = User.find_by_id(session[:user_id])
+    @user = User.find_by_id(session[:user_id])
     
     if user.answers.count>0 
       @summary = user.answerSummary

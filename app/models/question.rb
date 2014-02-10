@@ -126,5 +126,86 @@ class Question < ActiveRecord::Base
     
   end
   
+  def answerTime(uid)
+    if isAnswered(uid)==true
+      Answer.where(question_id: self.id, user_id:uid).order("created_at desc").limit(1).first.timeTakenString
+    else
+      "n/a"
+    end
+  end
+  
+  def fastAnswer(uid)
+    cutoffs={}
+    cutoffs["english"]=40
+    cutoffs["math"]=60
+    cutoffs["reading"]=52
+    cutoffs["science"]=52
+    
+    if (Answer.where(user_id: uid, question_id: self.id).count>0)
+      time=Answer.where(question_id: self.id, user_id:uid).order("created_at desc").limit(1).first.timetaken
+      if (time<=cutoffs[self.section])
+        true
+      else
+        false
+      end
+    else
+      true
+    end
+    
+  end
+  
+  def isAnswered(uid)
+    if (Answer.where(user_id: uid, question_id: self.id).count>0)
+      true
+    else
+      false
+    end
+  end
+  
+  def isCorrect(uid)
+    if (self.isAnswered(uid)==true)
+      mr_answer=Answer.where(question_id: self.id, user_id:uid).order("created_at desc").limit(1).first
+      if (mr_answer.selected_ans==self.correct_ans) 
+        true
+      else
+        false
+      end
+    else
+      false
+    end
+  end
+  
+  def correctnessStatus(uid)
+    status="na"
+    status="correct" if self.isCorrect(uid)==true
+    status="incorrect" if self.isCorrect(uid)==false && self.isAnswered(uid)==true
+    status
+  end
+  
+  def speedStatus(uid)
+    status="na"
+    status="fast" if self.fastAnswer(uid)==true  && self.isAnswered(uid)==true
+    status="slow" if self.fastAnswer(uid)==false && self.isAnswered(uid)==true
+    status
+  end
+  
+  def satisfyFilters(uid, filter_hash)
+    result=true
+    #section filter 
+    unless filter_hash[:section]=="all"
+      result=false unless self.section==filter_hash[:section]
+    end
+    #correctness filter
+    unless filter_hash[:correct]=="all"
+      result=false unless self.correctnessStatus(uid)==filter_hash[:correct]
+    end
+    #speed filter
+    unless filter_hash[:speed]=="all" || filter_hash[:correct]=="na" #dont check speed if question was not attempted
+      result=false unless self.speedStatus(uid)==filter_hash[:speed]
+    end
+    
+    result
+  end
+  
   
 end

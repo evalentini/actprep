@@ -10,13 +10,13 @@
 
 	<div class="row-fluid" style="margin-top: 25px;">
 		<%= token_tag(nil) %>
-		<div class="col-xs-8">
+		<div class="col-xs-10">
 			<div class="well">
 				<form class="form-inline" role="form">
 				  <div class="form-group">
 				    <label for="sectionfilter">Section &nbsp &nbsp </label>
 				    <select class="form-control" id="sectionfilter" name="sectionfilter">
-						<%= createOptList(Question.sectionListWithAll, "all").html_safe %>
+						<%= createOptList(Question.sectionListWithAll, @sectionfilter).html_safe %>
 					</select>
 				  </div>
 				  <div class="form-group">
@@ -28,27 +28,28 @@
 								"Correct"=>"correct", 
 								"Incorrect"=>"incorrect",
 								"Not Attempted"=>"na"
-							}, "all").html_safe %>
+							}, @correctfilter).html_safe %>
 					</select>
 				  </div>
 				  <div class="form-group">
-				    <label for="timefilter">&nbsp &nbsp Fast &nbsp &nbsp</label>
-				    <select class="form-control" id="timefilter" name="timefilter">
+				    <label for="speedfilter">&nbsp &nbsp Speed &nbsp &nbsp</label>
+				    <select class="form-control" id="speedfilter" name="speedfilter">
 						<%= createOptList(
 							{
 								"All"=>"all",
 								"Fast"=>"fast", 
 								"Slow"=>"slow",
-							}, "all").html_safe %>
+							}, @speedfilter).html_safe %>
 					</select>
 				  </div>
 				  <button type="submit" class="btn btn-default">Filter</button>
+				  <a href="<%= url_for :controller=>'pages', :action=>'home'%>" class="btn btn-default">Clear Filters</a>
 				</form>
 
 				
 			</div>
 		</div>
-		<div class="col-xs-4">
+		<div class="col-xs-2">
 		</div>
 	</div>
 	
@@ -75,14 +76,33 @@
 						</thead>
 						<tbody>
 							<% @questions.each do |question| %>
-							<tr>
-								<td><%= question.test_number%>MC</td>
-								<td><%= question.section.titlecase %></td>
-								<td><%= question.question_number %></td>
-								<td>Yes</td>
-								<td>1:00</td>
-								<td><a href="/answers/record/<%= question.id %>">Try Problem</a></td>
-							</tr>
+							<% if question.satisfyFilters(@user.id, @filter_hash)==true %>
+								<tr>
+									<td><%= question.test_number%>MC</td>
+									<td><%= question.section.titlecase %></td>
+									<td><%= question.question_number %></td>
+									<% if question.isAnswered(@user.id)==true %>
+										<% if question.isCorrect(@user.id)==true %>
+											<td class="greentime" style="text-align: left;">Yes</td>
+										<% else %>
+											<td class="redtime" style="text-align: left;">No</td>
+										<% end %>
+									<% else %>
+									<td style="background-color: #999999;">Not Answered</td>
+									<% end %>
+								
+									<% if question.isAnswered(@user.id)==true %>
+										<% if question.fastAnswer(@user.id)==true %>
+											<td class="greentime" style="text-align: left;"><%= question.answerTime(@user.id) %> (Fast)</td>
+										<% else %>
+											<td class="redtime" style="text-align: left;"><%= question.answerTime(@user.id) %> (Slow)</td>
+										<% end %>
+									<% else %>
+										<td style="background-color: #999999;">n/a</td>
+									<% end %>
+									<td><a href="/answers/record/<%= question.id %>">Try Question</a></td>
+								</tr>
+							<% end %>
 							<% end %>
 						</tbody>
 					</table>

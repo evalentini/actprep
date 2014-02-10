@@ -14,12 +14,12 @@ skip_before_filter :authorization
   		if @email_record.check_pwd(params[:password])
   			redirect_to root_path
   		else
-        flash.now[:failure] = "Wrong Password"  
+        flash.now[:danger] = "Wrong Password"  
         render 'new'
       end
     else
       if @email = params[:email]
-      flash.now[:failure] = "Wrong Email"  
+      flash.now[:danger] = "Email Not Found"  
       render 'new'
       end
   	end

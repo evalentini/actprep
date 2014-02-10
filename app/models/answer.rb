@@ -33,9 +33,21 @@ class Answer < ActiveRecord::Base
     self.timeTakenString.split(':')[1]
   end
   
-  def self.answeredQuestions(user_id) 
-    
-  end 
+  def speedClass
+    if self.question.fastAnswer(self.user.id)==true 
+      return "greentime"
+    else
+      return "redtime"
+    end
+  end
+  
+  def speedDescription
+    if self.question.fastAnswer(self.user.id)==true 
+      return "Fast"
+    else
+      return "Slow"
+    end
+  end
   
   #def self.record(question, user, ans_choice)
 	#Answer.create(question_id: question.id, user: user.id, ans_choice: ans_choice)

@@ -23,10 +23,11 @@
 				<a class="btn btn-default" href="/answers/record/<%= @answer.question.id %>">Do Again</a> &nbsp &nbsp &nbsp &nbsp
 				<input 
 					type="text" disabled="disabled" style="width: 25px;" 
-					value="<%= @answer.timeTakenMinutes %>" class="greentime"></input> :
+					value="<%= @answer.timeTakenMinutes %>" class="<%= @answer.speedClass %>"></input> :
 				<input 
 					type="text" disabled="disabled" style="width: 25px;" 
-					value="<%= @answer.timeTakenSeconds %>" class="greentime"></input>&nbsp &nbsp <b>(Your Time)</b>
+					value="<%= @answer.timeTakenSeconds %>" class="<%= @answer.speedClass %>"></input>&nbsp &nbsp 
+					<b>(Your Time) (<%= @answer.speedDescription %>)</b>
 		</div>
 			
 	</div>

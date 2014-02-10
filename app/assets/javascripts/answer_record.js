@@ -32,11 +32,11 @@ $('document').ready(function(){
 			var currentSection=$('input#currentquestionsection').val();
 			var elapsedSeconds=minutes*60+seconds;
 			if (currentSection=="english") {
-				if(elapsedSeconds<80) {
+				if(elapsedSeconds<32) {
 					$('input#timerminute, input#timersecond').attr("class", "greentime");
 				}
 				else {
-					if(elapsedSeconds<100) {
+					if(elapsedSeconds<40) {
 						$('input#timerminute, input#timersecond').attr("class", "yellowtime");
 					}
 					else {
@@ -46,11 +46,11 @@ $('document').ready(function(){
 			}
 			
 			if (currentSection=="science") {
-				if(elapsedSeconds<55) {
+				if(elapsedSeconds<42) {
 					$('input#timerminute, input#timersecond').attr("class", "greentime");
 				}
 				else {
-					if(elapsedSeconds<68) {
+					if(elapsedSeconds<52) {
 						$('input#timerminute, input#timersecond').attr("class", "yellowtime");
 					}
 					else {
