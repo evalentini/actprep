@@ -1,3 +1,3 @@
 class Homework < ActiveRecord::Base
-  attr_accessible :date, :due, :name
+  attr_accessible :due, :name
 end
