@@ -1,5 +1,8 @@
 Actprep::Application.routes.draw do
 
+  resources :homeworks
+
+
   match '/pages/formattest' => 'pages#formattes'
   match 'auth/:provider/callback', to: 'sessions#createFacebook'
   match 'auth/failure', to: redirect('/')
