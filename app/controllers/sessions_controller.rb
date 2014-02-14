@@ -35,6 +35,21 @@ skip_before_filter :authorization
     session[:user_id] = user.id
     redirect_to root_url
   end
+  
+  def signup
+  end
+  
+  def signupsave
+    User.make_with_pwd(params[:email], params[:firstname]+"-"+params[:lastname], params[:password], "student")
+    @user=User.find_by_email(params[:email])
+    @user.update_attributes(:firstname => params[:firstname], 
+                            :lastname => params[:lastname],
+                            :usertype => params[:usertype])
+    flash.now[:danger] = "Welcome #{params[:firstname]} #{params[:lastname]}!"
+    session[:user_id] = @user.id
+    session[:password] = params[:password]
+    redirect_to controller: "users", action: "profile"
+  end
 
   
 

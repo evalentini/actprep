@@ -37,6 +37,20 @@
 </div>
 <% end %>
 
+<% if @currentuser.usertype=="student" %>
+	<% if @user.homeworkAssignments.count==0 %>
+	<div class="row-fluid">
+		<div class="col-xs-12">
+			<p></p>
+			<div class="alert alert-success">
+				Your tutor has not assigned you any homework...yet!  If you want to try some practice problems, you can do so by clicking <strong><a href="/questions/answer">here</a></strong>.
+			</div>
+			<p></p>
+		</div>
+	</div>
+	<% end %>
+<% end %>
+
 <% @user.homeworkAssignments.order("due asc").each do |homework| %>
 
 <div class="row-fluid">

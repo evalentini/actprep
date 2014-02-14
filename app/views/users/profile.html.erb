@@ -82,6 +82,14 @@
 		  	<div class="row"><div class="col-sm-3 text-right">
 				<strong>Your Tutors</strong>
 			</div><div class="col-sm-9"></div></div>
+			<% if @studentrequests.count==0 %>
+			<div class="row">
+				<div class="col-sm-offset-3 col-sm-9">
+					<div class="alert alert-warning">We couldn't find your tutor.  Ask your tutor to friend you from his/her profile page.
+					</div>
+				</div>
+			</div>
+			<% end %>
 			<% @studentrequests.each do |request| %>
 		  	<div class="row">
 		  		<div class="col-sm-offset-3 col-sm-4">

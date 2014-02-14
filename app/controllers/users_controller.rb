@@ -34,6 +34,7 @@ class UsersController < ApplicationController
       format.json {render :json => User.find_by_email(params[:email])}
     end
   end
+
   
   def delete
     User.find(params[:id]).destroy
