@@ -1,0 +1,35 @@
+
+<div class="row-fluid" style="padding-top: 25px;">
+	<p></p>
+	<% if @numFriends>0 %>
+	<div class="col-xs-12">
+		<table class="table table-bordered" style="margin-top: 25px;">
+			<tr style="font-weight: bold;"><td>Student Name</td><td>Student Email</td><td></td></tr>
+			<% @user.currentFriendIds.each do |id| %>
+			<tr>
+				<td><%= User.find(id).firstname + " " + User.find(id).lastname %></td>
+				<td><%= User.find(id).email %></td>
+				<td>
+					<% if  User.find(id).assignedHomework(@homework.id)==true %>
+					Homework Assigned | 
+						<a href="/pages/unassignhomework/<%=@homework.id%>/<%=id%>">Unassign</a>
+					<% else %>
+						<a href="/pages/assignhomework/<%=@homework.id%>/<%=id%>">Assign Homework</a>
+					<% end %>
+				</td>
+			</tr>
+			<% end %>
+		</table>
+	</div>
+	<% else %>
+	<div class="col-xs-12">
+		<p></p>
+		<div class="alert alert-success">
+		<strong>
+			You are not currently tutoring any students.  Click <a href="/">here</a> to add students.  
+		</strong><br>
+		</div>
+		<p></p>
+	</div>
+	<% end %>
+</div>

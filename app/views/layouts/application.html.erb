@@ -29,17 +29,21 @@
 				        <span class="caret"></span>
 				      </button>
 				      <ul class="dropdown-menu">
-						<li><a href="<%= url_for :controller=>'homeworks', :action=>'index' %>">Edit Homeworks</a></li>
   			            <li><a href="/users/modify">Edit Users</a></li>
   			            <li><a href="/questions/modify">Edit Questions</a></li>
   						<li><a href="/answers/dashboard">Usage Report</a></li>
-						<li><a href="/completionreport">Homework Completion Report</a></li>
 				      </ul>
 				    </div>
 					<% end %>
 					<a href="/questions/answer" class="btn btn-default">Answer Questions</a>
-					<a href="/" class="btn btn-default">Homework</a>
+					<% if @is_tutor==true %>
+					<a href="/homeworks" class="btn btn-default">Student Homework</a>					
+					<% else %>
+					<a href="/pages/homework" class="btn btn-default">Homework</a>
+					<% end %>
 					<% if session[:user_id] %>
+						<a href="<%= url_for :controller=>'users', :action=>'profile'%>" 
+							class="btn btn-default">My Profile</a>
 						<a href="/sessions/destroy" class="btn btn-default">Log Out: <%= @user_email %></a> 
 					<% else %>
 						<a href="/sessions/new" class="btn btn-default">Login</a> 

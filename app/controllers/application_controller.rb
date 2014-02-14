@@ -26,6 +26,7 @@ class ApplicationController < ActionController::Base
             if User.find(session[:user_id]).check_pwd(session[:password]) == true 
               @user_email = User.find(session[:user_id]).email
               User.find(session[:user_id]).role=="admin" ? @is_admin=true : @is_admin=false
+              User.find(session[:user_id]).usertype=="tutor" ? @is_tutor=true : @is_tutor=false
             else 
               redirect_to login_path
             end

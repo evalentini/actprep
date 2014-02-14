@@ -1,8 +1,14 @@
 class User < ActiveRecord::Base
   
   attr_accessible :email, :encrypted_password, :role, :salt, :username, :locked, :ominauth_user, :uid, 
+                  :firstname, :lastname, :usertype,
                   :provider, :oauth_token, :oauth_expires_at
+
+  validates_uniqueness_of :email
+
   has_many :answers, dependent: :destroy
+  has_many :homeworks
+  has_many :tasks
   
   validates_uniqueness_of :email
   validates_uniqueness_of :username
@@ -202,6 +208,58 @@ class User < ActiveRecord::Base
     result.sort { |a,b| a[test] == b[test]? ( a[section] ==
     b[section]? a[question] <=> b[question] : a[section] <=> b[section] ) : b[test] <=> a[test] }
     
+  end
+  
+  def self.emailListHash
+    emaillist={}
+    User.order("email asc").each do |user|
+      emaillist[user.email]=user.email
+    end
+    emaillist
+  end
+  
+  def currentFriendIds
+    friendlist=[]
+    Friendship.where(tutor_id: self.id, approved: true).each do |friend|
+      friendlist << User.find(friend.student_id).id
+    end
+    friendlist
+  end
+  
+  def remainingPossibleFriends
+    emaillist=User.emailListHash
+    Friendship.where(tutor_id: self.id).each do |friend|
+      emaillist.delete(User.find(friend.student_id).email)
+    end
+    emaillist
+  end
+  
+  def checkfriend(friendid)
+    if Friendship.where(tutor_id: self.id, student_id: friendid).count>0
+      if (Friendship.where(tutor_id: self.id, student_id: friendid).first.approved==true)
+        return true
+      else
+        return false
+      end
+    else
+      return false 
+    end
+  end
+  
+  def assignedHomework(id)
+    if Tasks.where(student_id: self.id, homework_id: id).count > 0 
+      return true
+    else
+      return false
+    end
+  end
+  
+  def homeworkAssignments
+    homeworkids="-999"
+    Tasks.where(student_id: self.id).each do |task|
+      homeworkids+=", #{task.homework_id}"
+    end
+    Homework.where("id IN (#{homeworkids})").order("due asc")
   end
 
 end

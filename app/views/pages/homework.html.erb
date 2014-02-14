@@ -1,3 +1,4 @@
+
 <div class="row-fluid">
 	<div class="col-xs-12">
 		<p></p>
@@ -11,8 +12,32 @@
 	</div>
 </div>
 
+<% if @viewingstudenthomework==true %>
+<div class="row-fluid">
+	<div class="col-xs-12">
+		<p></p>
+		<div class="alert alert-success">
+		<strong>
+			You are now viewing homework for <%= @user.firstname%> <%=@user.lastname%> (<%= @user.email %>)
+		</strong><br>
+		</div>
+		<p></p>
+	</div>
+</div>
+<% end %>
 
-<% Homework.order("due asc").each do |homework| %>
+<% if @currentuser.usertype=="tutor" %>
+<div class="row-fluid">
+	<div class="col-xs-12">
+		<p></p>
+		<a href="<%= url_for :controller=>'homeworks', :action => 'index'%>"
+		   class="btn btn-success">Assign Homework</a>
+		<p></p>
+	</div>
+</div>
+<% end %>
+
+<% @user.homeworkAssignments.order("due asc").each do |homework| %>
 
 <div class="row-fluid">
 	<div class="col-xs-12">

@@ -1,3 +1,7 @@
+
+<div class="row-fluid">
+	<div class="col-xs-12">
+		<p></p>
 <%= form_for(@homework) do |f| %>
   <% if @homework.errors.any? %>
     <div id="error_explanation">
@@ -10,16 +14,21 @@
       </ul>
     </div>
   <% end %>
-
+  <p></p>
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
+  <p></p>
   <div class="field">
     <%= f.label :due %><br />
     <%= f.date_select :due %>
   </div>
+  <p></p>
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+<p></p>
+</div>
+</div>

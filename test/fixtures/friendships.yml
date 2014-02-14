@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  tutor_id: 1
+  student_id: 1
+  pending: false
+  approved: false
+
+two:
+  tutor_id: 1
+  student_id: 1
+  pending: false
+  approved: false

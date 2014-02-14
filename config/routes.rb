@@ -45,8 +45,9 @@ Actprep::Application.routes.draw do
   match 'questions/answer' => 'questions#answer'
   match 'answers/record/:id'  =>  'answers#record'
   match 'pages/homework' => 'pages#homework'
+  match 'pages/homework/:id' => 'pages#homework'
   match 'pages/home' => 'pages#home'
-  root :to => 'pages#homework'
+  root :to => 'users#profile'
 
   match 'sessions/new' => 'sessions#new', :as => 'login' 
   match 'sessions/destroy' => 'sessions#destroy', :as => 'logout'
@@ -59,6 +60,13 @@ Actprep::Application.routes.draw do
   
   match '/completionreport' =>'homeworks#completionreport'
   
+  match '/profile' => 'users#profile'
+  match 'users/sendfriendrequest' => 'users#friendrequest'
+  match 'users/approve' => 'users#approve'
+  match '/users/unfriend' => 'users#unfriend'
+  match '/pages/studentassignment' => 'pages#studentassignment'
+  match '/pages/assignhomework/:homeworkid/:studentid' => 'pages#assignhomework'
+   match '/pages/unassignhomework/:homeworkid/:studentid' => 'pages#unfriendassignhomework'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

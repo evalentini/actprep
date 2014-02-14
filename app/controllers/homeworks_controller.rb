@@ -2,7 +2,7 @@ class HomeworksController < ApplicationController
   # GET /homeworks
   # GET /homeworks.json
   def index
-    @homeworks = Homework.all
+    @homeworks = Homework.where(user_id: User.find(session[:user_id]))
 
     respond_to do |format|
       format.html # index.html.erb
@@ -40,11 +40,13 @@ class HomeworksController < ApplicationController
   # POST /homeworks
   # POST /homeworks.json
   def create
-    @homework = Homework.new(params[:homework])
-
+    homework_info=params[:homework]
+    homework_info[:user_id] = User.find(session[:user_id]).id
+    @homework = Homework.new(homework_info)
+      
     respond_to do |format|
       if @homework.save
-        format.html { redirect_to @homework, notice: 'Homework was successfully created.' }
+        format.html { redirect_to action: "index", notice: 'Homework was successfully created.' }
         format.json { render json: @homework, status: :created, location: @homework }
       else
         format.html { render action: "new" }
@@ -60,7 +62,7 @@ class HomeworksController < ApplicationController
 
     respond_to do |format|
       if @homework.update_attributes(params[:homework])
-        format.html { redirect_to @homework, notice: 'Homework was successfully updated.' }
+        format.html { redirect_to action: "index", notice: 'Homework was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

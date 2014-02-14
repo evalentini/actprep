@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140210080401) do
+ActiveRecord::Schema.define(:version => 20140213235702) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -22,11 +22,21 @@ ActiveRecord::Schema.define(:version => 20140210080401) do
     t.integer  "timetaken"
   end
 
+  create_table "friendships", :force => true do |t|
+    t.integer  "tutor_id"
+    t.integer  "student_id"
+    t.boolean  "pending"
+    t.boolean  "approved"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "homeworks", :force => true do |t|
     t.string   "name"
     t.date     "due"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "user_id"
   end
 
   create_table "questions", :force => true do |t|
@@ -52,20 +62,30 @@ ActiveRecord::Schema.define(:version => 20140210080401) do
     t.integer  "homework_id"
   end
 
+  create_table "tasks", :force => true do |t|
+    t.integer  "homework_id"
+    t.integer  "student_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "users", :force => true do |t|
     t.string   "username"
     t.string   "email"
     t.string   "role"
     t.string   "encrypted_password"
     t.string   "salt"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
     t.boolean  "locked"
     t.boolean  "omniauth_user"
     t.string   "provider"
     t.string   "uid"
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
+    t.string   "firstname",          :default => "none"
+    t.string   "lastname",           :default => "none"
+    t.string   "usertype",           :default => "student"
   end
 
 end

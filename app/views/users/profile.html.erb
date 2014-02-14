@@ -1,0 +1,112 @@
+<div class="row-fluid">
+	<div class="col-xs-12">
+		<p></p>
+	</div>
+</div>
+
+<div class="row-fluid">
+	<div class="col-xs-12">
+		<p></p>
+	</div>
+</div>
+
+<div class="row-fluid">
+	<div class="col-xs-12">
+		<p></p>
+	</div>
+</div>
+
+<div class="row-fluid">
+	<div class="col-xs-2"></div>
+	<div class="col-xs-8">
+		<form class="form-horizontal" role="form">
+		  <div class="form-group">
+		    <label for="firstname" class="col-sm-3 control-label">First Name</label>
+		    <div class="col-sm-9">
+		      <input type="text" class="form-control" id="firstname" name="user[firstname]" 
+			  		value="<%= @user.firstname %>">
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="lastname" class="col-sm-3 control-label">Last Name</label>
+		    <div class="col-sm-9">
+		      <input type="text" 
+			  		class="form-control" id="lastname" name="user[lastname]" value="<%= @user.lastname %>">
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="usertype" class="col-sm-3 control-label">Role</label>
+		    <div class="col-sm-9">
+				<select class="form-control" id="usertype" name="user[usertype]">
+					<%= createOptList({"Student"=>"student", "Tutor"=>"tutor"}, @user.usertype).html_safe %>
+				</select>
+		    </div>
+		  </div>
+		  <% if @user.usertype=="tutor" %>
+		  <div class="form-group">
+			   <label for="newstudent" class="col-sm-3 control-label">Add A Student</label>
+			   <div class="col-sm-3">
+	 		      <input type="text" class="form-control" id="newstudent"
+				  placeholder="search for or select emai">
+			   </div>
+			   <div class="col-sm-4">
+	 		      <select class="form-control" id="newstudentselect">
+					  <%= createOptList(@user.remainingPossibleFriends, User.order("email").first.email).html_safe %>
+				  </select>
+			   </div>
+			   <div class="col-sm-2">
+				   <button class="btn btn-default" type="submit" id="sendfriendrequest">Send Request</button>
+			   </div>
+		  </div>
+		   <div class="row"><div class="col-sm-3 text-right">
+			   <strong>Your Students</strong>
+		   </div><div class="col-sm-9"></div></div>
+		  <% @tutorrequests.each do |request| %>
+		  	<div class="row">
+		  		<div class="col-sm-offset-3 col-sm-4">
+		  			<%= User.find(request.student_id).email %>
+				</div>
+				<div class="col-sm-5">
+					<% if request.approved == true %>
+						Approved | <a href="<%= url_for :controller => 'pages', 
+														:action=>'homework',
+														:id => request.student_id %>">View Homework</a>
+					<% else %>
+						Pending Student Approval
+					<% end %>
+				</div>
+		  	</div>
+		  <% end %>
+		  <% end %>
+		  <% if @user.usertype=="student"%>
+		  	<div class="row"><div class="col-sm-3 text-right">
+				<strong>Your Tutors</strong>
+			</div><div class="col-sm-9"></div></div>
+			<% @studentrequests.each do |request| %>
+		  	<div class="row">
+		  		<div class="col-sm-offset-3 col-sm-4">
+		  			<%= User.find(request.tutor_id).email %>
+				</div>
+				<div class="col-sm-5">
+					<% if request.approved == true %>
+					Approved Tutor | <a href="<%= url_for :controller => 'users', 
+												:action => 'unfriend', 
+												:id => request.tutor_id %>">Remove Tutor</a>
+					<% else %>
+						Pending Approval | <a href="<%= url_for :controller => 'users', 
+															  :action => 'approve', :id => request.tutor_id %>">Approve</a>
+					<% end %>
+				</div>
+		  	</div>
+			<% end %>
+		  <% end %>
+		  <div class="form-group" style="padding-top: 20px;">
+		    <div class="col-sm-offset-3 col-sm-9">
+		      <button type="submit" class="btn btn-success">Update</button>
+		    </div>
+		  </div>
+	</div>
+	<div class="col-xs-2"></div>
+</div>
+</div>
+

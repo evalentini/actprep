@@ -4,9 +4,43 @@ class PagesController < ApplicationController
   def formattest
   end
   
+  def assignhomework
+    @user=User.find(session[:user_id])
+    if Homework.find(params[:homeworkid]).user.id==@user.id && @user.checkfriend(params[:studentid])==true
+      @task=Tasks.new({:student_id => params[:studentid], :homework_id => params[:homeworkid]})
+      @task.save
+    end
+    redirect_to action: "studentassignment", id: params[:homeworkid]
+  end
+  
+  def unassignhomework
+    @user=User.find(session[:user_id])
+    if Homework.find(params[:homeworkid]).user.id==@user.id && @user.checkfriend(params[:studentid])==true
+      Tasks.delete_all("homework_id=#{params[:homeworkid]} and student_id=#{params[:studentid]}")
+    end
+    redirect_to action: "studentassignment", id: params[:homeworkid]
+  end
+  
+  def studentassignment 
+    @homework=Homework.find(params[:id])
+    @user=User.find(session[:user_id])
+    @numFriends=Friendship.where(tutor_id: @user.id, approved: true).count
+  end
+  
   def homework
+    @currentuser = User.find_by_id(session[:user_id]) 
+    @user=@currentuser
+    @viewingstudenthomework=false
+    if @currentuser.usertype=="tutor" && params[:id].present?
+      if @currentuser.checkfriend(params[:id])==true
+        @user=User.find(params[:id]) 
+        @viewingstudenthomework=true
+      end
+    end
     @homeworks=Homework.order("due asc")
-    @user = User.find_by_id(session[:user_id])
+  end
+  
+  def tutorhomework
   end
 
   def home

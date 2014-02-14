@@ -1,30 +1,120 @@
-<p style="color: white;">-</p>
-<h1>Homework Assignments</h1>
 
-<table class="table table-bordered">
-  <tr>
-    <th>Name</th>
-    <th>Due</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<div class="row-fluid">
+	<div class="col-xs-12">
+		<p></p>
+		<div class="alert alert-warning fade in">
+		<button class="close" aria-hidden="true" data-dismiss="alert" type="button">×</button>
+		<strong>Please Take The Feedback Survey!</strong><br>
+		If you have not already done so, please take the feedback survey for the online portal. 
+		Click <a href="https://www.surveymonkey.com/s/3FB7WJ5">here</a> to take the survey.  
+		</div>
+		<p></p>
+	</div>
+</div>
 
-<% @homeworks.each do |homework| %>
-  <tr>
-    <td><%= homework.name %></td>
-    <td><%= homework.due %></td>
-	<td><a href="<%= url_for :controller=>'homeworks', :action=>'questionlist' ,:id=> homework.id %>">
-		Edit Questions
-	</a></td>
-    <td><%= link_to 'Show', homework %></td>
-    <td><%= link_to 'Edit', edit_homework_path(homework) %></td>
-    <td><%= link_to 'Destroy', homework, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+<div class="row-fluid">
+	<div class="col-xs-12">
+		<p></p>
+		<%= link_to 'New Homework', new_homework_path, :class=>"btn btn-default" %>
+		<p></p>
+	</div>
+</div>
+
+<% if @homeworks.count > 0 %>
+<div class="row-fluid">
+	<div class="col-xs-12">
+		<p></p>
+		<h3>Current Homeworks</h3>
+		<p></p>
+	</div>
+</div>
 <% end %>
-</table>
+<% @homeworks.each do |homework| %>
 
-<br />
+<div class="row-fluid">
+	<div class="col-xs-12">
+		<div class="panel panel-primary">
+		  <div class="panel-heading">
+			  <div class="row">
+				  <div class="col-xs-5">
+					  <h4><%= homework.name %></h4>
+				  </div>
+				  <div class="col-xs-4" style="text-align: right;">
+					  Due By: &nbsp &nbsp
+					  <span style="padding: 5px; background-color: #999999; color: black;">
+						  <%= homework.due %> 
+					  </span>
+				  </div>
+				  <div class="col-xs-2">
+					  <span style="padding: 5px; background-color: white; color: black;">
+						  <%= link_to 'Change Name/Due Date', edit_homework_path(homework) %>
+					  </span>
+				  </div>
+				  <div class="col-xs-1">
+					  <span style="padding: 5px; background-color: white; color: black;">
+						 <%= link_to 'Delete', homework, method: :delete, data: { confirm: 'Are you sure?' } %>
+					  </span>
+				  </div>
+			  </div>
+		  </div>
+		  <div class="panel-body">
+			  <div class="row">
+				  <div class="col-xs-2" style="text-align: right; ">
+					  <b>Homework Problems <span class="glyphicon glyphicon-arrow-right"></span> </b>
+				  </div>
+				  <div class="col-xs-10">
+					  <% if homework.questions.count == 0 %>
+					  <span style="padding: 5px; margin:5px; background-color: #999999; color: black;">
+						  None
+					  </span>
+					  <% end %>
+					  <% homework.questions.order("test_number, section, question_number").each do |question| %>
+						<a 
+							href="<%= url_for :controller=>'answers', :action=> 'record', :id=>question.id%>" 
+							class="btn btn-sm btn-default"
+						>
+							<%=question.shortDescription %>
+						</a>
+					  <% end %>
+				  	  <a 
+					  	href="<%= url_for :controller=>'homeworks', :action=>'questionlist' ,:id=> homework.id %>"
+					  	class="btn btn-sm btn-primary"
+					  >
+				  		Change Problems
+				  	</a>
+				  </div>
+			  </div>
+			  <div class="row">
+				  <p></p>
+				  <div class="col-xs-2" style="text-align: right; ">
+					  <b>Assigned Students <span class="glyphicon glyphicon-arrow-right"></span> </b>
+				  </div>
+				  <div class="col-xs-10">
+					  <% if homework.assignedStudents.count == 0 %>
+					  <span style="padding: 5px; margin:5px; background-color: #999999; color: black;">
+						  None
+					  </span>
+					  <% end %>
+					  <% homework.assignedStudents.each do |student| %>
+						<a 
+							href="" 
+							class="btn btn-sm btn-default"
+						>
+							<%=student.email %>
+						</a>
+					  <% end %>
+					  <a href="<%= url_for :controller=>'pages', 
+					  							 :action=>'studentassignment',
+					  							 :id => homework.id %>"
+												 class="btn btn-sm btn-primary">Change Assigned Students
+					</a>				  				  
+			  </div>
+		  </div>
+		</div>
+	</div>
+</div>
 
-<%= link_to 'New Homework', new_homework_path, :class=>"btn btn-default" %>
+<% end %>
+
+
 <p style="color: white;">-</p>

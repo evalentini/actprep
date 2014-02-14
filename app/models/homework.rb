@@ -1,6 +1,8 @@
 class Homework < ActiveRecord::Base
   has_many :questions
-  attr_accessible :due, :name
+  has_many :tasks
+  belongs_to :user
+  attr_accessible :due, :name, :user_id
   
   def addQuestion(test_number, section, question_number)
     qid=Question.where(test_number: test_number, section: section, question_number: question_number).first.id
@@ -24,5 +26,15 @@ class Homework < ActiveRecord::Base
     return result
     
   end
+  
+  def assignedStudents
+    studentids="-999"
+    Tasks.where(homework_id: self.id).each do |task|
+        studentids+=", #{task.student_id}"
+    end
+    User.where("id IN (#{studentids})").order("email asc")
+  end
+  
+  
   
 end
