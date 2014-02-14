@@ -66,7 +66,7 @@ Actprep::Application.routes.draw do
   match '/users/unfriend' => 'users#unfriend'
   match '/pages/studentassignment' => 'pages#studentassignment'
   match '/pages/assignhomework/:homeworkid/:studentid' => 'pages#assignhomework'
-  match '/pages/unassignhomework/:homeworkid/:studentid' => 'pages#unfriendassignhomework'
+  match '/pages/unassignhomework/:homeworkid/:studentid' => 'pages#unassignhomework'
   match '/signup' => "sessions#signup"
   match '/sessions/signupsave' => "sessions#signupsave"
    
