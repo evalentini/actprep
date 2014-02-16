@@ -40,7 +40,11 @@
 					</select>
 		        </div>
 		        <button type="submit" class="btn btn-success">Add Question</button>
-				<a href="/homeworks" class="btn btn-default">Go Back</a>
+				<% if @homework.quiz == false %>
+					<a href="/homeworks" class="btn btn-default">Go Back</a>
+				<% else %>
+					<a href="/quizzes" class="btn btn-default">Go Back</a>					
+				<% end %>
 		      </form>
 		    </div><!-- /.navbar-collapse -->
 		  </div><!-- /.container-fluid -->

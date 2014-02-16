@@ -3,6 +3,9 @@
 	<div class="col-xs-12">
 		<p></p>
 <%= form_for(@homework) do |f| %>
+<% if @isquiz==true%>
+	<input type="hidden" name="homework[quiz]" value="true">
+<% end %>
   <% if @homework.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@homework.errors.count, "error") %> prohibited this homework from being saved:</h2>

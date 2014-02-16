@@ -4,6 +4,10 @@ class PagesController < ApplicationController
   def formattest
   end
   
+  def quiz
+    @quizzes=Homework.where(quiz: true)
+  end
+  
   def assignhomework
     @user=User.find(session[:user_id])
     if Homework.find(params[:homeworkid]).user.id==@user.id && @user.checkfriend(params[:studentid])==true
@@ -44,15 +48,21 @@ class PagesController < ApplicationController
   end
 
   def home
-    @sectionfilter = (params.nil?  && "all") || params[:sectionfilter]
-    @correctfilter = (params.nil?  && "all") || params[:correctfilter]
-    @speedfilter = (params.nil?  && "all") || params[:speedfilter]
+    @isquizresult = true
+    
+    @sectionfilter = (params[:sectionfilter].nil?  && "all") || params[:sectionfilter]
+    @correctfilter = (params[:correctfilter].nil?  && "all") || params[:correctfilter]
+    @speedfilter = (params[:speedfilter].nil?  && "all") || params[:speedfilter]
+    @quizfilter = (params[:quizid].nil?  && "all") || params[:quizid]
+    
+    @isquizresult = false if @quizfilter.nil?
     
     @sectionfilter = "all" if @sectionfilter.nil?
     @correctfilter = "all" if @correctfilter.nil?
     @speedfilter = "all" if @speedfilter.nil?
+    @quizfilter = "all" if @quizfilter.nil?
     
-    @filter_hash= {:section => @sectionfilter, :correct=>@correctfilter, :speed=>@speedfilter}
+    @filter_hash= {:section => @sectionfilter, :correct=>@correctfilter, :speed=>@speedfilter, :quiz=>@quizfilter}
     
     user=User.find_by_id(session[:user_id])
     @user = User.find_by_id(session[:user_id])

@@ -216,8 +216,39 @@ class Question < ActiveRecord::Base
       result=false unless self.speedStatus(uid)==filter_hash[:speed]
     end
     
+    unless filter_hash[:quiz]=="all"
+      result=false
+      Homework.find(filter_hash[:quiz].to_i).questions.each do |quizQuestion|
+        result = true if quizQuestion.id==self.id
+      end
+    end
+    
+    
+    
     result
   end
   
+  def self.nextQuizQuestion(quizid, lastquestionid)
+    quizQuestions=Homework.find(quizid).questions.order("test_number, section, question_number")
+    if lastquestionid.nil?
+      return quizQuestions.first
+    else
+      #loop through all quiz questions until we get to question after last question
+      onRightQuestion=false
+      rightQuestion=nil
+      quizQuestions.each do |question|
+        if onRightQuestion==true
+          rightQuestion=question
+        end
+        if question.id==lastquestionid
+          onRightQuestion=true
+        else
+          onRightQuestion=false
+        end
+      end
+      return rightQuestion 
+    end
+    
+  end
   
 end

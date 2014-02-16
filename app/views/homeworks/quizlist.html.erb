@@ -1,0 +1,80 @@
+<div class="row-fluid">
+	<div class="col-xs-12">
+		<p></p>
+		<%= link_to 'New Quiz', new_homework_path(:isquiz => true), :class=>"btn btn-default" %>
+		<p></p>
+	</div>
+</div>
+
+<% if @homeworks.count > 0 %>
+<div class="row-fluid">
+	<div class="col-xs-12">
+		<p></p>
+		<h3>Current Quizzes</h3>
+		<p></p>
+	</div>
+</div>
+<% end %>
+<% @homeworks.each do |homework| %>
+
+<div class="row-fluid">
+	<div class="col-xs-12">
+		<div class="panel panel-primary">
+		  <div class="panel-heading">
+			  <div class="row">
+				  <div class="col-xs-5">
+					  <h4><%= homework.name %></h4>
+				  </div>
+				  <div class="col-xs-4" style="text-align: right;">
+					  Due By: &nbsp &nbsp
+					  <span style="padding: 5px; background-color: #999999; color: black;">
+						  <%= homework.due %> 
+					  </span>
+				  </div>
+				  <div class="col-xs-2">
+					  <span style="padding: 5px; background-color: white; color: black;">
+						  <%= link_to 'Change Name/Due Date', edit_homework_path(homework) %>
+					  </span>
+				  </div>
+				  <div class="col-xs-1">
+					  <span style="padding: 5px; background-color: white; color: black;">
+						 <%= link_to 'Delete', homework, method: :delete, data: { confirm: 'Are you sure?' } %>
+					  </span>
+				  </div>
+			  </div>
+		  </div>
+		  <div class="panel-body">
+			  <div class="row">
+				  <div class="col-xs-2" style="text-align: right; ">
+					  <b>Quiz  <span class="glyphicon glyphicon-arrow-right"></span> </b>
+				  </div>
+				  <div class="col-xs-10">
+					  <% if homework.questions.count == 0 %>
+					  <span style="padding: 5px; margin:5px; background-color: #999999; color: black;">
+						  None
+					  </span>
+					  <% end %>
+					  <% homework.questions.order("test_number, section, question_number").each do |question| %>
+						<a 
+							href="<%= url_for :controller=>'answers', :action=> 'record', :id=>question.id%>" 
+							class="btn btn-sm btn-default"
+						>
+							<%=question.shortDescription %>
+						</a>
+					  <% end %>
+				  	  <a 
+					  	href="<%= url_for :controller=>'homeworks', :action=>'questionlist' ,:id=> homework.id %>"
+					  	class="btn btn-sm btn-primary"
+					  >
+				  		Change Problems
+				  	</a>
+				  </div>
+			  </div>
+		</div>
+	</div>
+</div>
+
+<% end %>
+
+
+<p style="color: white;">-</p>

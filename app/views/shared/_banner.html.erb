@@ -39,7 +39,9 @@
 						<%= createOptList(Question.questionList, @question.nil? && Question.defQ.question_number || @question.question_number).html_safe %>
 					</select>
 		        </div>
-		        <button type="submit" class="btn btn-success">Go</button>
+				<% unless @inquiz == true %>
+		        	<button type="submit" class="btn btn-success">Go</button>
+				<% end %>
 		      </form>
 		      <ul class="nav navbar-nav navbar-right">
 		        <li><a href="<%= url_for :controller=>'pages', :action=>'home'%>"  

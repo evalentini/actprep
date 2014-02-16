@@ -1,4 +1,9 @@
+
+<% if @isquiz == true %>
+<h1>New Quiz</h1>
+<% else %>
 <h1>New homework</h1>
+<% end %>
 
 <%= render 'form' %>
 

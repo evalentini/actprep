@@ -1,0 +1,91 @@
+
+
+
+<div class="row-fluid">
+	<div class="col-xs-12">
+		<p></p>
+	</div>
+</div>
+
+<% if @quizzes.count==0 %>
+	<div class="row-fluid">
+		<div class="col-xs-12">
+			<p></p>
+			<div class="alert alert-success">
+				No quizzes have been added <strong>yet!</strong>.  Check back later for quizzes.
+			</div>
+			<p></p>
+		</div>
+	</div>
+<% else %>
+<div class="row-fluid">
+	<div class="col-xs-12">
+		<p></p>
+		<div class="alert alert-success">
+			Take any quiz in the list below by clicking the "Take Quiz" button.
+		</div>
+		<p></p>
+	</div>
+</div>
+<% end %>
+
+<% @quizzes.order("due asc").each do |homework| %>
+
+<% unless homework.questions.count == 0 %>
+
+<div class="row-fluid">
+	<div class="col-xs-12">
+		<div class="panel panel-primary">
+		  <div class="panel-heading">
+			  <div class="row">
+				  <div class="col-xs-8">
+					  <h4><%= homework.name %></h4>
+				  </div>
+				  <div class="col-xs-2" style="text-align: right;">
+					  Due By: 
+				  </div>
+				  <div class="col-xs-2">
+					  <span style="padding: 5px; background-color: #999999; color: black;">
+						  <%= homework.due %>
+					  </span>
+				  </div>
+			  </div>
+		  </div>
+		  <div class="panel-body">
+			  <div class="row">
+				  <div class="col-xs-2" style="text-align: right; ">
+					  <b>Quiz Problems <span class="glyphicon glyphicon-arrow-right"></span> </b>
+				  </div>
+				  <div class="col-xs-10">
+					  <% homework.questions.order("test_number, section, question_number").each do |question| %>
+						<a 
+							href="#" 
+							class="btn btn-sm btn-default"
+							disabled="disabled"
+						>
+							<%=question.shortDescription %>
+						</a>	
+					  <% end %>
+				  </div>
+			  </div>
+			  <div class="row">
+				  <p></p>
+				  <div class="col-xs-2" style="text-align: right; ">
+					  <b>Take Quiz <span class="glyphicon glyphicon-arrow-right"></span> </b>
+				  </div>
+				  <div class="col-xs-10">
+  					<%= link_to "Take Quiz", {:controller => "answers", 
+  								:action => "record", 
+								:id=>Question.nextQuizQuestion(homework.id, nil), :quizid=>homework.id}, 
+  								{:class => "btn btn-primary"} %>
+				  </div>
+			  </div>
+
+		  </div>
+		</div>
+	</div>
+</div>
+
+<% end %>
+
+<% end %>

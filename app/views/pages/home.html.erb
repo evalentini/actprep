@@ -6,6 +6,7 @@
 	</div>
 </div>
 
+<% unless @isquizresult==true %>
 
 
 	<div class="row-fluid" style="margin-top: 25px;">
@@ -52,6 +53,19 @@
 		<div class="col-xs-2">
 		</div>
 	</div>
+	
+	<% else %>
+	
+	
+	<div class="row-fluid">
+		<div class="col-xs-12">
+			<div class="alert alert-warning" style="font-size: 130%;">
+				Congratulations!  You just finished the <strong><%= Homework.find(@quizfilter.to_i).name %></strong> quiz.  You can see your results below.    
+			</div>
+		</div>
+	</div>
+	
+	<% end %>
 	
 	<div class="row-fluid" style="margin-top: 5px;">
 		<div class="col-xs-12">

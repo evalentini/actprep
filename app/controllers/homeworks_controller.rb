@@ -25,6 +25,8 @@ class HomeworksController < ApplicationController
   # GET /homeworks/new.json
   def new
     @homework = Homework.new
+    @isquiz = false
+    @isquiz = true if params[:isquiz].present?
 
     respond_to do |format|
       format.html # new.html.erb
@@ -46,7 +48,11 @@ class HomeworksController < ApplicationController
       
     respond_to do |format|
       if @homework.save
-        format.html { redirect_to action: "index", notice: 'Homework was successfully created.' }
+        if params[:homework][:quiz]=="true"
+          format.html { redirect_to action: "quizlist", notice: 'Quiz was successfully created.' }
+        else
+          format.html { redirect_to action: "index", notice: 'Homework was successfully created.' }
+        end
         format.json { render json: @homework, status: :created, location: @homework }
       else
         format.html { render action: "new" }
@@ -62,7 +68,11 @@ class HomeworksController < ApplicationController
 
     respond_to do |format|
       if @homework.update_attributes(params[:homework])
-        format.html { redirect_to action: "index", notice: 'Homework was successfully updated.' }
+        if @homework.quiz==true
+          format.html { redirect_to action: "quizlist", notice: 'Homework was successfully updated.' }
+        else
+          format.html { redirect_to action: "index", notice: 'Homework was successfully updated.' }
+        end
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -75,10 +85,15 @@ class HomeworksController < ApplicationController
   # DELETE /homeworks/1.json
   def destroy
     @homework = Homework.find(params[:id])
+    @quiz=@homework.quiz
     @homework.destroy
 
     respond_to do |format|
-      format.html { redirect_to homeworks_url }
+      if @quiz==true
+        format.html { redirect_to action: "quizlist" }
+      else
+        format.html { redirect_to homeworks_url }
+      end
       format.json { head :no_content }
     end
   end
@@ -98,6 +113,10 @@ class HomeworksController < ApplicationController
   end
   
   def completionreport
+  end
+  
+  def quizlist
+    @homeworks = Homework.where(quiz: true)
   end
   
 end

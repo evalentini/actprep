@@ -44,7 +44,11 @@ class AnswersController < ApplicationController
   
   def save
     user = User.find(session[:user_id])
-    time = params[:minutes].to_i*60+params[:seconds].to_i
+    if params[:time].nil?
+      time = params[:minutes].to_i*60+params[:seconds].to_i
+    else
+      time = params[:time].to_i
+    end
     @answer=Answer.create(question_id: params[:question_id], user_id: user.id, selected_ans: params[:ans_choice], timetaken:time)
     
     redirect_to :action => "show", :controller => "answers", :id => @answer.id
@@ -68,6 +72,14 @@ class AnswersController < ApplicationController
   end
   
   def record
+    
+    @inquiz=false
+    unless params[:quizid].nil?
+      @inquiz=true
+      @nextQuizQuestion = Question.nextQuizQuestion(params[:quizid].to_i, params[:id].to_i)
+      @quizid=params[:quizid]
+    end
+    #Question.nextQuizQuestion
 
     if params[:id].present?
       @question = Question.find(params[:id]) 

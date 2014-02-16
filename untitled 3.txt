@@ -1,0 +1,23 @@
+session variable called "taking quiz";
+quizzes cannot be assigned to students 
+quizzes are taken in sequence 
+
+add boolean column to homework model called "quiz"
+add validation to tasks model indicating that quiz can never be associated to a student (so homework_id != quiz for any task).
+
+quiz also has no creator_id.
+
+session variable called taking quiz.  When session variable is active clicking go button takes you to next question unless you are on last question in quiz (in which case you are taken to a readout of performance)
+
+readout looks like the profile except shows summary stats at top 
+(1) number right 
+(2) overall time (too fast or slow)
+  
+  
+  <div class="row-fluid">
+  	<div class="col-xs-12">
+  		<p></p>
+  		
+  		<p></p>
+  	</div>
+  </div>

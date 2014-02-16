@@ -69,6 +69,9 @@ Actprep::Application.routes.draw do
   match '/pages/unassignhomework/:homeworkid/:studentid' => 'pages#unassignhomework'
   match '/signup' => "sessions#signup"
   match '/sessions/signupsave' => "sessions#signupsave"
+  
+  match '/quizzes' => "homeworks#quizlist"
+  match '/pages/quiz' => "pages#quiz"
    
   # The priority is based upon order of creation:
   # first created -> highest priority.

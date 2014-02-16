@@ -4,7 +4,6 @@ class User < ActiveRecord::Base
                   :firstname, :lastname, :usertype,
                   :provider, :oauth_token, :oauth_expires_at
 
-  validates_uniqueness_of :email
 
   has_many :answers, dependent: :destroy
   has_many :homeworks
@@ -16,7 +15,6 @@ class User < ActiveRecord::Base
   validates_presence_of :username
   
   def check_pwd(pwd)
-    logger.info "-----pwd check running--------"
   	hash_pwd = self.salt + pwd
   	hash_pwd = Digest::SHA2.hexdigest(hash_pwd)
   	

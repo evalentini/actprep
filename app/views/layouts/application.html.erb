@@ -31,11 +31,14 @@
 				      <ul class="dropdown-menu">
   			            <li><a href="/users/modify">Edit Users</a></li>
   			            <li><a href="/questions/modify">Edit Questions</a></li>
+						<li><a href="/quizzes">Edit Quizzes</a></li>
   						<li><a href="/answers/dashboard">Usage Report</a></li>
 				      </ul>
 				    </div>
 					<% end %>
 					<a href="/questions/answer" class="btn btn-default">Answer Questions</a>
+					<a href="/pages/quiz" class="btn btn-default">Take Quizzes
+					</a>
 					<% if @is_tutor==true %>
 					<a href="/homeworks" class="btn btn-default">Student Homework</a>					
 					<% else %>
@@ -67,6 +70,8 @@
 				<div class="alert alert-<%= key %>"><%= value %></div>
 			</div>
 		</div>
+		
+		
         
         <% end %> <!-- Shows if validation is off -->
 

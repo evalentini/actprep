@@ -53,6 +53,8 @@
 
 <% @user.homeworkAssignments.order("due asc").each do |homework| %>
 
+<% unless homework.questions.count == 0 %>
+
 <div class="row-fluid">
 	<div class="col-xs-12">
 		<div class="panel panel-primary">
@@ -105,5 +107,7 @@
 		</div>
 	</div>
 </div>
+
+<% end %>
 
 <% end %>

@@ -2,7 +2,9 @@ class Homework < ActiveRecord::Base
   has_many :questions
   has_many :tasks
   belongs_to :user
-  attr_accessible :due, :name, :user_id
+  attr_accessible :due, :name, :user_id, :quiz
+  
+  before_save :quizlogic
   
   def addQuestion(test_number, section, question_number)
     qid=Question.where(test_number: test_number, section: section, question_number: question_number).first.id
@@ -35,6 +37,11 @@ class Homework < ActiveRecord::Base
     User.where("id IN (#{studentids})").order("email asc")
   end
   
+  def quizlogic
+    self.quiz ||=false
+    #quizzes are universal, not assigned by a tutor to students so they should not have creator 
+    self.user_id=nil if self.quiz==true
+  end
   
   
 end
