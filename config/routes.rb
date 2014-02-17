@@ -41,7 +41,7 @@ Actprep::Application.routes.draw do
   match "pages/statistics" => 'pages#statistics'
 
 
-  match 'pages/home' => 'pages#home'
+  match '/mainpage' => 'pages#home'
   match 'questions/answer' => 'questions#answer'
   match 'answers/record/:id'  =>  'answers#record'
   match 'pages/homework' => 'pages#homework'

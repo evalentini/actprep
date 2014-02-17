@@ -56,11 +56,13 @@ class PagesController < ApplicationController
     @speedfilter = (params[:speedfilter].nil?  && "all") || params[:speedfilter]
     @quizfilter = (params[:quizid].nil?  && "all") || params[:quizid]
     
-    @isquizresult = false if @quizfilter.nil?
+    @isquizresult = false if @quizfilter=="all"
     
-    unless @isquizresult.nil? || params[:noupdate].present?
-      #save quiz results
-      Homework.find(params[:quizid]).saveQuiz(session[:user_id])
+    unless @isquizresult==false
+      unless params[:noupdate].present?
+        #save quiz results
+        Homework.find(params[:quizid]).saveQuiz(session[:user_id])
+      end
     end
     
     @sectionfilter = "all" if @sectionfilter.nil?
