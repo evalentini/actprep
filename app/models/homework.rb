@@ -41,7 +41,12 @@ class Homework < ActiveRecord::Base
   def quizlogic
     self.quiz ||=false
     #quizzes are universal, not assigned by a tutor to students so they should not have creator 
+    #confirm that user is an admin before saving the quiz 
+    if self.user.role!="admin" && self.quiz==true
+      raise "only administrators can create quizzes"
+    end
     self.user_id=nil if self.quiz==true
+    
   end
   
   

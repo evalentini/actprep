@@ -1,6 +1,9 @@
 class HomeworksController < ApplicationController
   # GET /homeworks
   # GET /homeworks.json
+  
+  skip_before_filter :authorization
+  
   def index
     @homeworks = Homework.where(user_id: User.find(session[:user_id]))
 
@@ -27,6 +30,7 @@ class HomeworksController < ApplicationController
     @homework = Homework.new
     @isquiz = false
     @isquiz = true if params[:isquiz].present?
+    raise "only administrators can create quizzes" if @isquiz==true and User.find(session[:user_id]).role!="admin"
 
     respond_to do |format|
       format.html # new.html.erb
@@ -65,6 +69,8 @@ class HomeworksController < ApplicationController
   # PUT /homeworks/1.json
   def update
     @homework = Homework.find(params[:id])
+    
+    raise "only administrators can create quizzes" if @homework.quiz==true and User.find(session[:user_id]).role!="admin"
 
     respond_to do |format|
       if @homework.update_attributes(params[:homework])
@@ -86,6 +92,10 @@ class HomeworksController < ApplicationController
   def destroy
     @homework = Homework.find(params[:id])
     @quiz=@homework.quiz
+    
+    raise "only administrators can create quizzes" if @homework.quiz==true and User.find(session[:user_id]).role!="admin"
+    
+    
     @homework.destroy
 
     respond_to do |format|
@@ -108,6 +118,7 @@ class HomeworksController < ApplicationController
   
   def removequestion
     @homework=Question.find(params[:id]).homework
+    raise "only administrators can create quizzes" if @homework.quiz==true and User.find(session[:user_id]).role!="admin"
     Homework.removeQuestion(params[:id])
     redirect_to :action => "questionlist", :id=> @homework.id
   end

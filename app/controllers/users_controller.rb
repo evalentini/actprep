@@ -24,7 +24,7 @@ class UsersController < ApplicationController
   end
   
   def modify
-    @users=User.select("*").order("username")
+    @users=User.select("*").order("role, email")
     @new_user_pwd = User.rand_pwd
   end
   
