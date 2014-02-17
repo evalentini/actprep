@@ -51,7 +51,7 @@
 			   </div>
 			   <div class="col-sm-4">
 	 		      <select class="form-control" id="newstudentselect">
-					  <%= createOptList(@user.remainingPossibleFriends, User.order("email").first.email).html_safe %>
+					  <%= createOptList(@user.remainingPossibleStudentFriends, User.order("email").first.email).html_safe %>
 				  </select>
 			   </div>
 			   <div class="col-sm-2">

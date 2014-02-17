@@ -232,6 +232,17 @@ class User < ActiveRecord::Base
     emaillist
   end
   
+  def remainingPossibleStudentFriends
+    emaillist={}
+    User.where(usertype: "student").order("email asc").each do |user|
+      emaillist[user.email]=user.email
+    end
+    Friendship.where(tutor_id: self.id).each do |friend|
+      emaillist.delete(User.find(friend.student_id).email)
+    end
+    emaillist
+  end
+  
   def checkfriend(friendid)
     if Friendship.where(tutor_id: self.id, student_id: friendid).count>0
       if (Friendship.where(tutor_id: self.id, student_id: friendid).first.approved==true)
