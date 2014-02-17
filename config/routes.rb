@@ -41,12 +41,11 @@ Actprep::Application.routes.draw do
   match "pages/statistics" => 'pages#statistics'
 
 
-
+  match 'pages/home' => 'pages#home'
   match 'questions/answer' => 'questions#answer'
   match 'answers/record/:id'  =>  'answers#record'
   match 'pages/homework' => 'pages#homework'
   match 'pages/homework/:id' => 'pages#homework'
-  match 'pages/home' => 'pages#home'
   root :to => 'users#profile'
 
   match 'sessions/new' => 'sessions#new', :as => 'login' 
