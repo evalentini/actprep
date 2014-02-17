@@ -45,7 +45,7 @@ class UsersController < ApplicationController
   
   def profile 
      @user = User.find(session[:user_id])
-     @user.update_attributes(params[:user]) unless params[:user].nil?
+     @user.update_attributes(params[:user]) unless params[:user].nil? 
      @tutorrequests=Friendship.where("tutor_id=#{@user.id} and (pending=true or approved=true)")
      @studentrequests=Friendship.where("student_id=#{@user.id}")
   end
