@@ -146,6 +146,15 @@ class Question < ActiveRecord::Base
     end
   end
   
+  def targetTime
+    cutoffs={}
+    cutoffs["english"]=40
+    cutoffs["math"]=60
+    cutoffs["reading"]=52
+    cutoffs["science"]=52
+    return cutoffs[self.section]
+  end
+  
   def fastAnswer(uid)
     cutoffs={}
     cutoffs["english"]=40

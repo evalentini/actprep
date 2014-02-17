@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  homework_id: 1
+  student_id: 1
+  completed: 2014-02-16 19:56:25
+  num_question: 
+  num_right: 
+  cum_time: 1.5
+
+two:
+  homework_id: 1
+  student_id: 1
+  completed: 2014-02-16 19:56:25
+  num_question: 
+  num_right: 
+  cum_time: 1.5

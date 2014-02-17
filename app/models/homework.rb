@@ -1,8 +1,9 @@
 class Homework < ActiveRecord::Base
   has_many :questions
   has_many :tasks
+  has_many :quizscores
   belongs_to :user
-  attr_accessible :due, :name, :user_id, :quiz
+  attr_accessible :due, :name, :user_id, :quiz, :finishedquiz
   
   before_save :quizlogic
   
@@ -43,5 +44,41 @@ class Homework < ActiveRecord::Base
     self.user_id=nil if self.quiz==true
   end
   
+  
+  def saveQuiz(user_id)
+    numq=0
+    numr=0
+    cumtime=0
+    targettime=0
+    completetime=self.questions.first.updated_at
+    self.questions.each do |question|
+      numq+=1
+      answer=question.answers.where(user_id:user_id).first
+      numr+=1 if answer.correct
+      cumtime+=answer.timetaken
+      targettime+=question.targetTime
+      completetime=[completetime, question.updated_at].max
+    end
+    if Quizscore.where(homework_id: self.id, student_id: user_id).count==0
+      qscore=Quizscore.new({:completed=>completetime, :cum_time=>cumtime, 
+                          :homework_id=>self.id, :num_question=>numq, 
+                          :num_right=>numr, :student_id=>user_id})
+      qscore.save
+    else
+     quiz=Quizscore.where(homework_id: self.id, student_id: user_id).first
+     quiz.update_attributes({:completed=>completetime, 
+                          :cum_time=>cumtime, 
+                         :homework_id=>self.id, :num_question=>numq, 
+                          :num_right=>numr, :student_id=>user_id})
+    end
+  end
+  
+  def checkComplete(user_id)
+    if self.quizscores.where(student_id: user_id).count>0
+      return true
+    else
+      return false
+    end
+  end
   
 end

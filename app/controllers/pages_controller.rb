@@ -6,6 +6,7 @@ class PagesController < ApplicationController
   
   def quiz
     @quizzes=Homework.where(quiz: true)
+    @user=User.find(session[:user_id])
   end
   
   def assignhomework
@@ -56,6 +57,11 @@ class PagesController < ApplicationController
     @quizfilter = (params[:quizid].nil?  && "all") || params[:quizid]
     
     @isquizresult = false if @quizfilter.nil?
+    
+    unless @isquizresult.nil? || params[:noupdate].present?
+      #save quiz results
+      Homework.find(params[:quizid]).saveQuiz(session[:user_id])
+    end
     
     @sectionfilter = "all" if @sectionfilter.nil?
     @correctfilter = "all" if @correctfilter.nil?

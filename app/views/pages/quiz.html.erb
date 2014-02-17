@@ -42,11 +42,15 @@
 					  <h4><%= homework.name %></h4>
 				  </div>
 				  <div class="col-xs-2" style="text-align: right;">
-					  Due By: 
+					  Completed: 
 				  </div>
 				  <div class="col-xs-2">
-					  <span style="padding: 5px; background-color: #999999; color: black;">
-						  <%= homework.due %>
+					  <span style="padding: 5px; background-color: white; color: black;">
+						  <% if homework.checkComplete(@user.id) == true %>
+						  Yes! <%= link_to "View Results", :controller => "pages", :action => "home", :quizid=>homework.id, :noupdate => true %>
+						  <% else %>
+						  No
+						  <% end %>
 					  </span>
 				  </div>
 			  </div>
