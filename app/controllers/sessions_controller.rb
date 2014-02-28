@@ -1,8 +1,29 @@
 class SessionsController < ApplicationController
   
+
+skip_before_filter :confirm_gate, :only => :gate
 skip_before_filter :confirm_login
 skip_before_filter :authorization
 
+
+  def gate
+    if params[:accesscode].present?
+      logger.info "---gate running------"
+      logger.info "----#{Digest::SHA2.hexdigest(params[:accesscode])}-------"
+      session[:accesscode]=params[:accesscode]
+      if Digest::SHA2.hexdigest(params[:accesscode])=="5d2a0db78c45a6788200fb007fcbd9513dc1f418e62bb8e7ac5c70d17f000e68"
+        logger.info "---picked up that code matches------"
+        redirect_to root_path
+      else 
+        flash.now[:danger]="Wrong Access Code"
+        render 'gate'
+      end
+    else
+      session[:accesscode]=nil
+      render 'gate'
+    end
+  end
+  
 
   def new
   	@active = "login"
@@ -26,6 +47,7 @@ skip_before_filter :authorization
   end
   
   def destroy
+    session[:accesscode]=nil
     session[:user_id] = nil
     redirect_to root_url, :notice => "Logged out"
   end 

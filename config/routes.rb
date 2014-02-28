@@ -5,6 +5,8 @@ Actprep::Application.routes.draw do
   resources :homeworks
 
 
+
+
   match '/pages/formattest' => 'pages#formattes'
   match 'auth/:provider/callback', to: 'sessions#createFacebook'
   match 'auth/failure', to: redirect('/')
@@ -48,6 +50,7 @@ Actprep::Application.routes.draw do
   match 'pages/homework/:id' => 'pages#homework'
   root :to => 'users#profile'
 
+  match '/sessions/gate' => "sessions#gate", :as => 'gate'
   match 'sessions/new' => 'sessions#new', :as => 'login' 
   match 'sessions/destroy' => 'sessions#destroy', :as => 'logout'
   match 'users/modify' => 'users#modify'

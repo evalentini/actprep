@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  before_filter :confirm_gate
   before_filter :confirm_login
   before_filter :authorization
 
@@ -10,6 +11,21 @@ class ApplicationController < ActionController::Base
 	  def current_user 
 	  	@current_user ||= User.find(session[:user_id]) if session[:user_id]
 	  end
+    
+    def confirm_gate
+      if session[:accesscode].present? 
+        unless session[:accesscode].nil?
+          if Digest::SHA2.hexdigest(session[:accesscode])=="5d2a0db78c45a6788200fb007fcbd9513dc1f418e62bb8e7ac5c70d17f000e68"
+          else
+            redirect_to gate_path 
+          end
+        else
+          redirect_to gate_path
+        end
+      else
+        redirect_to gate_path
+      end
+    end
 
 	  
 	  def confirm_login
