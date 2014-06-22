@@ -10,6 +10,5 @@ module ApplicationHelper
     end
     
     return optionText
-    
   end
 end

@@ -25,8 +25,8 @@ Actprep::Application.configure do
     :storage => :s3,
     :s3_credentials => {
       :bucket => 'actprep',
-      :access_key_id => 'AKIAJGSUWKREAKDAE7EA',
-      :secret_access_key => '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'
+      :access_key_id => ENV['ACCESS_KEY_ID']
+      :secret_access_key => ENV['SECRET_ACCESS_KEY']
     }
   }
 
